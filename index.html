@@ -1,217 +1,812 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>MBrace framework
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
-    <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
-    
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+﻿<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>MBrace - Scripting Compute and Data Jobs in the Cloud Made Simple</title>
+    <meta name="keywords" content="Azure,Cloud,MBrace,Data,Distributed,FSharp,CSharp" />
+    <meta name="description" content="" />
 
-    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-196x196.png" sizes="196x196"/>
-    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-160x160.png" sizes="160x160"/>
-    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-96x96.png" sizes="96x96"/>
-    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-16x16.png" sizes="16x16"/>
-    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-32x32.png" sizes="32x32"/>
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
-    <link type="text/css" rel="stylesheet" href="http://www.m-brace.net/content/style.css" />
-    <script type="text/javascript" src="http://www.m-brace.net/content/tips.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+
+    <!-- WEB FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/sky-forms.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/weather-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/line-icons.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/owl-carousel/owl.pack.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/flexslider.css" rel="stylesheet" type="text/css" />
+
+    <!-- REVOLUTION SLIDER -->
+    <link href="assets/css/revolution-slider.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layerslider.css" rel="stylesheet" type="text/css" />
+
+    <!-- THEME CSS -->
+    <link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/header-default.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/footer-default.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+    <!-- <link href="assets/css/layout-dark.css" rel="stylesheet" type="text/css"  /> -->
+    <!-- Morenizr -->
+    <script type="text/javascript" src="assets/plugins/modernizr.min.js"></script>
+
+    <!--[if lte IE 8]>
+    <script src="assets/plugins/respond.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://nessos.github.io">nessos</a></li>
-          <li><a href="http://github.com/mbraceproject/MBrace.Core">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="http://www.m-brace.net/index.html">MBrace</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
-<h1><a name="MBrace-framework" class="anchor" href="#MBrace-framework">MBrace framework</a></h1>
+</head>
 
-<p>The MBrace framework is an open-source distributed runtime that enables
-scalable, fault-tolerant computation and data processing for the .NET/mono frameworks.
-The MBrace programming model uses a distributed continuation-based approach elegantly
-manifested through computation expressions in F#.</p>
+<body class="smoothscroll">
 
-<div class="row">
-  <div class="span1"></div>
-  <div class="span6">
-    <div class="well well-small" id="nuget">
-      A prerelease of MBrace can be <a href="https://nuget.org/packages/MBrace.Core">installed from NuGet</a>:
-      <pre>PM> Install-Package MBrace.Core -Pre</pre>
-    </div>
-  </div>
-  <div class="span1"></div>
-</div>
+    <div id="wrapper">
 
-<h2><a name="Example" class="anchor" href="#Example">Example</a></h2>
+        <div id="header">
+            <!-- class="sticky" for sticky menu -->
+            <!-- Top Bar -->
+            <header id="topBar">
+                <div class="container">
 
-<p>An MBrace session can be initialized from F# interactive as follows:</p>
+                    <div class="pull-right fsize13 margin-top10 hide_mobile">
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 11)" onmouseover="showTip(event, 'fs1', 11)" class="i">MBrace</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 12)" onmouseover="showTip(event, 'fs1', 12)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 13)" onmouseover="showTip(event, 'fs2', 13)" class="i">Azure</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 14)" onmouseover="showTip(event, 'fs1', 14)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 15)" onmouseover="showTip(event, 'fs2', 15)" class="i">Azure</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 16)" onmouseover="showTip(event, 'fs3', 16)" class="i">Client</span>
+                        <!-- mail , phone -->
+                        <a href="http://github.com/mbraceproject/MBrace.Core">MBrace.Core on github</a> &bull; <a href="http://github.com/mbraceproject/MBrace.Azure">MBrace.Azure on github</a>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="f">lineCount</span> () <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="i">cloud</span> {
-    <span class="c">// enumerate all files from underlying storage container</span>
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs10', 19)" onmouseover="showTip(event, 'fs10', 19)" class="i">files</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="f">Enumerate</span> <span class="s">&quot;path/to/container&quot;</span>
+                        <div class="block text-right">
+                            <!-- social -->
+                            <!--								<a href="#" class="social fa fa-facebook"></a> -->
+                            <a href="https://twitter.com/mbracethecloud" class="social fa fa-twitter"></a>
+                            <!--								<a href="#" class="social fa fa-google-plus"></a>
+                                                        <a href="#" class="social fa fa-linkedin"></a>
+                                                        <a href="#" class="social fa fa-pinterest"></a> -->
+                        </div><!-- /social -->
 
-    <span class="c">// read the contents of a file and return its line count</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="f">count</span> (<span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">f</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs11', 24)" onmouseover="showTip(event, 'fs11', 24)" class="t">CloudFile</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 25)" onmouseover="showTip(event, 'fs9', 25)" class="i">cloud</span> {
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 27)" onmouseover="showTip(event, 'fs11', 27)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="f">ReadAllText</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="i">f</span>
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs15', 30)" onmouseover="showTip(event, 'fs15', 30)" class="i">text</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="f">Split</span>(<span class="s">&#39;\n&#39;</span>)<span class="o">.</span><span class="i">Length</span>
-    }
-    
-    <span class="c">// perform line count in parallel</span>
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="i">sizes</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 33)" onmouseover="showTip(event, 'fs10', 33)" class="i">files</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="f">map</span> <span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="f">count</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="t">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="f">Parallel</span>
-    <span class="k">return</span> <span onmouseout="hideTip(event, 'fs19', 39)" onmouseover="showTip(event, 'fs19', 39)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="f">sum</span> <span onmouseout="hideTip(event, 'fs18', 41)" onmouseover="showTip(event, 'fs18', 41)" class="i">sizes</span>
-}
+                    </div>
 
-<span class="c">// get handle to Azure MBrace cluster</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="i">cluster</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="t">Runtime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="f">GetHandle</span>(<span onmouseout="hideTip(event, 'fs4', 45)" onmouseover="showTip(event, 'fs4', 45)" class="i">config</span>)
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 46)" onmouseover="showTip(event, 'fs27', 46)" class="i">proc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="i">cluster</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="f">CreateProcess</span> (<span onmouseout="hideTip(event, 'fs8', 49)" onmouseover="showTip(event, 'fs8', 49)" class="f">lineCount</span> ()) <span class="c">// send computation to the runtime</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="i">lines</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 51)" onmouseover="showTip(event, 'fs27', 51)" class="i">proc</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 52)" onmouseover="showTip(event, 'fs30', 52)" class="f">AwaitResult</span> () <span class="c">// await completion</span>
-</pre>
-</td>
-</tr>
-</table>
+                    <!-- Logo -->
+                    <a class="logo" href="index.html">
+                        <img src="assets/images/mbrace-banner-50-height.png" height="50" alt="" />
+                    </a>
 
-<p>For a quick dive into MBrace and applications, check out the 
-<a href="https://github.com/mbraceproject/MBrace.Demos"><code>MBrace.Demos</code></a> solution.</p>
+                </div><!-- /.container -->
+            </header>
+            <!-- /Top Bar -->
+            <!-- Top Nav -->
+            <header id="topNav">
+                <div class="container">
 
-<table class="pre"><tr><td><pre lang="bash">git clone https://github.com/mbraceproject/MBrace.Demos
-</pre></td></tr></table>
+                    <!-- Mobile Menu Button -->
+                    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
-<h2><a name="Documentation-amp-Tutorials" class="anchor" href="#Documentation-amp-Tutorials">Documentation &amp; Tutorials</a></h2>
+                    <!-- Search 
+                    <form class="search" method="get" action="page-search.html">
+                        <input type="text" class="form-control" name="s" value="" placeholder="Search">
+                        <button class="fa fa-search"></button>
+                    </form>
+                    -->
+                    <!-- Top Nav -->
+                    <div class="navbar-collapse nav-main-collapse collapse">
+                        <nav class="nav-main">
 
-<p>A collection of tutorials, technical overviews and API references of the library.</p>
+                            <ul id="topMain" class="nav nav-pills nav-main">
 
-<ul>
-<li><p><a href="programming-model.html">Programming Model</a> An overview of the MBrace programming model.</p></li>
-<li><p><a href="client-api.html">Client API</a> An overview of the MBrace client API.</p></li>
-<li><p><a href="runtime-deployment.html">Cluster Deployment Guide</a> Deploying an MBrace runtime.</p></li>
-<li><p><a href="azure-tutorial.html">Azure Tutorial</a> Getting started with MBrace on Windows Azure.</p></li>
-<li><p><a href="reference/index.html">API Reference</a> contains automatically generated documentation for all types, modules
-and functions in the library.</p></li>
-</ul>
+                                <li>
+                                    <a href="#try">LEARN <span>get started</span></a>
+                                </li>
+                                <li>
+                                    <a href="#features">FEATURES <span>details</span></a>
+                                </li>
+                                <li>
+                                    <a href="#contribute">CONTRIBUTE <span>open source</span></a>
+                                </li>
+                                <li>
+                                    <a href="#training">SUPPORT <span>training</span></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#">DOCUMENTATION <span>API reference</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="core/core.html">MBrace Overview</a></li>
+                                        <li><a href="core/programming-model.html">MBrace Programming Model</a></li>
+                                        <li><a href="https://github.com/elastacloud/mbrace-on-brisk-starter/">MBrace.Azure Tutorials</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="mbrace-manual.pdf">MBrace Manual</a></li>
+                                        <li><a href="core/runtime-deployment.html">MBrace Runtime Deployment</a></li>
+                                        <li><a href="core/client-api.html">MBrace Client API</a></li>
+                                        <li><a href="core/azure-tutorial.html">MBrace.Azure (manual deploymeny)</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="reference/index.html">API Reference</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="mbrace-plos.pdf">PLOS Paper</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
 
-<h2><a name="Community" class="anchor" href="#Community">Community</a></h2>
+                        </nav>
+                    </div>
+                    <!-- /Top Nav -->
 
-<ul>
-<li><p>Twitter Feed <a href="https://twitter.com/mbracethecloud">@mbracethecloud</a>.</p></li>
-<li><p>User mailing list <a href="https://groups.google.com/group/mbrace-user"><a href="https://groups.google.com/group/mbrace-user">https://groups.google.com/group/mbrace-user</a></a>.</p></li>
-<li><p>Developer/Contributor mailing list <a href="https://groups.google.com/group/mbrace-dev"><a href="https://groups.google.com/group/mbrace-dev">https://groups.google.com/group/mbrace-dev</a></a>.</p></li>
-</ul>
-
-<h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
-
-<p>The project is hosted on <a href="https://github.com/mbraceproject/MBrace">GitHub</a> where you can <a href="https://github.com/mbraceproject/MBrace/issues">report issues</a>, fork 
-the project and submit pull requests.</p>
-
-<p>The library is available under the Apache License. 
-For more information see the <a href="https://github.com/mbraceproject/MBrace/blob/master/LICENSE.md">License file</a> in the GitHub repository.</p>
-
-<div class="tip" id="fs1">namespace MBrace</div>
-<div class="tip" id="fs2">namespace MBrace.Azure</div>
-<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
-<div class="tip" id="fs4">val config : Configuration<br /><br />Full name: Index.config</div>
-<div class="tip" id="fs5">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
-<div class="tip" id="fs6">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
-<div class="tip" id="fs7">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;UserDataTable: string;}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
-<div class="tip" id="fs8">val lineCount : unit -&gt; Cloud&lt;int&gt;<br /><br />Full name: Index.lineCount</div>
-<div class="tip" id="fs9">val cloud : CloudBuilder<br /><br />Full name: MBrace.Builders.cloud</div>
-<div class="tip" id="fs10">val files : CloudFile []</div>
-<div class="tip" id="fs11">Multiple items<br />type CloudFile =<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;new : path:string -&gt; CloudFile<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Path : string<br />&#160;&#160;member private StructuredFormatDisplay : string<br />&#160;&#160;static member Create : serializer:(Stream -&gt; Async&lt;unit&gt;) * ?path:string -&gt; Local&lt;CloudFile&gt;<br />&#160;&#160;static member Create : serializer:(Stream -&gt; Async&lt;unit&gt;) * directory:string * fileName:string -&gt; Local&lt;CloudFile&gt;<br />&#160;&#160;static member Delete : file:CloudFile -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member Delete : path:string -&gt; Local&lt;unit&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.CloudFile<br /><br />--------------------<br />new : path:string -&gt; CloudFile</div>
-<div class="tip" id="fs12">static member CloudFile.Enumerate : ?directory:CloudDirectory -&gt; Local&lt;CloudFile []&gt;<br />static member CloudFile.Enumerate : ?directory:string -&gt; Local&lt;CloudFile []&gt;</div>
-<div class="tip" id="fs13">val count : (CloudFile -&gt; Cloud&lt;int&gt;)</div>
-<div class="tip" id="fs14">val f : CloudFile</div>
-<div class="tip" id="fs15">val text : string</div>
-<div class="tip" id="fs16">static member CloudFile.ReadAllText : file:CloudFile * ?encoding:System.Text.Encoding -&gt; Local&lt;string&gt;<br />static member CloudFile.ReadAllText : file:string * ?encoding:System.Text.Encoding -&gt; Local&lt;string&gt;</div>
-<div class="tip" id="fs17">System.String.Split(params separator: char []) : string []<br />System.String.Split(separator: string [], options: System.StringSplitOptions) : string []<br />System.String.Split(separator: char [], options: System.StringSplitOptions) : string []<br />System.String.Split(separator: char [], count: int) : string []<br />System.String.Split(separator: string [], count: int, options: System.StringSplitOptions) : string []<br />System.String.Split(separator: char [], count: int, options: System.StringSplitOptions) : string []</div>
-<div class="tip" id="fs18">val sizes : int []</div>
-<div class="tip" id="fs19">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs20">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs21">Multiple items<br />type Cloud =<br />&#160;&#160;static member AsLocal : workflow:Cloud&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member AwaitCloudTask : task:ICloudTask&lt;&#39;T&gt; * ?timeoutMilliseconds:int -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member AwaitTask : task:Task&lt;&#39;T&gt; * ?timeoutMilliseconds:int -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member Catch : workflow:Workflow&lt;&#39;T&gt; -&gt; Cloud&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />&#160;&#160;static member Choice : computations:seq&lt;#Workflow&lt;&#39;T option&gt; * IWorkerRef&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />&#160;&#160;static member Choice : computations:seq&lt;#Workflow&lt;&#39;T option&gt;&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />&#160;&#160;static member ChoiceEverywhere : computation:Workflow&lt;&#39;T option&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />&#160;&#160;static member CreateCancellationTokenSource : unit -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />&#160;&#160;static member CreateLinkedCancellationTokenSource : tokens:seq&lt;ICloudCancellationToken&gt; -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />&#160;&#160;static member CreateLinkedCancellationTokenSource : ?parent:ICloudCancellationToken -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Cloud<br /><br />--------------------<br />type Cloud&lt;&#39;T&gt; =<br />&#160;&#160;inherit Workflow&lt;&#39;T&gt;<br />&#160;&#160;private new : body:Body&lt;&#39;T&gt; -&gt; Cloud&lt;&#39;T&gt;<br /><br />Full name: MBrace.Cloud&lt;_&gt;<br /><br />--------------------<br />type CloudAttribute = ReflectedDefinitionAttribute<br /><br />Full name: MBrace.CloudAttribute</div>
-<div class="tip" id="fs22">static member Cloud.Parallel : computations:seq&lt;#Workflow&lt;&#39;T&gt; * IWorkerRef&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />static member Cloud.Parallel : computations:seq&lt;#Workflow&lt;&#39;T&gt;&gt; -&gt; Cloud&lt;&#39;T []&gt;</div>
-<div class="tip" id="fs23">val sum : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.Array.sum</div>
-<div class="tip" id="fs24">val cluster : Runtime<br /><br />Full name: Index.cluster</div>
-<div class="tip" id="fs25">Multiple items<br />namespace MBrace.Azure.Runtime<br /><br />--------------------<br />namespace MBrace.Runtime<br /><br />--------------------<br />type Runtime =<br />&#160;&#160;private new : clientId:string * config:Configuration -&gt; Runtime<br />&#160;&#160;member AttachClientLogger : logger:ICloudLogger -&gt; unit<br />&#160;&#160;member ClearAllProcesses : ?fullClear:bool * ?force:bool -&gt; unit<br />&#160;&#160;member ClearAllProcessesAsync : ?fullClear:bool * ?force:bool -&gt; Async&lt;unit&gt;<br />&#160;&#160;member ClearProcess : pid:string * ?fullClear:bool * ?force:bool -&gt; unit<br />&#160;&#160;member ClearProcessAsync : pid:string * ?fullClear:bool * ?force:bool -&gt; Async&lt;unit&gt;<br />&#160;&#160;member CreateCancellationTokenSource : unit -&gt; ICloudCancellationTokenSource<br />&#160;&#160;member CreateProcess : workflow:Workflow&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:ICloudChannelProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Process&lt;&#39;T&gt;<br />&#160;&#160;member CreateProcessAsTask : workflow:Workflow&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:ICloudChannelProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Task&lt;Process&lt;&#39;T&gt;&gt;<br />&#160;&#160;member CreateProcessAsync : workflow:Workflow&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:ICloudChannelProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Async&lt;Process&lt;&#39;T&gt;&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Azure.Client.Runtime</div>
-<div class="tip" id="fs26"></div>
-<div class="tip" id="fs27">val proc : Process&lt;int&gt;<br /><br />Full name: Index.proc</div>
-<div class="tip" id="fs28">member Runtime.CreateProcess : workflow:Workflow&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:Store.ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:Store.ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:Store.ICloudChannelProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Process&lt;&#39;T&gt;</div>
-<div class="tip" id="fs29">val lines : int<br /><br />Full name: Index.lines</div>
-<div class="tip" id="fs30">member Process.AwaitResult : unit -&gt; &#39;T</div>
+                </div><!-- /.container -->
+            </header>
+            <!-- /Top Nav -->
 
         </div>
-        <div class="span3">
-          <a href="http://www.m-brace.net/index.html">
-            <img src="http://www.m-brace.net/img/mbrace.png" alt="F# Project" style="width:150px;margin:10px" />
-          </a>
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">MBrace</li>
-            <li><a href="http://www.m-brace.net/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://www.nuget.org/packages/MBrace.Core">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/mbraceproject/MBrace.Core">Source Code on GitHub</a></li>
-            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/LICENSE.md">License</a></li>
-            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
-            <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
-            <li class="divider"></li>
-            <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
-            <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
+        <!-- CALLOUT -->
+        <div class="callout dark">
+            <!-- add "styleBackgroundColor" class for colored background and white text OR "dark" for a dark callout -->
+            <div class="container">
+                <div class="row">
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
-            <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
-            <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
-          </ul>
+                    <div class="col-md-3">
+                    </div>
+
+                    <div class="col-md-9">
+                        <img class="img-responsive animate_fade_in" src="assets/images/mbrace-banner900x300.png" alt="" />
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-2">
+                        <!-- button -->
+                        <a href="#try" rel="nofollow" target="_blank" class="btn btn-primary btn-lg">Get Started Now</a>
+                    </div>
+
+                    <div class="col-md-9">
+                        <!-- title + shortdesc -->
+                        <h3>Integrated Data Scripting for the Cloud - Get started with MBrace.Core and MBrace.Azure today.</h3>
+                    </div>
+
+
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-    <a href="http://github.com/mbraceproject/MBrace.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
-  </html>
+        <!-- /CALLOUT -->
+        <!-- WELCOME -->
+        <section>
+            <div class="container">
+                <header>
+                    <h2>
+                        Welcome to
+                        <span class="word-rotator" data-delay="2000">
+                            <!-- word rotator - default delay: 2000. Change rotating delay: data-delay="5000" -->
+                            <span class="items bold">
+                                <span><em>MBrace</em></span>
+                                <span><em>simple scripting of scalable compute and data jobs</em></span>
+                                <span><em>big data and big compute</em></span>
+                            </span>
+                        </span><!-- /word rotator -->
+                    </h2>
+                    <p class="lead">
+                        MBrace.Core is a simple programming model for scalable cloud data scripting and programming with F# and C#.
+                        With MBrace.Azure, you can script Azure for large-scale compute and data processing, directly from Visual Studio.
+                    </p>
+                </header>
+
+
+
+                <!-- FEATURED BOXES 3 -->
+                <div class="row featured-box-minimal">
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-group"></i> Simple Cloud Programming</h4>
+                        <p>MBrace.Core is a cloud programming model simple enough to be explained on a single slide.</p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-bars"></i> Azure Support</h4>
+                        <p>MBrace.Azure implements MBrace.Core on the Azure cloud platform.</p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-check"></i> Simple Provisioning</h4>
+                        <p>Simple one-stop cluster provisioning for Azure with Elastacloud Brisk Engine.</p>
+                    </div>
+
+                </div>
+                <div class="row featured-box-minimal">
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-code"></i> Scripting for Compute and Data</h4>
+                        <p>Integrate cloud-scale compute and data processing directly into your F#/C# scripting.</p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-check"></i> Big Data, Big Compute</h4>
+                        <p>
+                            Scale your data scripts across tens to thousands of machines with seamless access
+                            to cloud storage.
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <h4><i class="fa fa-desktop"></i> Direct from Visual Studio</h4>
+                        <p>
+                            With MBrace.Azure, use your Azure storage and compute assets,
+                            at your fingertips in Visual Studio.
+                        </p>
+                    </div>
+
+                </div>
+                <!-- /FEATURED BOXES 3 -->
+
+            </div>
+        </section>
+        <!-- /WELCOME -->
+
+
+        <section>
+            <div class="callout dark" id="try">
+                <div class="container text-left">
+
+                    <h2>Getting Started with the MBrace.Azure preview in Visual Studio 2013</h2>
+
+                    <ol>
+                        <li>If necessary, <a href="http://fsharp.org/about/learning.html" target="_blank">learn basic F# scripting in Visual Studio 2013</a> </li>
+                        <li><a href="https://www.briskengine.com/" target="_blank">Create an Azure MBrace cluster</a> using Brisk Engine</li>
+                        <li><a href="https://github.com/elastacloud/mbrace-on-brisk-starter/archive/master.zip" target="_blank">Download the samples</a> and learn MBrace</li>
+                        <li><a href="https://github.com/mbraceproject/MBrace.Azure/issues/new" target="_blank">Give feedback</a> on github</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="alternate">
+            <div class="container" id="training">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2><strong>Training</strong> and <strong>Support</strong></h2>
+                        <p class="lead">Consultancy partners including <strong>Nessos</strong> and <strong>Elastacloud</strong> contribute to MBrace and provide training, support and consultancy services.</p>
+                        <p>Combining the strength and experience of two consultancies, Nessos and Elastacloud partner to bring you training and support for both MBrace.Core and MBrace.Azure.</p>
+                    </div>
+
+                    <div class="col-md-3 text-center">
+                        <a href="http://www.nessos.gr/"><img class="img-responsive animate_fade_in" target="_blank" src="assets/images/nessos-200-200.png" alt="" /></a>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="http://www.elastacloud.com/"><img class="img-responsive animate_fade_in" target="_blank" src="assets/images/elastalogo-200-200.png" alt="" /></a>
+                    </div>
+                </div>
+
+                <!--
+
+                                <div class="row text-center countTo">
+                                        <div class="col-md-3 col-sm-6">
+                                            <span class="boxed radius3">
+                                                <strong class="styleColor" data-to="13">13</strong>
+                                                <label>Years Experience</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6">
+                                            <span class="boxed radius3">
+                                                <strong class="styleColor" data-to="12000">12000</strong>
+                                                <label>Hours of Development</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6">
+                                            <span class="boxed radius3">
+                                                <strong class="styleColor" data-to="3890">3890</strong>
+                                                <label>Happy Customers</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6">
+                                            <span class="boxed radius3">
+                                                <strong class="styleColor" data-to="11000">11000</strong>
+                                                <label>Cups of Coffee</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                -->
+            </div>
+
+        </section>
+
+
+
+        <!-- DARK CALLOUT -->
+        <div class="callout dark arrow-down" id="features">
+            <div class="container text-center">
+
+                <h2>MBrace.Core - Cloud Programming Made Simple</h2>
+
+                <p>
+                    Confused by the cloud?  Cloud computation and data can be simple,
+                    if using the right framework. MBrace.Core
+                    helps the cloud empower you, not enslave you.
+                </p>
+                <div class="divider half-margins hidden-xs"><!-- divider --></div>
+
+                <div class="row text-left hidden-xs">
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>Cloud Workflows</li>
+                            <li>Concurrent</li>
+                            <li>Fault Tolerant</li>
+                            <li>High Availability</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>Functional Cloud Data Flows</li>
+                            <li>Partitioned Cloud Vectors</li>
+                            <li>Abstract and Reuse Common Cloud Patterns</li>
+                            <li>Strong Typing For Cloud Data</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>Full F# and C# Support</li>
+                            <li>Cloud Vendor Neutral</li>
+                            <li>100% Open Source</li>
+                            <li>Extensible Data Serialization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row text-left hidden-xs">
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            MBrace.Core is an open source software framework, initiated by experts, for
+                            developing big data algorithms that will execute on a private or
+                            public cloud. It is similar to Hadoop but simpler,
+                            explorative and not confined to the map-reduce paradigm.
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            MBrace.Core abstracts the underlying cloud infrastructure
+                            - code developed using MBrace.Core can run locally or on a supported private
+                            or public clouds.
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            MBrace.Core integrates with F# Interactive where you can delve
+                            into REPL style programming which enables fast code prototyping in a
+                            cloud scale, job monitoring and code deployment.
+                        </p>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="callout dark arrow-up">
+            <div class="container text-center">
+
+                <h2>MBrace.Azure - Included Features</h2>
+                <p>Whether new to Azure or an advanced Azure developer, MBrace.Azure brings Azure storage and compute to your fingertips.</p>
+
+                <div class="divider half-margins hidden-xs"><!-- divider --></div>
+
+                <div class="row text-left hidden-xs">
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>Cloud Scripting from Visual Studio</li>
+                            <li>Programmatic Data Upload</li>
+                            <li>Automatic Code Transport</li>
+                            <li>Extensible Data Serialization</li>
+                            <li>Fault Tolerance Options</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>Full F# and C# Support</li>
+                            <li>Job Creation and Control</li>
+                            <li>Integrated Cloud Logging</li>
+                            <li>Smooth Transitions From Scripts to Code</li>
+                            <li>Nuget Packages</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <ul class="list-icon spaced check-circle">
+                            <li>All MBrace.Core Features</li>
+                            <li>Interoperate With Azure Services</li>
+                            <li>Local Prototyping</li>
+                            <li>Native CPU Performance</li>
+                            <li>100% Open Source</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row text-left hidden-xs">
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            MBrace.Azure takes care of task orchestration and data flow between
+                            your scripting environment and worker nodes: you deal with the data and algorithm 
+                            you want to execute. 
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            MBrace.Azure uses Azure storage and Azure Service Bus. Azure geo-replication
+                            and Premium storage options give additional storage safety and performance.
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+
+                        <p>
+                            The MBrace.Azure runtime makes executing processes fault tolerant.
+                            If the underlying platform resources fail, e.g. a security
+                            patch is applied abruptly, the computations are either already replicated over
+                            different nodes, or they will be restarted.
+                        </p>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <section>
+            <div class="container">
+
+                <div class="text-center">
+                    <img class="img-responsive animate_fade_in" src="assets/images/code/example-flow.png" alt="" />
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section>
+            <div class="container">
+
+
+                <header class="text-center">
+                    <h2>MBrace.Azure brings Azure scalability directly into Visual Studio</h2>
+                    <blockquote class="noborder nopadding nomargin">
+                        <i>
+                            MBrace.Azure integrates Azure storage and compute VMs as a kind of co-processor to your F# Interactive scripting sessions or your F#/C# applications.
+                            It brings Azure scalability directly into Visual Studio using an intuitive and powerful data scripting model. Combining
+                            MBrace.Azure with F# gives a powerful and scalable cloud data scripting solution.
+                        </i>
+                        <cite class="block">Don Syme, F# Language Designer</cite>
+                    </blockquote>
+
+                    <div class="divider half-margins"><!-- divider --></div>
+
+                </header>
+
+                <!--
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="testimonial classic female animate_from_bottom">
+                                                <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                                <cite><strong>John Doe</strong>, Customer</cite>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="testimonial classic male animate_from_bottom">
+                                                <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                                <cite><strong>John Doe</strong>, Customer</cite>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="testimonial classic male animate_from_bottom">
+                                                <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                                <cite><strong>John Doe</strong>, Customer</cite>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="testimonial classic female animate_from_bottom">
+                                                <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                                <cite><strong>John Doe</strong>, Customer</cite>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="testimonial classic male animate_from_bottom">
+                                                <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                                <cite><strong>John Doe</strong>, Customer</cite>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="owl-carousel animate_from_bottom text-center" data-plugin-options='{"items": 1, "singleItem": true, "navigation": false, "pagination": true, "autoPlay": true, "transitionStyle":"fadeUp"}'>
+                                        <div class="testimonial">
+                                            <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                            <cite><strong>John Doe</strong>, Customer</cite>
+                                        </div>
+
+                                        <div class="testimonial">
+                                            <p>Donec tellus massa, tristique sit amet condim vel, facilisis quis sapien. Praesent id enim sit amet odio vulputate eleifend in in tortor. Donec tellus massa.</p>
+                                            <cite><strong>Jessica Doe</strong>, Customer</cite>
+                                        </div>
+
+                                        <div class="testimonial">
+                                            <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+                                            <cite><strong>Dorin Doe</strong>, Customer</cite>
+                                        </div>
+
+                                        <div class="testimonial">
+                                            <p>Donec tellus massa, tristique sit amet condim vel, facilisis quis sapien. Praesent id enim sit amet odio vulputate eleifend in in tortor. Donec tellus massa.</p>
+                                            <cite><strong>Melissa Doe</strong>, Customer</cite>
+                                        </div>
+
+                                    </div>
+                -->
+            </div>
+        </section>
+        <!-- /TESTIMONIALS -->
+        <!-- CALLOUT -->
+        <div class="callout dark">
+            <!-- add "styleBackgroundColor" class for colored background and white text OR "dark" for a dark callout -->
+            <div class="container" id="contribute">
+
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <!-- title + shortdesc -->
+                        <h3>Contribute to MBrace!</h3>
+                        <p>MBrace.Core and MBrace.Azure are both fully open source under an Apache 2.0 license. You can contribute to them today.</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <!-- button -->
+                        <a href="http://github.com/mbraceproject" rel="nofollow" target="_blank" class="btn btn-primary btn-lg">MBrace on GitHub</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /CALLOUT -->
+
+        <section class="callout styleBackgroundColor">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>Who are we?</h3>
+                        <p>Meet the people behind MBrace!</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-sm-4 col-md-3 fadeInUpBig">
+                        <div class="box-content thumbnail text-center">
+                            <span class="item-image">
+                                <img class="img-responsive" src="assets/images/people/tsarpalis.jpg" alt="">
+                            </span>
+                            <div class="caption text-left">
+
+                                <div class="clearfix margin-bottom10">
+                                    <div class="pull-left">
+                                        <h4 class="nomargin">
+                                            Eirik Tsarpalis
+                                            <small class="block">Core team</small>
+                                        </h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="https://twitter.com/eiriktsarpalis" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://github.com/eiriktsarpalis" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <p class="noborder nomargin nopadding">Eirik works at Nessos on MBrace.Core and MBrace.Azure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 fadeInUpBig">
+                        <div class="box-content thumbnail text-center">
+                            <span class="item-image">
+                                <img class="img-responsive" src="assets/images/people/nick.jpg" alt="">
+                            </span>
+                            <div class="caption text-left">
+
+                                <div class="clearfix margin-bottom10">
+                                    <div class="pull-left">
+                                        <h4 class="nomargin">
+                                            Nick Palladinos
+                                            <small class="block">Core team</small>
+                                        </h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="https://twitter.com/NickPalladinos" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://github.com/palladin/" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <p class="noborder nomargin nopadding">Nick is lead software designer and researcher at Nessos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 fadeInUpBig">
+                        <div class="box-content thumbnail text-center">
+                            <span class="item-image">
+                                <img class="img-responsive" src="assets/images/people/kostas.jpg" alt="">
+                            </span>
+                            <div class="caption text-left">
+
+                                <div class="clearfix margin-bottom10">
+                                    <div class="pull-left">
+                                        <h4 class="nomargin">
+                                            Kostas Rontogiannis
+                                            <small class="block">Core team</small>
+                                        </h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="http://twitter.com/krontogiannis" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://github.com/krontogiannis" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <p class="noborder nomargin nopadding">F# Developer at Nessos on {m}brace.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 fadeInUpBig">
+                        <!-- member -->
+                        <div class="box-content thumbnail text-center">
+                            <span class="item-image">
+                                <img class="img-responsive" src="assets/images/people/isaac.png" alt="">
+                            </span>
+                            <div class="caption text-left">
+
+                                <div class="clearfix margin-bottom10">
+                                    <div class="pull-left">
+                                        <h4 class="nomargin">
+                                            Isaac Abraham
+                                            <small class="block">Elastacloud Brisk team</small>
+                                        </h4>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="https://twitter.com/isaac_abraham" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://github.com/isaacabraham" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <p class="noborder nomargin nopadding">F# MVP, experienced C# consultant, user of Azure, guitar shredder and mad Tottenham fan. Follow Isaac on <a href="https://twitter.com/isaac_abraham"> twitter</a> or at <a href="https://cockneycoder.wordpress.com/">his personal blog</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer id="footer">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="logo_footer dark col-md-3">
+
+                        <img alt="" src="assets/images/mbrace-banner-50-height.png" height="50" class="logo" />
+
+                        <p class="block">
+                            <!-- social -->
+                            <a href="https://twitter.com/mbracethecloud" class="social fa fa-twitter"></a>
+                        </p><!-- /social -->
+                    </div>
+                        <!--
+                    <div class="spaced col-md-6 col-sm-6 hidden-xs">
+                                                    <h4>Recent <strong>Posts</strong></h4>
+                                                    <ul class="list-unstyled">
+                                                        <li>
+                                                            <a class="block" href="#">New CSS3 Transitions this Year</a>
+                                                            <small>June 29, 2014</small>
+                                                        </li>
+                                                        <li>
+                                                            <a class="block" href="#">Inteligent Transitions In UX Design</a>
+                                                            <small>June 29, 2014</small>
+                                                        </li>
+                                                        <li>
+                                                            <a class="block" href="#">Lorem Ipsum Dolor</a>
+                                                            <small>June 29, 2014</small>
+                                                        </li>
+                                                    </ul>
+                    </div>
+                    <div class="spaced col-md-6 col-sm-6 hidden-xs">
+                        <!--
+                                                    <h4>Recent <strong>Tweets</strong></h4>
+                                                    <ul class="list-unstyled fsize13">
+                                                        <li>
+                                                            <i class="fa fa-twitter"></i> <a href="#">@John Doe</a> Pilsum dolor lorem sit consectetur adipiscing orem sequat <small class="ago">8 mins ago</small>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-twitter"></i> <a href="#">@John Doe</a> Remonde sequat ipsum dolor lorem sit consectetur adipiscing  <small class="ago">8 mins ago</small>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-twitter"></i> <a href="#">@John Doe</a> Imperdiet condimentum diam dolor lorem sit consectetur adipiscing <small class="ago">8 mins ago</small>
+                                                        </li>
+                                                    </ul>
+                    </div>
+                -->
+                    <div class="spaced col-md-6 col-sm-6">
+                        <h4>About <strong>Us</strong></h4>
+                        <p>
+                            MBrace.Core and MBrace.Azure are open source projects supported by an open community
+                            of contributors including Nessos and Elastacloud.
+                        </p>
+
+                        <h4><small><strong><a href="http://github.com/mbraceproject">Join us on GitHub today</a></strong></small></h4>
+                        <!--							<form id="newsletterSubscribe" method="post" action="php/newsletter.php" class="input-group">
+                                                        <input required type="email" class="form-control" name="newsletter_email" id="newsletter_email" value="" placeholder="E-mail Address">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-primary">SUBMIT</button>
+                                                        </span>
+                                                    </form>
+                        -->
+                    </div>
+                    <!-- /col #4 -->
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <!--				<div class="copyright">
+                                <div class="container text-center fsize12">
+                                    MBrace theme by <a href="http://www.stepofweb.com" target="_blank" title="bootstrap themes &amp; templates" class="copyright">stepofweb</a> &bull; All Right Reserved &copy; Your Company LLC. &nbsp;
+                                    <a href="page-privacy.html" class="fsize11">Privacy Policy</a> &bull;
+                                    <a href="page-terms.html" class="fsize11">Terms of Service</a>
+                                </div>
+                            </div>
+            -->
+        </footer>
+        <!-- /FOOTER -->
+
+        <a href="#" id="toTop"></a>
+
+    </div><!-- /#wrapper -->
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript" src="assets/plugins/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery.isotope.js"></script>
+    <script type="text/javascript" src="assets/plugins/masonry.js"></script>
+
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/knob/js/jquery.knob.js"></script>
+    <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+
+    <script type="text/javascript" src="assets/js/scripts.js"></script>
+</body>
+</html>
