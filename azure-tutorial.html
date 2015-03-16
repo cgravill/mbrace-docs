@@ -132,7 +132,7 @@ connect to the MBrace nodes:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">nodes</span> <span class="o">=</span> [<span class="n">1..</span><span class="n">3</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="i">i</span> <span class="k">-&gt;</span> <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">sprintf</span> <span class="s">&quot;clusterVM%d&quot;</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">i</span>, <span class="n">2675</span>))
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="i">nodes</span> <span class="o">=</span> [<span class="n">1..</span><span class="n">3</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 12)" onmouseover="showTip(event, 'fs4', 12)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs7', 14)" onmouseover="showTip(event, 'fs7', 14)" class="i">i</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="i">MBraceNode</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 16)" onmouseover="showTip(event, 'fs4', 16)" class="i">Connect</span>(<span onmouseout="hideTip(event, 'fs4', 17)" onmouseover="showTip(event, 'fs4', 17)" class="i">sprintf</span> <span class="s">&quot;clusterVM%d&quot;</span> <span onmouseout="hideTip(event, 'fs4', 18)" onmouseover="showTip(event, 'fs4', 18)" class="i">i</span>, <span class="n">2675</span>))
 </pre>
 </td>
 </tr>
@@ -150,11 +150,11 @@ connect to the MBrace nodes:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="i">nodes</span> <span class="o">=</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 19)" onmouseover="showTip(event, 'fs4', 19)" class="i">nodes</span> <span class="o">=</span>
     [
-        <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span class="s">&quot;10.0.1.4&quot;</span>, <span class="n">2675</span>)
-        <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span class="s">&quot;10.0.1.5&quot;</span>, <span class="n">2675</span>)
-        <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span class="s">&quot;10.0.1.6&quot;</span>, <span class="n">2675</span>)
+        <span onmouseout="hideTip(event, 'fs4', 20)" onmouseover="showTip(event, 'fs4', 20)" class="i">MBraceNode</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 21)" onmouseover="showTip(event, 'fs4', 21)" class="i">Connect</span>(<span class="s">&quot;10.0.1.4&quot;</span>, <span class="n">2675</span>)
+        <span onmouseout="hideTip(event, 'fs4', 22)" onmouseover="showTip(event, 'fs4', 22)" class="i">MBraceNode</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 23)" onmouseover="showTip(event, 'fs4', 23)" class="i">Connect</span>(<span class="s">&quot;10.0.1.5&quot;</span>, <span class="n">2675</span>)
+        <span onmouseout="hideTip(event, 'fs4', 24)" onmouseover="showTip(event, 'fs4', 24)" class="i">MBraceNode</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 25)" onmouseover="showTip(event, 'fs4', 25)" class="i">Connect</span>(<span class="s">&quot;10.0.1.6&quot;</span>, <span class="n">2675</span>)
     ]
 </pre>
 </td>
@@ -168,7 +168,7 @@ connect to the MBrace nodes:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="i">nodes</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">n</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="f">printfn</span> <span class="s">&quot;Node </span><span class="pf">%A</span><span class="s"> : </span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">n</span> <span class="o">&lt;|</span> <span class="k">try</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="i">n</span><span class="o">.</span><span class="i">Ping</span>()<span class="o">.</span><span class="i">ToString</span>() <span class="k">with</span> _ <span class="k">-&gt;</span> <span class="s">&quot;failed&quot;</span>)
+<span onmouseout="hideTip(event, 'fs4', 26)" onmouseover="showTip(event, 'fs4', 26)" class="i">nodes</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 27)" onmouseover="showTip(event, 'fs4', 27)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 28)" onmouseover="showTip(event, 'fs8', 28)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs9', 29)" onmouseover="showTip(event, 'fs9', 29)" class="i">n</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs4', 30)" onmouseover="showTip(event, 'fs4', 30)" class="f">printfn</span> <span class="s">&quot;Node </span><span class="pf">%A</span><span class="s"> : </span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 31)" onmouseover="showTip(event, 'fs9', 31)" class="i">n</span> <span class="o">&lt;|</span> <span class="k">try</span> <span onmouseout="hideTip(event, 'fs9', 32)" onmouseover="showTip(event, 'fs9', 32)" class="i">n</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 33)" onmouseover="showTip(event, 'fs4', 33)" class="i">Ping</span>()<span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 34)" onmouseover="showTip(event, 'fs4', 34)" class="i">ToString</span>() <span class="k">with</span> _ <span class="k">-&gt;</span> <span class="s">&quot;failed&quot;</span>)
 </pre>
 </td>
 </tr>
@@ -198,14 +198,14 @@ You can find your storage account name and key using the Azure Management Portal
 <span class="prep">#I</span> <span class="s">&quot;../../packages/MBrace.Azure/lib/net45/&quot;</span> 
 <span class="prep">#r</span> <span class="s">&quot;MBrace.Azure.dll&quot;</span>
 
-<span class="k">open</span> <span class="i">Nessos</span><span class="o">.</span><span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 35)" onmouseover="showTip(event, 'fs4', 35)" class="i">Nessos</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 36)" onmouseover="showTip(event, 'fs4', 36)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 37)" onmouseover="showTip(event, 'fs4', 37)" class="i">Azure</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="i">name</span> <span class="o">=</span> <span class="s">&quot;yourStorageAccountName&quot;</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="i">key</span> <span class="o">=</span> <span class="s">&quot;yourStorageAccountKey&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 38)" onmouseover="showTip(event, 'fs4', 38)" class="i">name</span> <span class="o">=</span> <span class="s">&quot;yourStorageAccountName&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 39)" onmouseover="showTip(event, 'fs4', 39)" class="i">key</span> <span class="o">=</span> <span class="s">&quot;yourStorageAccountKey&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="i">azureStore</span> <span class="o">=</span> <span class="i">AzureStore</span><span class="o">.</span><span class="i">Create</span>(<span class="i">accountName</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="i">name</span>, <span class="i">accountKey</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">key</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 40)" onmouseover="showTip(event, 'fs4', 40)" class="i">azureStore</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 41)" onmouseover="showTip(event, 'fs4', 41)" class="i">AzureStore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 42)" onmouseover="showTip(event, 'fs4', 42)" class="i">Create</span>(<span onmouseout="hideTip(event, 'fs4', 43)" onmouseover="showTip(event, 'fs4', 43)" class="i">accountName</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 44)" onmouseover="showTip(event, 'fs4', 44)" class="i">name</span>, <span onmouseout="hideTip(event, 'fs4', 45)" onmouseover="showTip(event, 'fs4', 45)" class="i">accountKey</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 46)" onmouseover="showTip(event, 'fs4', 46)" class="i">key</span>)
 
-<span class="i">MBraceSettings</span><span class="o">.</span><span class="i">DefaultStore</span> <span class="o">&lt;-</span> <span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">azureStore</span>
+<span onmouseout="hideTip(event, 'fs4', 47)" onmouseover="showTip(event, 'fs4', 47)" class="i">MBraceSettings</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 48)" onmouseover="showTip(event, 'fs4', 48)" class="i">DefaultStore</span> <span class="o">&lt;-</span> <span onmouseout="hideTip(event, 'fs4', 49)" onmouseover="showTip(event, 'fs4', 49)" class="i">azureStore</span>
 </pre>
 </td>
 </tr>
@@ -221,9 +221,9 @@ and send your first cloud computation.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="i">runtime</span> <span class="o">=</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Boot</span>(<span onmouseout="hideTip(event, 'fs4', 25)" onmouseover="showTip(event, 'fs4', 25)" class="i">nodes</span>, <span class="i">store</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">azureStore</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 50)" onmouseover="showTip(event, 'fs4', 50)" class="i">runtime</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 51)" onmouseover="showTip(event, 'fs4', 51)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 52)" onmouseover="showTip(event, 'fs4', 52)" class="i">Boot</span>(<span onmouseout="hideTip(event, 'fs4', 53)" onmouseover="showTip(event, 'fs4', 53)" class="i">nodes</span>, <span onmouseout="hideTip(event, 'fs4', 54)" onmouseover="showTip(event, 'fs4', 54)" class="i">store</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 55)" onmouseover="showTip(event, 'fs4', 55)" class="i">azureStore</span>)
 
-<span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="i">runtime</span><span class="o">.</span><span class="i">Run</span> &lt;@ <span class="i">cloud</span> { <span class="k">return</span> <span class="n">42</span> } @&gt;
+<span onmouseout="hideTip(event, 'fs4', 56)" onmouseover="showTip(event, 'fs4', 56)" class="i">runtime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="i">Run</span> &lt;@ <span onmouseout="hideTip(event, 'fs4', 58)" onmouseover="showTip(event, 'fs4', 58)" class="i">cloud</span> { <span class="k">return</span> <span class="n">42</span> } @&gt;
 </pre>
 </td>
 </tr>
@@ -240,21 +240,15 @@ and send your first cloud computation.</p>
 <li><a href="http://azure.microsoft.com/en-us/documentation/articles/install-configure-powershell/">How to install and configure Azure PowerShell</a></li>
 </ul>
 
-<div class="tip" id="fs1">val config : obj<br /><br />Full name: Azure-tutorial.config</div>
-<div class="tip" id="fs2">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
-<div class="tip" id="fs3">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
-<div class="tip" id="fs4">val nodes : obj list<br /><br />Full name: Azure-tutorial.nodes</div>
-<div class="tip" id="fs5">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs1">namespace MBrace</div>
+<div class="tip" id="fs2">namespace MBrace.Azure</div>
+<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
+<div class="tip" id="fs4"></div>
+<div class="tip" id="fs5">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
 <div class="tip" id="fs6">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
 <div class="tip" id="fs7">val i : int</div>
-<div class="tip" id="fs8">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
-<div class="tip" id="fs9">val iter : action:(&#39;T -&gt; unit) -&gt; list:&#39;T list -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.List.iter</div>
-<div class="tip" id="fs10">val n : obj</div>
-<div class="tip" id="fs11">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs12">val name : string<br /><br />Full name: Azure-tutorial.name</div>
-<div class="tip" id="fs13">val key : string<br /><br />Full name: Azure-tutorial.key</div>
-<div class="tip" id="fs14">val azureStore : obj<br /><br />Full name: Azure-tutorial.azureStore</div>
-<div class="tip" id="fs15">val runtime : obj<br /><br />Full name: Azure-tutorial.runtime</div>
+<div class="tip" id="fs8">val iter : action:(&#39;T -&gt; unit) -&gt; list:&#39;T list -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.List.iter</div>
+<div class="tip" id="fs9">val n : obj</div>
 
         </div>
         <div class="span3">
