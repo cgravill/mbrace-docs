@@ -135,8 +135,8 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
             Choice(computations)
           </code>
           <div class="tip" id="140">
-            <strong>Signature:</strong> (computations:seq&lt;&#39;?52869 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T option&gt;<br />
-                          <strong>Type parameters:</strong> '?52869, 'T          </div>
+            <strong>Signature:</strong> (computations:seq&lt;&#39;?52076 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T option&gt;<br />
+                          <strong>Type parameters:</strong> '?52076, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Returns a cloud computation that will execute the given computation on the corresponding worker,
@@ -155,8 +155,8 @@ This operator may create distribution.</p>
             Choice(computations)
           </code>
           <div class="tip" id="141">
-            <strong>Signature:</strong> computations:seq&lt;&#39;?52866&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />
-                          <strong>Type parameters:</strong> '?52866, 'T          </div>
+            <strong>Signature:</strong> computations:seq&lt;&#39;?52073&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />
+                          <strong>Type parameters:</strong> '?52073, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Returns a cloud computation that will execute given computations
@@ -360,8 +360,8 @@ This operator may create distribution.</p>
             Ignore(workflow)
           </code>
           <div class="tip" id="154">
-            <strong>Signature:</strong> workflow:&#39;?52847 -&gt; Cloud&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> '?52847, 'T          </div>
+            <strong>Signature:</strong> workflow:&#39;?52054 -&gt; Cloud&lt;unit&gt;<br />
+                          <strong>Type parameters:</strong> '?52054, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Performs a cloud computations, discarding its result</p>
@@ -406,8 +406,8 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
             Logf(fmt)
           </code>
           <div class="tip" id="157">
-            <strong>Signature:</strong> fmt:StringFormat&lt;&#39;?52855,Local&lt;unit&gt;&gt; -&gt; &#39;?52855<br />
-                          <strong>Type parameters:</strong> '?52855          </div>
+            <strong>Signature:</strong> fmt:StringFormat&lt;&#39;?52062,Local&lt;unit&gt;&gt; -&gt; &#39;?52062<br />
+                          <strong>Type parameters:</strong> '?52062          </div>
         </td>
         <td class="xmldoc">
           <p>Writes an entry to a logging provider, if it exists.</p>
@@ -436,8 +436,8 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
             Parallel(computations)
           </code>
           <div class="tip" id="159">
-            <strong>Signature:</strong> (computations:seq&lt;&#39;?52861 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T []&gt;<br />
-                          <strong>Type parameters:</strong> '?52861, 'T          </div>
+            <strong>Signature:</strong> (computations:seq&lt;&#39;?52068 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T []&gt;<br />
+                          <strong>Type parameters:</strong> '?52068, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Creates a cloud computation that will execute given computations to targeted workers
@@ -454,8 +454,8 @@ Exceptions raised by children carry cancellation semantics.</p>
             Parallel(computations)
           </code>
           <div class="tip" id="160">
-            <strong>Signature:</strong> computations:seq&lt;&#39;?52858&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />
-                          <strong>Type parameters:</strong> '?52858, 'T          </div>
+            <strong>Signature:</strong> computations:seq&lt;&#39;?52065&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />
+                          <strong>Type parameters:</strong> '?52065, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Creates a cloud computation that will execute the given computations
