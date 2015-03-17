@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Using MBrace on Windows Azure
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
+    <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
+    
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-196x196.png" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-160x160.png" sizes="160x160"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-16x16.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-32x32.png" sizes="32x32"/>
+
+    <link type="text/css" rel="stylesheet" href="http://www.m-brace.net/content/style.css" />
+    <script type="text/javascript" src="http://www.m-brace.net/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://nessos.github.io">nessos</a></li>
+          <li><a href="http://github.com/mbraceproject/MBrace.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="http://www.m-brace.net/index.html">MBrace</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="Using-MBrace-on-Windows-Azure" class="anchor" href="#Using-MBrace-on-Windows-Azure">Using MBrace on Windows Azure</a></h1>
+
+<p>In this tutorial you will learn how to setup MBrace on Windows Azure.</p>
+
+<h2><a name="Provisioning-Using-Brisk-Engine" class="anchor" href="#Provisioning-Using-Brisk-Engine">Provisioning Using Brisk Engine</a></h2>
+
+<p>The easiest path to provision an MBrace cluster on Azure using
+an Azure Cloud Service is to use <a href="http://briskengine.com">Brisk Engine</a>.
+See the <a href="brisk-tutorial.html">Brisk Engine Tutorial</a>.</p>
+
+<h2><a name="Provisioning-Explicitly" class="anchor" href="#Provisioning-Explicitly">Provisioning Explicitly</a></h2>
+
+<p>In some cases you may decide to provision explicitly, if the options provided
+by Brisk Engine do not yet meet your needs.  For example you may want to:</p>
+
+<ul>
+<li><p>adjust the size of VM used for worker instances in your cluster;</p></li>
+<li><p>add endpoints to your cloud service (so your MBrace cluster can publish 
+TCP and HTTP endpoints, either public or to your virtual network,
+for example, you want your MBrace cluster to publish a web server);</p></li>
+<li><p>enable Remote Access to MBrace cluster worker instances;</p></li>
+<li><p>specify the size of local storage available on MBrace cluster worker instances;</p></li>
+<li><p>upload certificates as part of your provisioning process;</p></li>
+<li><p>specify Azure-specific local caching options;</p></li>
+<li>compile and deploy your own version of the MBrace cluster worker instance software.</li>
+</ul>
+
+<p>At the time of writing these options were not yet available via the Brisk Engine provisioning
+service.</p>
+
+<p>In order to provision explicitly, as a prerequisite you need 
+to have a Windows Azure account, basic knowledge of the Azure computing and
+optionally Microsoft Visual Studio (or any environment supporting F#).</p>
+
+<p>Typically you will host your MBrace runtime/cluster nodes in one of</p>
+
+<ul>
+<li><p>the VMs of an Azure cloud service (normal); or</p></li>
+<li><p>explicit VMs; or</p></li>
+<li><p>the execution environment of an Azure web job.</p></li>
+</ul>
+
+<p>Typically the MBrace client will run in:</p>
+
+<ul>
+<li><p>an F# interactive instance in your Visual Studio session; or</p></li>
+<li><p>as part of another Azure cloud service, website or web job; or</p></li>
+<li><p>as a client desktop process.</p></li>
+</ul>
+
+<p>In all cases, the client will need sufficient network access to be able to write to the
+Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.</p>
+
+<h2><a name="Authoring-a-Cloud-Service-which-uses-the-MBrace-Runtime" class="anchor" href="#Authoring-a-Cloud-Service-which-uses-the-MBrace-Runtime">Authoring a Cloud Service which uses the MBrace Runtime</a></h2>
+
+<p>This is the normal option when provisioning eplicitly.</p>
+
+<p>See <a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">using an Azure cloud service for the MBrace runtime instances</a>.</p>
+
+<h2><a name="Using-a-virtual-network" class="anchor" href="#Using-a-virtual-network">Using a virtual network</a></h2>
+
+<p>Any nodes in a MBrace runtime as well as any clients, should be part of the 
+same network in order to work properly. 
+Because of this restriction in this tutorial you have two choices: you can either 
+use one of the virtual machines as a client or you can use
+the Windows Azure VPN service to join the virtual network created in Azure 
+and access the runtime from a remote client (your on-premises computer).</p>
+
+<p>If you use a virtual network, create and upload certificates and finally configure your VPN client. 
+The process is described in <a href="http://msdn.microsoft.com/en-us/library/azure/dn133792.aspx">here</a>.</p>
+
+<div class="tip" id="fs1">namespace MBrace</div>
+<div class="tip" id="fs2">namespace MBrace.Azure</div>
+<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
+<div class="tip" id="fs4">namespace MBrace.Azure.Runtime</div>
+<div class="tip" id="fs5">val config : Configuration<br /><br />Full name: Azure-tutorial.config</div>
+<div class="tip" id="fs6">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
+<div class="tip" id="fs7">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
+<div class="tip" id="fs8">Multiple items<br />module Configuration<br /><br />from MBrace.Azure.Runtime<br /><br />--------------------<br />type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;UserDataTable: string;}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
+
+        </div>
+        <div class="span3">
+          <a href="http://www.m-brace.net/index.html">
+            <img src="http://www.m-brace.net/img/mbrace.png" alt="F# Project" style="width:150px;margin:10px" />
+          </a>
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">MBrace</li>
+            <li><a href="http://www.m-brace.net/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://www.nuget.org/packages/MBrace.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/LICENSE.md">License</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+
+            <li class="nav-header">Getting Started</li>
+            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Azure API</a></li>
+            <li class="divider"></li>
+            <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
+            <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
+            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
+            <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/mbraceproject/MBrace.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
