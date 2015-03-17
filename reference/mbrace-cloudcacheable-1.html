@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>ICloudComputationConsumer<'R> - MBrace</title>
+    <title>CloudCacheable<'T> - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,9 +41,10 @@
 
 
 
-<h1>ICloudComputationConsumer<'R></h1>
+<h1>CloudCacheable<'T></h1>
 <div class="xmldoc">
-<p>Abstract cloud computation unpacker</p>
+<p>Defines a defered computation whose result can be
+cached in-memory and on-demand to worker machines.</p>
 </div>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
@@ -54,16 +55,47 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '642', 642)" onmouseover="showTip(event, '642', 642)">
-            Consume(arg1)
+          <code onmouseout="hideTip(event, '185', 185)" onmouseover="showTip(event, '185', 185)">
+            IsCachedLocally
           </code>
-          <div class="tip" id="642">
-            <strong>Signature:</strong> Cloud&lt;&#39;T&gt; -&gt; &#39;R<br />
-              <strong>Modifiers:</strong> abstract<br />
+          <div class="tip" id="185">
+            <strong>Signature:</strong> Local&lt;bool&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Returns true if value is cached in the local execution context.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
+            PopulateCache()
+          </code>
+          <div class="tip" id="186">
+            <strong>Signature:</strong> unit -&gt; Local&lt;bool&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Attempt to cache computation to local execution context.
+Returns true if succesful or already cached.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
+            Value
+          </code>
+          <div class="tip" id="187">
+            <strong>Signature:</strong> Local&lt;&#39;T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Evaluates the entity, returning the locally cached value if it already exists.</p>
+
         </td>
       </tr>
     </tbody>

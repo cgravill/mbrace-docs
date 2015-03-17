@@ -54,10 +54,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '528', 528)" onmouseover="showTip(event, '528', 528)">
+          <code onmouseout="hideTip(event, '554', 554)" onmouseover="showTip(event, '554', 554)">
             FromContinuations(body)
           </code>
-          <div class="tip" id="528">
+          <div class="tip" id="554">
             <strong>Signature:</strong> (body:(ExecutionContext -&gt; Continuation&lt;&#39;T&gt; -&gt; unit)) -&gt; Cloud&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -69,12 +69,177 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '529', 529)" onmouseover="showTip(event, '529', 529)">
+          <code onmouseout="hideTip(event, '555', 555)" onmouseover="showTip(event, '555', 555)">
+            GetExecutionContext()
+          </code>
+          <div class="tip" id="555">
+            <strong>Signature:</strong> unit -&gt; Local&lt;ExecutionContext&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the execution context of current computation.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '556', 556)" onmouseover="showTip(event, '556', 556)">
+            GetResource()
+          </code>
+          <div class="tip" id="556">
+            <strong>Signature:</strong> unit -&gt; Local&lt;&#39;TResource&gt;<br />
+                          <strong>Type parameters:</strong> 'TResource          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets resource from current execution context.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '557', 557)" onmouseover="showTip(event, '557', 557)">
+            GetResourceRegistry()
+          </code>
+          <div class="tip" id="557">
+            <strong>Signature:</strong> unit -&gt; Local&lt;ResourceRegistry&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the resource registry for current execution context.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '558', 558)" onmouseover="showTip(event, '558', 558)">
+            RunSynchronously(...)
+          </code>
+          <div class="tip" id="558">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; &#39;T<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Synchronously await a locally executing workflow.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '559', 559)" onmouseover="showTip(event, '559', 559)">
+            Start(...)
+          </code>
+          <div class="tip" id="559">
+            <strong>Signature:</strong> (workflow:Cloud&lt;unit&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts provided cloud workflow in the thread pool.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '560', 560)" onmouseover="showTip(event, '560', 560)">
+            StartAsTask(...)
+          </code>
+          <div class="tip" id="560">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken * taskCreationOptions:TaskCreationOptions option) -&gt; Task&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts given workflow as a System.Threading.Task</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '561', 561)" onmouseover="showTip(event, '561', 561)">
+            StartImmediate(...)
+          </code>
+          <div class="tip" id="561">
+            <strong>Signature:</strong> (workflow:Cloud&lt;unit&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts provided cloud workflow immediately in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
+            StartWithContinuations(...)
+          </code>
+          <div class="tip" id="562">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * continuation:Continuation&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts a cloud workflow with given execution context in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
+            StartWithContinuations(...)
+          </code>
+          <div class="tip" id="563">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * continuation:Continuation&lt;&#39;T&gt; * context:ExecutionContext) -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts a cloud workflow with given execution context in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
+            ToAsync(...)
+          </code>
+          <div class="tip" id="564">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; Async&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Wraps a cloud workflow into an asynchronous workflow.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
+            TryGetResource()
+          </code>
+          <div class="tip" id="565">
+            <strong>Signature:</strong> unit -&gt; Local&lt;&#39;TResource option&gt;<br />
+                          <strong>Type parameters:</strong> 'TResource          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Try Getting resource from current execution context.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '566', 566)" onmouseover="showTip(event, '566', 566)">
             WithAppendedStackTrace(...)
           </code>
-          <div class="tip" id="529">
-            <strong>Signature:</strong> functionName:string -&gt; workflow:&#39;?53655 -&gt; Cloud&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> '?53655, 'T          </div>
+          <div class="tip" id="566">
+            <strong>Signature:</strong> functionName:string -&gt; workflow:&#39;?62319 -&gt; Cloud&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> '?62319, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Appends a function information entry to the symbolic stacktrace in the exception continuation.</p>
@@ -84,12 +249,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '530', 530)" onmouseover="showTip(event, '530', 530)">
+          <code onmouseout="hideTip(event, '567', 567)" onmouseover="showTip(event, '567', 567)">
             WithMappedContinuation(mapper workflow)
           </code>
-          <div class="tip" id="530">
-            <strong>Signature:</strong> (mapper:(Continuation&lt;&#39;T&gt; -&gt; Continuation&lt;&#39;S&gt;)) -&gt; workflow:&#39;?53653 -&gt; Cloud&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'S, '?53653          </div>
+          <div class="tip" id="567">
+            <strong>Signature:</strong> (mapper:(Continuation&lt;&#39;T&gt; -&gt; Continuation&lt;&#39;S&gt;)) -&gt; workflow:&#39;?62317 -&gt; Cloud&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T, 'S, '?62317          </div>
         </td>
         <td class="xmldoc">
           <p>Wraps a workflow with a mapped continuation.</p>
@@ -99,12 +264,29 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '531', 531)" onmouseover="showTip(event, '531', 531)">
+          <code onmouseout="hideTip(event, '568', 568)" onmouseover="showTip(event, '568', 568)">
             WithNestedContext(...)
           </code>
-          <div class="tip" id="531">
-            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * update:(ExecutionContext -&gt; ExecutionContext) * revert:(ExecutionContext -&gt; ExecutionContext)) -&gt; Cloud&lt;&#39;T&gt;<br />
+          <div class="tip" id="568">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * update:(ExecutionContext -&gt; ExecutionContext) * revert:(ExecutionContext -&gt; ExecutionContext)) -&gt; Cloud&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Runs provided workflow in a nested execution context that is
+introduced using the update/revert functions.
+These must be serializable and exception safe.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '569', 569)" onmouseover="showTip(event, '569', 569)">
+            WithNestedResource(...)
+          </code>
+          <div class="tip" id="569">
+            <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * update:(&#39;TResource -&gt; &#39;TResource) * revert:(&#39;TResource -&gt; &#39;TResource)) -&gt; Cloud&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T, 'TResource          </div>
         </td>
         <td class="xmldoc">
           <p>Runs provided workflow in a nested execution context that is
@@ -131,8 +313,8 @@ These must be serializable and exception safe.</p>
             <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
             <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
+            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Azure API</a></li>
             <li class="divider"></li>
             <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
             <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
@@ -140,7 +322,7 @@ These must be serializable and exception safe.</p>
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
             <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
+            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
         </div>

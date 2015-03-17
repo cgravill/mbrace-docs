@@ -54,10 +54,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '295', 295)" onmouseover="showTip(event, '295', 295)">
+          <code onmouseout="hideTip(event, '311', 311)" onmouseover="showTip(event, '311', 311)">
             Catch(workflow)
           </code>
-          <div class="tip" id="295">
+          <div class="tip" id="311">
             <strong>Signature:</strong> workflow:Local&lt;&#39;T&gt; -&gt; Local&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -69,10 +69,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '296', 296)" onmouseover="showTip(event, '296', 296)">
+          <code onmouseout="hideTip(event, '312', 312)" onmouseover="showTip(event, '312', 312)">
             Choice(computations)
           </code>
-          <div class="tip" id="296">
+          <div class="tip" id="312">
             <strong>Signature:</strong> (computations:seq&lt;Local&lt;&#39;T option&gt;&gt;) -&gt; Local&lt;&#39;T option&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -89,10 +89,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '297', 297)" onmouseover="showTip(event, '297', 297)">
+          <code onmouseout="hideTip(event, '313', 313)" onmouseover="showTip(event, '313', 313)">
             Ignore(workflow)
           </code>
-          <div class="tip" id="297">
+          <div class="tip" id="313">
             <strong>Signature:</strong> workflow:Local&lt;&#39;T&gt; -&gt; Local&lt;unit&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -104,10 +104,28 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '298', 298)" onmouseover="showTip(event, '298', 298)">
+          <code onmouseout="hideTip(event, '314', 314)" onmouseover="showTip(event, '314', 314)">
+            Parallel(left, right)
+          </code>
+          <div class="tip" id="314">
+            <strong>Signature:</strong> (left:Local&lt;&#39;L&gt; * right:Local&lt;&#39;R&gt;) -&gt; Local&lt;&#39;L * &#39;R&gt;<br />
+                          <strong>Type parameters:</strong> 'L, 'R          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a cloud computation that will execute given computations to targeted workers
+possibly in parallel and if successful returns the array of gathered results.
+This operator may create distribution.
+Exceptions raised by children carry cancellation semantics.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '315', 315)" onmouseover="showTip(event, '315', 315)">
             Parallel(computations)
           </code>
-          <div class="tip" id="298">
+          <div class="tip" id="315">
             <strong>Signature:</strong> computations:seq&lt;Local&lt;&#39;T&gt;&gt; -&gt; Local&lt;&#39;T []&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -122,10 +140,10 @@ Exceptions raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '299', 299)" onmouseover="showTip(event, '299', 299)">
+          <code onmouseout="hideTip(event, '316', 316)" onmouseover="showTip(event, '316', 316)">
             TryFinally(body, finalizer)
           </code>
-          <div class="tip" id="299">
+          <div class="tip" id="316">
             <strong>Signature:</strong> (body:Local&lt;&#39;T&gt; * finalizer:Local&lt;unit&gt;) -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -152,8 +170,8 @@ Exceptions raised by children carry cancellation semantics.</p>
             <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
             <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
+            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Azure API</a></li>
             <li class="divider"></li>
             <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
             <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
@@ -161,7 +179,7 @@ Exceptions raised by children carry cancellation semantics.</p>
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
             <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
+            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
         </div>

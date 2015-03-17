@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>ICloudComputationConsumer<'R> - MBrace</title>
+    <title>Array - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,29 +41,61 @@
 
 
 
-<h1>ICloudComputationConsumer<'R></h1>
+<h1>Array</h1>
 <div class="xmldoc">
-<p>Abstract cloud computation unpacker</p>
 </div>
-  <h3>Instance members</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '642', 642)" onmouseover="showTip(event, '642', 642)">
-            Consume(arg1)
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            splitByChunkSize(chunkSize input)
           </code>
-          <div class="tip" id="642">
-            <strong>Signature:</strong> Cloud&lt;&#39;T&gt; -&gt; &#39;R<br />
-              <strong>Modifiers:</strong> abstract<br />
-                      </div>
+          <div class="tip" id="12">
+            <strong>Signature:</strong> chunkSize:int -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          
+          <p>partitions an array into chunks of given size.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+            splitByPartitionCount(partitions input)
+          </code>
+          <div class="tip" id="13">
+            <strong>Signature:</strong> partitions:int -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>partitions an array into a predetermined number of uniformly sized chunks.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            splitWeighted(weights input)
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> weights:int [] -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Partitions an array into chunks according to a weighted array.</p>
+
         </td>
       </tr>
     </tbody>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Get started With Brisk
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
+    <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
+    
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-196x196.png" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-160x160.png" sizes="160x160"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-16x16.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="http://www.m-brace.net/img/favicon-32x32.png" sizes="32x32"/>
+
+    <link type="text/css" rel="stylesheet" href="http://www.m-brace.net/content/style.css" />
+    <script type="text/javascript" src="http://www.m-brace.net/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://nessos.github.io">nessos</a></li>
+          <li><a href="http://github.com/mbraceproject/MBrace.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="http://www.m-brace.net/index.html">MBrace</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="Get-started-With-Brisk" class="anchor" href="#Get-started-With-Brisk">Get started With Brisk</a></h1>
+
+<p>Steps I used to create an <a href="http://www.m-brace.net/">MBrace</a> Cluster on <a href="https://windowsazure.com">Azure</a> using <a href="https://www.briskengine.com/#/dash">Elastacloud Brisk Engine</a> as of 20/02/2015. See <a href="http://blog.brisk.elastatools.com/2015/02/19/adding-support-for-mbrace-f-and-net-on-brisk/">the announcement of the pre-release availability</a> of this service.</p>
+
+<p>Assumes you have an Azure account with at least 4 cores spare (there is a 20 core limit on some free or trial Azure accounts).</p>
+
+<ol>
+<li><p>Create an account with <a href="https://www.briskengine.com/">Brisk</a>, including entering your Azure account connection token details. When you select "Download Azure settings" Brisk will automatically take you to the Azure page that downloads a settings file.  You then load those settings into Brisk to complete creating your account.</p></li>
+<li><p>Create a new storage account in the <a href="https://manage.windowsazure.com">Azure Console</a> (any name) or use an existing storage account.  Keep an eye on which data center you created your storage account in.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/7204669/6285351/a8257724-b8f2-11e4-9955-ceb19c53b7b4.jpg" alt="pic3" /></p></li>
+<li><p>Create a new MBrace cluster in <a href="https://www.briskengine.com/#/dash">Brisk console</a> (use any name). Specify the right data centre (the same one as the storage account) and the right storage account.  This will take 5-10 minutes.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/7204669/6285354/b0620876-b8f2-11e4-84c9-58e7acee52ab.jpg" alt="pic4" /></p>
+<p><img src="https://cloud.githubusercontent.com/assets/7204669/6285356/b53f71c6-b8f2-11e4-964a-c3b89d17cf3e.png" alt="pic4b" /></p>
+<p><img src="https://cloud.githubusercontent.com/assets/7204669/6285357/b55bcf4c-b8f2-11e4-905c-b782ae7b9c6a.png" alt="pic4c" /></p></li>
+</ol>
+
+<ol>
+<li><p>Fetch the connection string details for your cluster  from Brisk by clicking on your cluster details, and looking at the Connection Strings tab. These will be needed in the next step.</p></li>
+<li><p>Download the contents of this repository as a ZIP of clone and open in Visual Studio 2013.  If you don't have Visual Studio 2013, see <a href="http://fsharp.org/use/windows">http://fsharp.org/use/windows</a> to get it.</p></li>
+<li><p>In Visual Studio 2013, reset F# Interactive, enter the connection strings into the <code>credentials.fsx</code>  script:</p>
+<p><code>`fsharp
+ let myStorageConnectionString = "DefaultEndpointsProtocol=..."
+ let myServiceBusConnectionString = "Endpoint=sb://brisk..."</code>`</p></li>
+<li><p>Called runtime.GetHandle(config):
+<code>`fsharp
+let runtime = Runtime.GetHandle(config)</code><code>giving</code><code></code>
+Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Edm.dll'...
+Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Services.Client.dll'...
+Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.OData.dll'...
+Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Newtonsoft.Json.dll'...</p>
+<p>val runtime : Runtime
+ <code></code>`</p></li>
+<li><p>Call runtime.ShowWorkers():
+<code></code>`
+Workers</p>
+<p>Id                     Hostname        % CPU / Cores  % Memory / Total(MB)  Network(ul/dl : kbps)  Tasks  Process Id  Initialization Time         Heartbeat                <br />
+ --                     --------        -------------  --------------------  ---------------------  -----  ----------  -------------------         ---------                <br />
+ MBraceWorkerRole<em>IN</em>0  RD0003FF5507E5    1.78 / 2       22.08 / 3583.00         38.26 / 19.33      0 / 2        3316  20/02/2015 10:40:13 +00:00  20/02/2015 10:59:10 +00:00 
+ MBraceWorkerRole<em>IN</em>2  RD0003FF550024    2.11 / 2       22.10 / 3583.00         45.91 / 23.32      0 / 2        3204  20/02/2015 10:40:15 +00:00  20/02/2015 10:59:09 +00:00 
+ MBraceWorkerRole<em>IN</em>1  RD0003FF552704    2.43 / 2       22.19 / 3583.00         38.02 / 21.79      0 / 2         268  20/02/2015 10:40:18 +00:00  20/02/2015 10:59:10 +00:00 
+ <code>`
+ Called runtime.ShowProcesses():</code>`
+ Processes</p>
+<p>Name  Process Id  State  Completed  Execution Time  Tasks  Result Type  Start Time  Completion Time 
+ ----  ----------  -----  ---------  --------------  -----  -----------  ----------  ---------------</p>
+<p>Tasks : Active / Faulted / Completed / Total
+ <code></code>`</p></li>
+<li><p>Create a cloud computation:
+<code></code>`fsharp</p>
+<p>let work0 =
+    cloud { return sprintf "run in the cloud on worker '%s' " Environment.MachineName }
+    |> runtime.CreateProcess
+<code>`
+giving:</code>`
+20022015 11:00:30.715 +00:00 : Creating process 6c31512670884c9eaa5655dc53e5cde1 
+20022015 11:00:30.719 +00:00 : Uploading dependencies
+20022015 11:00:30.726 +00:00 : FSI-ASSEMBLY<em>4f4cf9fc-e870-4681-9b03-bea847eff8c0</em>1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+20022015 11:00:31.611 +00:00 : Creating DistributedCancellationToken
+20022015 11:00:31.846 +00:00 : Starting process 6c31512670884c9eaa5655dc53e5cde1
+20022015 11:00:33.547 +00:00 : Created process 6c31512670884c9eaa5655dc53e5cde1</p>
+<p>val work0 : Process<string>
+<code></code>`</p></li>
+<li><p>Check status:
+<code></code>`
+Process</p>
+<p>Name                        Process Id      State  Completed  Execution Time            Tasks          Result Type  Start Time                  Completion Time          <br />
+----                        ----------      -----  ---------  --------------            -----          -----------  ----------                  ---------------          <br />
+      6c31512670884c9eaa5655dc53e5cde1  Completed  True       00:00:00.8355016    0 /   0 /   1 /   1  string       20/02/2015 11:00:35 +00:00  02/20/2015 11:00:36 +00:00</p>
+<p>Tasks : Active / Faulted / Completed / Total
+<code></code>`</p></li>
+<li><p>Check result:
+<code>`fsharp
+work0.IsCompleted</code><code>giving</code><code>fsharp
+true</code><code>and</code><code></code>fsharp
+work0.AwaitResultAsync() |> Async.RunSynchronously</p>
+<p>val it : string = "run in the cloud on worker 'RD0003FF550024' "
+<code></code>`</p></li>
+</ol>
+
+<p>Awesome. Now go through the tutorials in this starter pack.  Read things carefully and take it step by step, don't execute the entire scripts in F# Interactive but rather take the time to execute each piece of code and understand what it's doing.</p>
+
+
+        </div>
+        <div class="span3">
+          <a href="http://www.m-brace.net/index.html">
+            <img src="http://www.m-brace.net/img/mbrace.png" alt="F# Project" style="width:150px;margin:10px" />
+          </a>
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">MBrace</li>
+            <li><a href="http://www.m-brace.net/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://www.nuget.org/packages/MBrace.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/LICENSE.md">License</a></li>
+            <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+
+            <li class="nav-header">Getting Started</li>
+            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Azure API</a></li>
+            <li class="divider"></li>
+            <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
+            <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
+            <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
+            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
+            <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/mbraceproject/MBrace.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

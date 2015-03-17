@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>ICloudComputationConsumer<'R> - MBrace</title>
+    <title>CloudOperators - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,29 +41,32 @@
 
 
 
-<h1>ICloudComputationConsumer<'R></h1>
+<h1>CloudOperators</h1>
 <div class="xmldoc">
-<p>Abstract cloud computation unpacker</p>
+<p>collection of parallelism operators for the cloud</p>
 </div>
-  <h3>Instance members</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '642', 642)" onmouseover="showTip(event, '642', 642)">
-            Consume(arg1)
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+            ( &lt;||&gt; ) left right
           </code>
-          <div class="tip" id="642">
-            <strong>Signature:</strong> Cloud&lt;&#39;T&gt; -&gt; &#39;R<br />
-              <strong>Modifiers:</strong> abstract<br />
-                      </div>
+          <div class="tip" id="4">
+            <strong>Signature:</strong> left:Cloud&lt;&#39;a&gt; -&gt; right:Cloud&lt;&#39;b&gt; -&gt; Cloud&lt;&#39;a * &#39;b&gt;<br />
+                          <strong>Type parameters:</strong> 'a, 'b          </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Combines two cloud computations into one that executes them in parallel.</p>
+
         </td>
       </tr>
     </tbody>
