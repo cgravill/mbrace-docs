@@ -53,73 +53,175 @@
 <p><img src="https://cloud.githubusercontent.com/assets/7204669/6285354/b0620876-b8f2-11e4-84c9-58e7acee52ab.jpg" alt="pic4" /></p>
 <p><img src="https://cloud.githubusercontent.com/assets/7204669/6285356/b53f71c6-b8f2-11e4-964a-c3b89d17cf3e.png" alt="pic4b" /></p>
 <p><img src="https://cloud.githubusercontent.com/assets/7204669/6285357/b55bcf4c-b8f2-11e4-905c-b782ae7b9c6a.png" alt="pic4c" /></p></li>
-</ol>
-
-<ol>
 <li><p>Fetch the connection string details for your cluster  from Brisk by clicking on your cluster details, and looking at the Connection Strings tab. These will be needed in the next step.</p></li>
 <li><p>Download the contents of this repository as a ZIP of clone and open in Visual Studio 2013.  If you don't have Visual Studio 2013, see <a href="http://fsharp.org/use/windows">http://fsharp.org/use/windows</a> to get it.</p></li>
 <li><p>In Visual Studio 2013, reset F# Interactive, enter the connection strings into the <code>credentials.fsx</code>  script:</p>
-<p><code>`fsharp
- let myStorageConnectionString = "DefaultEndpointsProtocol=..."
- let myServiceBusConnectionString = "Endpoint=sb://brisk..."</code>`</p></li>
-<li><p>Called runtime.GetHandle(config):
-<code>`fsharp
-let runtime = Runtime.GetHandle(config)</code><code>giving</code><code></code>
-Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Edm.dll'...
-Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Services.Client.dll'...
-Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.OData.dll'...
-Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Newtonsoft.Json.dll'...</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span><span class="i">fsharp</span>
+<span class="k">let</span> <span class="i">myStorageConnectionString</span> <span class="o">=</span> <span class="s">&quot;DefaultEndpointsProtocol=...&quot;</span>
+<span class="k">let</span> <span class="i">myServiceBusConnectionString</span> <span class="o">=</span> <span class="s">&quot;Endpoint=sb://brisk...&quot;</span>
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table></li>
+<li><p>Called runtime.GetHandle(config):</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span><span class="i">fsharp</span>
+<span class="k">let</span> <span class="i">runtime</span> <span class="o">=</span> <span class="i">Runtime</span><span class="o">.</span><span class="i">GetHandle</span>(<span class="i">config</span>)
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table>
+<p>giving</p>
+<p><code></code>`
+   Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Edm.dll'...
+   Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.Services.Client.dll'...
+   Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Microsoft.Data.OData.dll'...
+   Binding session to 'C:\Users\dsyme\Documents\MBraceOnBriskStarter\MBraceOnBriskStarter\src\Demos../../lib/Newtonsoft.Json.dll'...</p>
 <p>val runtime : Runtime
- <code></code>`</p></li>
-<li><p>Call runtime.ShowWorkers():
-<code></code>`
-Workers</p>
-<p>Id                     Hostname        % CPU / Cores  % Memory / Total(MB)  Network(ul/dl : kbps)  Tasks  Process Id  Initialization Time         Heartbeat                <br />
- --                     --------        -------------  --------------------  ---------------------  -----  ----------  -------------------         ---------                <br />
- MBraceWorkerRole<em>IN</em>0  RD0003FF5507E5    1.78 / 2       22.08 / 3583.00         38.26 / 19.33      0 / 2        3316  20/02/2015 10:40:13 +00:00  20/02/2015 10:59:10 +00:00 
- MBraceWorkerRole<em>IN</em>2  RD0003FF550024    2.11 / 2       22.10 / 3583.00         45.91 / 23.32      0 / 2        3204  20/02/2015 10:40:15 +00:00  20/02/2015 10:59:09 +00:00 
- MBraceWorkerRole<em>IN</em>1  RD0003FF552704    2.43 / 2       22.19 / 3583.00         38.02 / 21.79      0 / 2         268  20/02/2015 10:40:18 +00:00  20/02/2015 10:59:10 +00:00 
- <code>`
- Called runtime.ShowProcesses():</code>`
- Processes</p>
-<p>Name  Process Id  State  Completed  Execution Time  Tasks  Result Type  Start Time  Completion Time 
- ----  ----------  -----  ---------  --------------  -----  -----------  ----------  ---------------</p>
-<p>Tasks : Active / Faulted / Completed / Total
- <code></code>`</p></li>
-<li><p>Create a cloud computation:
-<code></code>`fsharp</p>
-<p>let work0 =
-    cloud { return sprintf "run in the cloud on worker '%s' " Environment.MachineName }
-    |> runtime.CreateProcess
-<code>`
-giving:</code>`
-20022015 11:00:30.715 +00:00 : Creating process 6c31512670884c9eaa5655dc53e5cde1 
-20022015 11:00:30.719 +00:00 : Uploading dependencies
-20022015 11:00:30.726 +00:00 : FSI-ASSEMBLY<em>4f4cf9fc-e870-4681-9b03-bea847eff8c0</em>1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-20022015 11:00:31.611 +00:00 : Creating DistributedCancellationToken
-20022015 11:00:31.846 +00:00 : Starting process 6c31512670884c9eaa5655dc53e5cde1
-20022015 11:00:33.547 +00:00 : Created process 6c31512670884c9eaa5655dc53e5cde1</p>
-<p>val work0 : Process<string>
-<code></code>`</p></li>
-<li><p>Check status:
-<code></code>`
-Process</p>
+    <code></code>`</p></li>
+<li><p>Call runtime.ShowWorkers():</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+<span class="i">Workers</span>                                                                                                        
+
+<span class="i">Id</span>                     <span class="i">Hostname</span>        <span class="o">%</span> <span class="i">CPU</span> <span class="o">/</span> <span class="i">Cores</span>  <span class="o">%</span> <span class="i">Memory</span> <span class="o">/</span> <span class="i">Total</span>(<span class="i">MB</span>)  <span class="i">Network</span>(<span class="i">ul</span><span class="o">/</span><span class="i">dl</span> <span class="o">:</span> <span class="i">kbps</span>)  <span class="i">Tasks</span>  <span class="i">Process</span> <span class="i">Id</span>  <span class="i">Initialization</span> <span class="i">Time</span>         <span class="i">Heartbeat</span>                  
+<span class="o">--</span>                     <span class="o">--------</span>        <span class="o">-------------</span>  <span class="o">--------------------</span>  <span class="o">---------------------</span>  <span class="o">-----</span>  <span class="o">----------</span>  <span class="o">-------------------</span>         <span class="o">---------</span>                  
+<span class="i">MBraceWorkerRole_IN_0</span>  <span class="i">RD0003FF5507E5</span>    <span class="n">1.78</span> <span class="o">/</span> <span class="n">2</span>       <span class="n">22.08</span> <span class="o">/</span> <span class="n">3583.00</span>         <span class="n">38.26</span> <span class="o">/</span> <span class="n">19.33</span>      <span class="n">0</span> <span class="o">/</span> <span class="n">2</span>        <span class="n">3316</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">40</span><span class="o">:</span><span class="n">13</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">59</span><span class="o">:</span><span class="n">10</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> 
+<span class="i">MBraceWorkerRole_IN_2</span>  <span class="i">RD0003FF550024</span>    <span class="n">2.11</span> <span class="o">/</span> <span class="n">2</span>       <span class="n">22.10</span> <span class="o">/</span> <span class="n">3583.00</span>         <span class="n">45.91</span> <span class="o">/</span> <span class="n">23.32</span>      <span class="n">0</span> <span class="o">/</span> <span class="n">2</span>        <span class="n">3204</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">40</span><span class="o">:</span><span class="n">15</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">59</span><span class="o">:</span><span class="n">09</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> 
+<span class="i">MBraceWorkerRole_IN_1</span>  <span class="i">RD0003FF552704</span>    <span class="n">2.43</span> <span class="o">/</span> <span class="n">2</span>       <span class="n">22.19</span> <span class="o">/</span> <span class="n">3583.00</span>         <span class="n">38.02</span> <span class="o">/</span> <span class="n">21.79</span>      <span class="n">0</span> <span class="o">/</span> <span class="n">2</span>         <span class="n">268</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">40</span><span class="o">:</span><span class="n">18</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span>  <span class="n">20</span><span class="o">/</span><span class="n">02</span><span class="o">/</span><span class="n">2015</span> <span class="n">10</span><span class="o">:</span><span class="n">59</span><span class="o">:</span><span class="n">10</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> 
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table>
+<p>Called runtime.ShowProcesses():</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+<span class="i">Processes</span>                                                                                                   
+
+<span class="i">Name</span>  <span class="i">Process</span> <span class="i">Id</span>  <span class="i">State</span>  <span class="i">Completed</span>  <span class="i">Execution</span> <span class="i">Time</span>  <span class="i">Tasks</span>  <span class="i">Result</span> <span class="i">Type</span>  <span class="i">Start</span> <span class="i">Time</span>  <span class="i">Completion</span> <span class="i">Time</span> 
+<span class="o">----</span>  <span class="o">----------</span>  <span class="o">-----</span>  <span class="o">---------</span>  <span class="o">--------------</span>  <span class="o">-----</span>  <span class="o">-----------</span>  <span class="o">----------</span>  <span class="o">---------------</span> 
+
+<span class="i">Tasks</span> <span class="o">:</span> <span class="i">Active</span> <span class="o">/</span> <span class="i">Faulted</span> <span class="o">/</span> <span class="i">Completed</span> <span class="o">/</span> <span class="i">Total</span>
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table></li>
+<li><p>Create a cloud computation:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span><span class="i">fsharp</span>
+
+<span class="k">let</span> <span class="i">work0</span> <span class="o">=</span>
+    <span class="i">cloud</span> { <span class="k">return</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">sprintf</span> <span class="s">&quot;run in the cloud on worker &#39;%s&#39; &quot;</span> <span class="i">Environment</span><span class="o">.</span><span class="i">MachineName</span> }
+    <span class="o">|&gt;</span> <span class="i">runtime</span><span class="o">.</span><span class="i">CreateProcess</span>
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table>
+<p>giving:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">30.715</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">Creating</span> <span class="i">process</span> <span class="n">6c31512670884c9eaa5655dc53e5cde1</span> 
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">30.719</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">Uploading</span> <span class="i">dependencies</span>
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">30.726</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">FSI</span><span class="o">-</span><span class="i">ASSEMBLY_4f4cf9fc</span><span class="o">-</span><span class="i">e870</span><span class="o">-</span><span class="n">4681</span><span class="o">-</span><span class="n">9b03</span><span class="o">-</span><span class="i">bea847eff8c0_1</span>, <span class="i">Version</span><span class="o">=</span><span class="n">0.0</span><span class="o">.</span><span class="n">0.0</span>, <span class="i">Culture</span><span class="o">=</span><span class="i">neutral</span>, <span class="i">PublicKeyToken</span><span class="o">=</span><span class="k">null</span>
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">31.611</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">Creating</span> <span class="i">DistributedCancellationToken</span>
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">31.846</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">Starting</span> <span class="i">process</span> <span class="n">6c31512670884c9eaa5655dc53e5cde1</span>
+<span class="n">20022015</span> <span class="n">11</span><span class="o">:</span><span class="n">00</span><span class="o">:</span><span class="n">33.547</span> <span class="o">+</span><span class="n">00</span><span class="o">:</span><span class="n">00</span> <span class="o">:</span> <span class="i">Created</span> <span class="i">process</span> <span class="n">6c31512670884c9eaa5655dc53e5cde1</span>
+
+<span class="k">val</span> <span class="i">work0</span> <span class="o">:</span> <span class="i">Process</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">string</span><span class="o">&gt;</span>
+<span class="k">`</span><span class="k">`</span><span class="k">`</span>
+</pre>
+</td>
+</tr>
+</table></li>
+<li><p>Check status:</p>
+<p><code></code>`
+   Process</p>
 <p>Name                        Process Id      State  Completed  Execution Time            Tasks          Result Type  Start Time                  Completion Time          <br />
-----                        ----------      -----  ---------  --------------            -----          -----------  ----------                  ---------------          <br />
-      6c31512670884c9eaa5655dc53e5cde1  Completed  True       00:00:00.8355016    0 /   0 /   1 /   1  string       20/02/2015 11:00:35 +00:00  02/20/2015 11:00:36 +00:00</p>
+   ----                        ----------      -----  ---------  --------------            -----          -----------  ----------                  ---------------          <br />
+         6c31512670884c9eaa5655dc53e5cde1  Completed  True       00:00:00.8355016    0 /   0 /   1 /   1  string       20/02/2015 11:00:35 +00:00  02/20/2015 11:00:36 +00:00</p>
 <p>Tasks : Active / Faulted / Completed / Total
-<code></code>`</p></li>
-<li><p>Check result:
-<code>`fsharp
-work0.IsCompleted</code><code>giving</code><code>fsharp
-true</code><code>and</code><code></code>fsharp
-work0.AwaitResultAsync() |> Async.RunSynchronously</p>
+   <code></code>`</p></li>
+<li><p>Check result:</p>
+<p><code>`fsharp
+ work0.IsCompleted</code>`</p>
+<p>giving</p>
+<p><code>`fsharp
+ true</code>`</p>
+<p>and</p>
+<p><code></code>`fsharp
+   work0.AwaitResultAsync() |> Async.RunSynchronously</p>
 <p>val it : string = "run in the cloud on worker 'RD0003FF550024' "
-<code></code>`</p></li>
+   <code></code>`</p></li>
 </ol>
 
-<p>Awesome. Now go through the tutorials in this starter pack.  Read things carefully and take it step by step, don't execute the entire scripts in F# Interactive but rather take the time to execute each piece of code and understand what it's doing.</p>
+<p>Awesome. Now go through the tutorials in the starter pack.  Read things carefully and take it step by step, don't execute the entire scripts in F# Interactive but rather take the time to execute each piece of code and understand what it's doing.</p>
 
+<div class="tip" id="fs1">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
+<div class="tip" id="fs2">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
 
         </div>
         <div class="span3">

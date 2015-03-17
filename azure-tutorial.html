@@ -49,37 +49,50 @@
 an Azure Cloud Service is to use <a href="http://briskengine.com">Brisk Engine</a>.
 See the <a href="brisk-tutorial.html">Brisk Engine Tutorial</a>.</p>
 
-<h2><a name="Provisioning-Explicitly" class="anchor" href="#Provisioning-Explicitly">Provisioning Explicitly</a></h2>
+<h2><a name="Provisioning-an-Azure-Cloud-Service-Explicitly" class="anchor" href="#Provisioning-an-Azure-Cloud-Service-Explicitly">Provisioning an Azure Cloud Service Explicitly</a></h2>
 
 <p>In some cases you may decide to provision explicitly, if the options provided
-by Brisk Engine do not yet meet your needs.  For example you may want to:</p>
+by Brisk Engine do not yet meet your needs.</p>
+
+<p>If so, see <a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">Creating a Custom Azure Cloud Service which includes MBrace runtime instances</a>.</p>
+
+<p>For example you may want to:</p>
 
 <ul>
-<li><p>adjust the size of VM used for worker instances in your cluster;</p></li>
+<li><p>adjust the size of VM used for worker instances in your cluster; or</p></li>
 <li><p>add endpoints to your cloud service (so your MBrace cluster can publish 
 TCP and HTTP endpoints, either public or to your virtual network,
-for example, you want your MBrace cluster to publish a web server);</p></li>
-<li><p>enable Remote Access to MBrace cluster worker instances;</p></li>
-<li><p>specify the size of local storage available on MBrace cluster worker instances;</p></li>
-<li><p>upload certificates as part of your provisioning process;</p></li>
-<li><p>specify Azure-specific local caching options;</p></li>
+for example, you want your MBrace cluster to publish a web server); or</p></li>
+<li><p>enable Remote Access to MBrace cluster worker instances; or</p></li>
+<li><p>specify the size of local storage available on MBrace cluster worker instances; or</p></li>
+<li><p>upload certificates as part of your provisioning process; or</p></li>
+<li><p>specify Azure-specific local caching options; or</p></li>
+<li><p>include additional web and worker roles in your cloud service; or</p></li>
 <li>compile and deploy your own version of the MBrace cluster worker instance software.</li>
 </ul>
 
-<p>At the time of writing these options were not yet available via the Brisk Engine provisioning
-service.</p>
+<p>At the time of writing these options were not yet via the Brisk Engine provisioning
+service. In this case, you must create and deploy your own Azure cloud service.</p>
 
 <p>In order to provision explicitly, as a prerequisite you need 
 to have a Windows Azure account, basic knowledge of the Azure computing and
 optionally Microsoft Visual Studio (or any environment supporting F#).</p>
 
-<p>Typically you will host your MBrace runtime/cluster nodes in one of</p>
+<h2><a name="Deploying-as-an-Azure-Web-job-or-explicit-VMs" class="anchor" href="#Deploying-as-an-Azure-Web-job-or-explicit-VMs">Deploying as an Azure Web job or explicit VMs</a></h2>
+
+<p>The above deployment techniques use an Azure Cloud Service.
+Alternatively you may want to host your MBrace runtime/cluster nodes in one of</p>
 
 <ul>
-<li><p>the VMs of an Azure cloud service (normal); or</p></li>
 <li><p>explicit VMs; or</p></li>
-<li><p>the execution environment of an Azure web job.</p></li>
+<li><p>an Azure web job.</p></li>
 </ul>
+
+<p>These options are not yet documented but you may be able
+to utilize the relevant components used by the
+<a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>.</p>
+
+<h3><a name="Where-your-MBrace-client-code-runs" class="anchor" href="#Where-your-MBrace-client-code-runs">Where your MBrace client code runs</a></h3>
 
 <p>Typically the MBrace client will run in:</p>
 
@@ -91,12 +104,6 @@ optionally Microsoft Visual Studio (or any environment supporting F#).</p>
 
 <p>In all cases, the client will need sufficient network access to be able to write to the
 Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.</p>
-
-<h2><a name="Authoring-a-Cloud-Service-which-uses-the-MBrace-Runtime" class="anchor" href="#Authoring-a-Cloud-Service-which-uses-the-MBrace-Runtime">Authoring a Cloud Service which uses the MBrace Runtime</a></h2>
-
-<p>This is the normal option when provisioning eplicitly.</p>
-
-<p>See <a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">using an Azure cloud service for the MBrace runtime instances</a>.</p>
 
 <h2><a name="Using-a-virtual-network" class="anchor" href="#Using-a-virtual-network">Using a virtual network</a></h2>
 
