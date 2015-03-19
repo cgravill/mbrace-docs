@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CloudOperators - MBrace</title>
+    <title>Array - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,9 +41,8 @@
 
 
 
-<h1>CloudOperators</h1>
+<h1>Array</h1>
 <div class="xmldoc">
-<p>collection of parallelism operators for the cloud</p>
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -57,76 +56,45 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '68', 68)" onmouseover="showTip(event, '68', 68)">
-            ( ? ) channel
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            splitByChunkSize(chunkSize input)
           </code>
-          <div class="tip" id="68">
-            <strong>Signature:</strong> channel:IReceivePort&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />
+          <div class="tip" id="12">
+            <strong>Signature:</strong> chunkSize:int -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Awaits a message from cloud channel.</p>
+          <p>partitions an array into chunks of given size.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
-            ( &lt;-- ) channel message
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+            splitByPartitionCount(partitions input)
           </code>
-          <div class="tip" id="69">
-            <strong>Signature:</strong> channel:ISendPort&lt;&#39;T&gt; -&gt; message:&#39;T -&gt; Local&lt;unit&gt;<br />
+          <div class="tip" id="13">
+            <strong>Signature:</strong> partitions:int -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Send a message to cloud channel.</p>
+          <p>partitions an array into a predetermined number of uniformly sized chunks.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
-            ( &lt;.&gt; ) first second
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            splitWeighted(weights input)
           </code>
-          <div class="tip" id="70">
-            <strong>Signature:</strong> first:Workflow&lt;&#39;?50008&gt; -&gt; second:Workflow&lt;&#39;?50009&gt; -&gt; Cloud&lt;&#39;?50008 * &#39;?50009&gt;<br />
-                          <strong>Type parameters:</strong> '?50008, '?50009          </div>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> weights:int [] -&gt; input:&#39;T [] -&gt; &#39;T [] []<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines two cloud computations into one that executes them sequentially.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
-            ( &lt;||&gt; ) left right
-          </code>
-          <div class="tip" id="71">
-            <strong>Signature:</strong> left:Workflow&lt;&#39;a&gt; -&gt; right:Workflow&lt;&#39;b&gt; -&gt; Cloud&lt;&#39;a * &#39;b&gt;<br />
-                          <strong>Type parameters:</strong> 'a, 'b          </div>
-        </td>
-        <td class="xmldoc">
-          <p>Combines two cloud computations into one that executes them in parallel.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
-            ( &lt;|&gt; ) left right
-          </code>
-          <div class="tip" id="72">
-            <strong>Signature:</strong> left:Workflow&lt;&#39;a&gt; -&gt; right:Workflow&lt;&#39;a&gt; -&gt; Cloud&lt;&#39;a&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-          <p>Combines two cloud computations into one that executes them in parallel and returns the
-result of the first computation that completes and cancels the other.</p>
+          <p>Partitions an array into chunks according to a weighted array.</p>
 
         </td>
       </tr>
@@ -148,8 +116,8 @@ result of the first computation that completes and cancels the other.</p>
             <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
             <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
+            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure tutorial</a></li>
+            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
             <li class="divider"></li>
             <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
             <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
@@ -157,7 +125,7 @@ result of the first computation that completes and cancels the other.</p>
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
             <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
+            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
         </div>
