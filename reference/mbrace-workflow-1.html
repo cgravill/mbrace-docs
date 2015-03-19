@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CloudCacheable<'T> - MBrace</title>
+    <title>Workflow<'T> - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,65 +41,11 @@
 
 
 
-<h1>CloudCacheable<'T></h1>
+<h1>Workflow<'T></h1>
 <div class="xmldoc">
-<p>Defines a defered computation whose result can be
-cached in-memory and on-demand to worker machines.</p>
+<p>Representation of an MBrace workflow, which, when run 
+will produce a value of type 'T, or raise an exception.</p>
 </div>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '185', 185)" onmouseover="showTip(event, '185', 185)">
-            IsCachedLocally
-          </code>
-          <div class="tip" id="185">
-            <strong>Signature:</strong> Local&lt;bool&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Returns true if value is cached in the local execution context.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
-            PopulateCache()
-          </code>
-          <div class="tip" id="186">
-            <strong>Signature:</strong> unit -&gt; Local&lt;bool&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Attempt to cache computation to local execution context.
-Returns true if succesful or already cached.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
-            Value
-          </code>
-          <div class="tip" id="187">
-            <strong>Signature:</strong> Local&lt;&#39;T&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Evaluates the entity, returning the locally cached value if it already exists.</p>
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
         </div>
         <div class="span3">
@@ -116,8 +62,8 @@ Returns true if succesful or already cached.</p>
             <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
             <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure tutorial</a></li>
-            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
+            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
             <li class="divider"></li>
             <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
             <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
@@ -125,7 +71,7 @@ Returns true if succesful or already cached.</p>
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
             <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
+            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
         </div>

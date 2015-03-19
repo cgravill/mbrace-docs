@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>LocalBuilder - MBrace</title>
+    <title>Workflow - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,232 +41,179 @@
 
 
 
-<h1>LocalBuilder</h1>
+<h1>Workflow</h1>
 <div class="xmldoc">
-<p>Local workflow expression builder</p>
+<p>Cloud workflows core continuation API</p>
 </div>
-  <h3>Constructors</h3>
+  <h3>Static members</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Constructor</td><td>Description</td></tr>
+      <tr><td>Static member</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '120', 120)" onmouseover="showTip(event, '120', 120)">
-            new()
+          <code onmouseout="hideTip(event, '555', 555)" onmouseover="showTip(event, '555', 555)">
+            GetExecutionContext()
           </code>
-          <div class="tip" id="120">
-            <strong>Signature:</strong> unit -&gt; LocalBuilder<br />
+          <div class="tip" id="555">
+            <strong>Signature:</strong> unit -&gt; Local&lt;ExecutionContext&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Returns the execution context of current computation.</p>
+
         </td>
       </tr>
-    </tbody>
-  </table>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '121', 121)" onmouseover="showTip(event, '121', 121)">
-            Bind(f, g)
+          <code onmouseout="hideTip(event, '556', 556)" onmouseover="showTip(event, '556', 556)">
+            GetResource()
           </code>
-          <div class="tip" id="121">
-            <strong>Signature:</strong> (f:Local&lt;&#39;T&gt; * g:(&#39;T -&gt; Local&lt;&#39;S&gt;)) -&gt; Local&lt;&#39;S&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'S          </div>
+          <div class="tip" id="556">
+            <strong>Signature:</strong> unit -&gt; Local&lt;&#39;TResource&gt;<br />
+                          <strong>Type parameters:</strong> 'TResource          </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Gets resource from current execution context.</p>
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '122', 122)" onmouseover="showTip(event, '122', 122)">
-            Combine(f, g)
+          <code onmouseout="hideTip(event, '557', 557)" onmouseover="showTip(event, '557', 557)">
+            GetResourceRegistry()
           </code>
-          <div class="tip" id="122">
-            <strong>Signature:</strong> (f:Local&lt;unit&gt; * g:Local&lt;&#39;T&gt;) -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '123', 123)" onmouseover="showTip(event, '123', 123)">
-            Delay(f)
-          </code>
-          <div class="tip" id="123">
-            <strong>Signature:</strong> (f:(unit -&gt; Local&lt;&#39;T&gt;)) -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '124', 124)" onmouseover="showTip(event, '124', 124)">
-            For(ts, body)
-          </code>
-          <div class="tip" id="124">
-            <strong>Signature:</strong> (ts:seq&lt;&#39;T&gt; * body:(&#39;T -&gt; Local&lt;unit&gt;)) -&gt; Local&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '125', 125)" onmouseover="showTip(event, '125', 125)">
-            For(ts, body)
-          </code>
-          <div class="tip" id="125">
-            <strong>Signature:</strong> (ts:&#39;T list * body:(&#39;T -&gt; Local&lt;unit&gt;)) -&gt; Local&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '126', 126)" onmouseover="showTip(event, '126', 126)">
-            For(ts, body)
-          </code>
-          <div class="tip" id="126">
-            <strong>Signature:</strong> (ts:&#39;T [] * body:(&#39;T -&gt; Local&lt;unit&gt;)) -&gt; Local&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '127', 127)" onmouseover="showTip(event, '127', 127)">
-            Return(t)
-          </code>
-          <div class="tip" id="127">
-            <strong>Signature:</strong> t:&#39;T -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '128', 128)" onmouseover="showTip(event, '128', 128)">
-            ReturnFrom(c)
-          </code>
-          <div class="tip" id="128">
-            <strong>Signature:</strong> c:Local&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '129', 129)" onmouseover="showTip(event, '129', 129)">
-            TryFinally(f, finalizer)
-          </code>
-          <div class="tip" id="129">
-            <strong>Signature:</strong> (f:Local&lt;&#39;T&gt; * finalizer:(unit -&gt; unit)) -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '130', 130)" onmouseover="showTip(event, '130', 130)">
-            TryWith(f, handler)
-          </code>
-          <div class="tip" id="130">
-            <strong>Signature:</strong> (f:Local&lt;&#39;T&gt; * handler:(exn -&gt; Local&lt;&#39;T&gt;)) -&gt; Local&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '131', 131)" onmouseover="showTip(event, '131', 131)">
-            Using(value, bindF)
-          </code>
-          <div class="tip" id="131">
-            <strong>Signature:</strong> (value:&#39;T * bindF:(&#39;T -&gt; Local&lt;&#39;U&gt;)) -&gt; Local&lt;&#39;U&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'U          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '132', 132)" onmouseover="showTip(event, '132', 132)">
-            Using(value, bindF)
-          </code>
-          <div class="tip" id="132">
-            <strong>Signature:</strong> (value:&#39;T * bindF:(&#39;T -&gt; Local&lt;&#39;U&gt;)) -&gt; Local&lt;&#39;U&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'U, 'p          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '133', 133)" onmouseover="showTip(event, '133', 133)">
-            While(pred, body)
-          </code>
-          <div class="tip" id="133">
-            <strong>Signature:</strong> (pred:(unit -&gt; bool) * body:Local&lt;unit&gt;) -&gt; Local&lt;unit&gt;<br />
+          <div class="tip" id="557">
+            <strong>Signature:</strong> unit -&gt; Local&lt;ResourceRegistry&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Returns the resource registry for current execution context.</p>
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '134', 134)" onmouseover="showTip(event, '134', 134)">
-            Zero()
+          <code onmouseout="hideTip(event, '558', 558)" onmouseover="showTip(event, '558', 558)">
+            RunSynchronously(...)
           </code>
-          <div class="tip" id="134">
-            <strong>Signature:</strong> unit -&gt; Local&lt;unit&gt;<br />
+          <div class="tip" id="558">
+            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; &#39;T<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Synchronously await a locally executing workflow.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '559', 559)" onmouseover="showTip(event, '559', 559)">
+            Start(...)
+          </code>
+          <div class="tip" id="559">
+            <strong>Signature:</strong> (workflow:Workflow&lt;unit&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-          
+          <p>Starts provided cloud workflow in the thread pool.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '560', 560)" onmouseover="showTip(event, '560', 560)">
+            StartAsTask(...)
+          </code>
+          <div class="tip" id="560">
+            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken * taskCreationOptions:TaskCreationOptions option) -&gt; Task&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts given workflow as a System.Threading.Task</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '561', 561)" onmouseover="showTip(event, '561', 561)">
+            StartImmediate(...)
+          </code>
+          <div class="tip" id="561">
+            <strong>Signature:</strong> (workflow:Workflow&lt;unit&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts provided cloud workflow immediately in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
+            StartWithContinuations(...)
+          </code>
+          <div class="tip" id="562">
+            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * continuation:Continuation&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts a cloud workflow with given execution context in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
+            StartWithContinuations(...)
+          </code>
+          <div class="tip" id="563">
+            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * continuation:Continuation&lt;&#39;T&gt; * context:ExecutionContext) -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Starts a cloud workflow with given execution context in the current thread.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
+            ToAsync(...)
+          </code>
+          <div class="tip" id="564">
+            <strong>Signature:</strong> (workflow:Workflow&lt;&#39;T&gt; * resources:ResourceRegistry * cancellationToken:ICloudCancellationToken) -&gt; Async&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Wraps a cloud workflow into an asynchronous workflow.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
+            TryGetResource()
+          </code>
+          <div class="tip" id="565">
+            <strong>Signature:</strong> unit -&gt; Local&lt;&#39;TResource option&gt;<br />
+                          <strong>Type parameters:</strong> 'TResource          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Try Getting resource from current execution context.</p>
+
         </td>
       </tr>
     </tbody>

@@ -53,10 +53,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '259', 259)" onmouseover="showTip(event, '259', 259)">
+          <code onmouseout="hideTip(event, '244', 244)" onmouseover="showTip(event, '244', 244)">
             FromFile(file, deserializer, force)
           </code>
-          <div class="tip" id="259">
+          <div class="tip" id="244">
             <strong>Signature:</strong> (file:CloudFile * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -68,10 +68,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '260', 260)" onmouseover="showTip(event, '260', 260)">
+          <code onmouseout="hideTip(event, '245', 245)" onmouseover="showTip(event, '245', 245)">
             FromFile(path, deserializer, force)
           </code>
-          <div class="tip" id="260">
+          <div class="tip" id="245">
             <strong>Signature:</strong> (path:string * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -83,25 +83,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '261', 261)" onmouseover="showTip(event, '261', 261)">
-            FromTextFile(...)
-          </code>
-          <div class="tip" id="261">
-            <strong>Signature:</strong> (path:string * textDeserializer:(StreamReader -&gt; seq&lt;&#39;T&gt;) * encoding:Encoding option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          <p>Creates a CloudSequence from text file.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
+          <code onmouseout="hideTip(event, '246', 246)" onmouseover="showTip(event, '246', 246)">
             New(values, directory, serializer)
           </code>
-          <div class="tip" id="262">
+          <div class="tip" id="246">
             <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * directory:string option * serializer:ISerializer option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -114,10 +99,10 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
+          <code onmouseout="hideTip(event, '247', 247)" onmouseover="showTip(event, '247', 247)">
             NewPartitioned(...)
           </code>
-          <div class="tip" id="263">
+          <div class="tip" id="247">
             <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * directory:string option * serializer:ISerializer option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt; []&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -129,10 +114,10 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
+          <code onmouseout="hideTip(event, '248', 248)" onmouseover="showTip(event, '248', 248)">
             Parse(file, serializer, force)
           </code>
-          <div class="tip" id="264">
+          <div class="tip" id="248">
             <strong>Signature:</strong> (file:CloudFile * serializer:ISerializer option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -144,10 +129,10 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
+          <code onmouseout="hideTip(event, '249', 249)" onmouseover="showTip(event, '249', 249)">
             Parse(path, serializer, force)
           </code>
-          <div class="tip" id="265">
+          <div class="tip" id="249">
             <strong>Signature:</strong> (path:string * serializer:ISerializer option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -174,8 +159,8 @@ Cloud sequences are cached locally for performance.</p>
             <li><a href="http://github.com/mbraceproject/MBrace.Core/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
 
             <li class="nav-header">Getting Started</li>
-            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure tutorial</a></li>
-            <li><a href="http://www.m-brace.net/brisk-tutorial.html">Brisk Tutorial</a></li>
+            <li><a href="http://www.m-brace.net/runtime-deployment.html">Cluster Deployment Guide</a></li>
+            <li><a href="http://www.m-brace.net/azure-tutorial.html">Azure Guide</a></li>
             <li class="divider"></li>
             <li><a target="_blank" href="http://skillsmatter.com/skillscasts/5157-mbrace-large-scale-distributed-computation-with-f">Video presentation</a></li>
             <li><a target="_blank" href="http://www.m-brace.net/mbrace-plos.pdf">PLOS'13 Publication</a></li>
@@ -183,7 +168,7 @@ Cloud sequences are cached locally for performance.</p>
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
             <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
-            <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
+            <li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
         </div>
