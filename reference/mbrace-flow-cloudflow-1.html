@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CloudPathClient - MBrace</title>
+    <title>CloudFlow<'T> - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,9 +41,9 @@
 
 
 
-<h1>CloudPathClient</h1>
+<h1>CloudFlow<'T></h1>
 <div class="xmldoc">
-<p>Collection of path-related file store methods.</p>
+<p>Represents a distributed Stream of values.</p>
 </div>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
@@ -54,105 +54,32 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
-            Combine(directory, fileNames)
+          <code onmouseout="hideTip(event, '657', 657)" onmouseover="showTip(event, '657', 657)">
+            Apply(arg1 arg2 arg3)
           </code>
-          <div class="tip" id="562">
-            <strong>Signature:</strong> (directory:string * fileNames:seq&lt;string&gt;) -&gt; string []<br />
-                      </div>
+          <div class="tip" id="657">
+            <strong>Signature:</strong> Local&lt;Collector&lt;&#39;T,&#39;S&gt;&gt; -&gt; ((&#39;S -&gt; Local&lt;&#39;R&gt;)) -&gt; ((&#39;R [] -&gt; Local&lt;&#39;R&gt;)) -&gt; Cloud&lt;&#39;R&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
+                          <strong>Type parameters:</strong> 'R          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines a collection of file names with provided directory prefix.</p>
+          <p>Applies the given collector to the CloudFlow.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
-            Combine(paths)
+          <code onmouseout="hideTip(event, '658', 658)" onmouseover="showTip(event, '658', 658)">
+            DegreeOfParallelism
           </code>
-          <div class="tip" id="563">
-            <strong>Signature:</strong> (paths:string []) -&gt; string<br />
+          <div class="tip" id="658">
+            <strong>Signature:</strong> int option<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Combines an array of paths into a path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
-            Combine(path1, path2, path3)
-          </code>
-          <div class="tip" id="564">
-            <strong>Signature:</strong> (path1:string * path2:string * path3:string) -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Combines three strings into one path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
-            Combine(path1, path2)
-          </code>
-          <div class="tip" id="565">
-            <strong>Signature:</strong> (path1:string * path2:string) -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Combines two strings into one path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '566', 566)" onmouseover="showTip(event, '566', 566)">
-            GetDirectoryName(path)
-          </code>
-          <div class="tip" id="566">
-            <strong>Signature:</strong> path:string -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Returns the directory name for given path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '567', 567)" onmouseover="showTip(event, '567', 567)">
-            GetFileName(path)
-          </code>
-          <div class="tip" id="567">
-            <strong>Signature:</strong> path:string -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Returns the file name for given path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '568', 568)" onmouseover="showTip(event, '568', 568)">
-            GetRandomDirectoryName()
-          </code>
-          <div class="tip" id="568">
-            <strong>Signature:</strong> unit -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Generates a random, uniquely specified path to directory</p>
+          <p>The number of concurrently executing tasks</p>
 
         </td>
       </tr>

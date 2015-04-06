@@ -53,11 +53,11 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '259', 259)" onmouseover="showTip(event, '259', 259)">
-            FromFile(file, deserializer, force)
+          <code onmouseout="hideTip(event, '313', 313)" onmouseover="showTip(event, '313', 313)">
+            FromFile(...)
           </code>
-          <div class="tip" id="259">
-            <strong>Signature:</strong> (file:CloudFile * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="313">
+            <strong>Signature:</strong> (file:CloudFile * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -68,11 +68,11 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '260', 260)" onmouseover="showTip(event, '260', 260)">
-            FromFile(path, deserializer, force)
+          <code onmouseout="hideTip(event, '314', 314)" onmouseover="showTip(event, '314', 314)">
+            FromFile(...)
           </code>
-          <div class="tip" id="260">
-            <strong>Signature:</strong> (path:string * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="314">
+            <strong>Signature:</strong> (path:string * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * force:bool option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -83,11 +83,11 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '261', 261)" onmouseover="showTip(event, '261', 261)">
+          <code onmouseout="hideTip(event, '315', 315)" onmouseover="showTip(event, '315', 315)">
             FromTextFile(...)
           </code>
-          <div class="tip" id="261">
-            <strong>Signature:</strong> (path:string * textDeserializer:(StreamReader -&gt; seq&lt;&#39;T&gt;) * encoding:Encoding option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="315">
+            <strong>Signature:</strong> (path:string * textDeserializer:(StreamReader -&gt; seq&lt;&#39;T&gt;) * encoding:Encoding option * force:bool option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -98,11 +98,11 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
-            New(values, directory, serializer)
+          <code onmouseout="hideTip(event, '316', 316)" onmouseover="showTip(event, '316', 316)">
+            New(...)
           </code>
-          <div class="tip" id="262">
-            <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * directory:string option * serializer:ISerializer option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="316">
+            <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * directory:string option * serializer:ISerializer option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -114,11 +114,11 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
+          <code onmouseout="hideTip(event, '317', 317)" onmouseover="showTip(event, '317', 317)">
             NewPartitioned(...)
           </code>
-          <div class="tip" id="263">
-            <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * directory:string option * serializer:ISerializer option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt; []&gt;<br />
+          <div class="tip" id="317">
+            <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * directory:string option * serializer:ISerializer option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt; []&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -129,11 +129,11 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
-            Parse(file, serializer, force)
+          <code onmouseout="hideTip(event, '318', 318)" onmouseover="showTip(event, '318', 318)">
+            Parse(...)
           </code>
-          <div class="tip" id="264">
-            <strong>Signature:</strong> (file:CloudFile * serializer:ISerializer option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="318">
+            <strong>Signature:</strong> (file:CloudFile * serializer:ISerializer option * force:bool option * cacheByDefault:obj option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -144,11 +144,11 @@ Cloud sequences are cached locally for performance.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
-            Parse(path, serializer, force)
+          <code onmouseout="hideTip(event, '319', 319)" onmouseover="showTip(event, '319', 319)">
+            Parse(...)
           </code>
-          <div class="tip" id="265">
-            <strong>Signature:</strong> (path:string * serializer:ISerializer option * force:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
+          <div class="tip" id="319">
+            <strong>Signature:</strong> (path:string * serializer:ISerializer option * force:bool option * cacheByDefault:bool option) -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">

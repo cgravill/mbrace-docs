@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CloudPathClient - MBrace</title>
+    <title>CloudVector - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,118 +41,73 @@
 
 
 
-<h1>CloudPathClient</h1>
+<h1>CloudVector</h1>
 <div class="xmldoc">
-<p>Collection of path-related file store methods.</p>
+<p>Cloud vector static API</p>
 </div>
-  <h3>Instance members</h3>
+  <h3>Static members</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
+      <tr><td>Static member</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
-            Combine(directory, fileNames)
+          <code onmouseout="hideTip(event, '670', 670)" onmouseover="showTip(event, '670', 670)">
+            Merge(components)
           </code>
-          <div class="tip" id="562">
-            <strong>Signature:</strong> (directory:string * fileNames:seq&lt;string&gt;) -&gt; string []<br />
-                      </div>
+          <div class="tip" id="670">
+            <strong>Signature:</strong> components:seq&lt;CloudVector&lt;&#39;T&gt;&gt; -&gt; CloudVector&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines a collection of file names with provided directory prefix.</p>
+          <p>Merge a collection of cloud vectors into a single instance.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
-            Combine(paths)
+          <code onmouseout="hideTip(event, '671', 671)" onmouseover="showTip(event, '671', 671)">
+            New(...)
           </code>
-          <div class="tip" id="563">
-            <strong>Signature:</strong> (paths:string []) -&gt; string<br />
-                      </div>
+          <div class="tip" id="671">
+            <strong>Signature:</strong> (values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * enableCaching:bool option) -&gt; Local&lt;CloudVector&lt;&#39;T&gt;&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines an array of paths into a path.</p>
+          <p>Creates a CloudVector in file store using a collection of sequences with specified partition size.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
-            Combine(path1, path2, path3)
+          <code onmouseout="hideTip(event, '672', 672)" onmouseover="showTip(event, '672', 672)">
+            OfCloudFiles(...)
           </code>
-          <div class="tip" id="564">
-            <strong>Signature:</strong> (path1:string * path2:string * path3:string) -&gt; string<br />
-                      </div>
+          <div class="tip" id="672">
+            <strong>Signature:</strong> (files:seq&lt;string&gt; * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * enableCaching:bool option) -&gt; Local&lt;CloudVector&lt;&#39;T&gt;&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines three strings into one path.</p>
+          <p>Creates a cloudvector instance using a collection of cloud files and provided deserializer method.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
-            Combine(path1, path2)
+          <code onmouseout="hideTip(event, '673', 673)" onmouseover="showTip(event, '673', 673)">
+            OfPartitions(partitions, enableCaching)
           </code>
-          <div class="tip" id="565">
-            <strong>Signature:</strong> (path1:string * path2:string) -&gt; string<br />
-                      </div>
+          <div class="tip" id="673">
+            <strong>Signature:</strong> (partitions:seq&lt;CloudSequence&lt;&#39;T&gt;&gt; * enableCaching:bool option) -&gt; Local&lt;CloudVector&lt;&#39;T&gt;&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-          <p>Combines two strings into one path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '566', 566)" onmouseover="showTip(event, '566', 566)">
-            GetDirectoryName(path)
-          </code>
-          <div class="tip" id="566">
-            <strong>Signature:</strong> path:string -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Returns the directory name for given path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '567', 567)" onmouseover="showTip(event, '567', 567)">
-            GetFileName(path)
-          </code>
-          <div class="tip" id="567">
-            <strong>Signature:</strong> path:string -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Returns the file name for given path.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '568', 568)" onmouseover="showTip(event, '568', 568)">
-            GetRandomDirectoryName()
-          </code>
-          <div class="tip" id="568">
-            <strong>Signature:</strong> unit -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          <p>Generates a random, uniquely specified path to directory</p>
+          <p>Creates a new CloudVector out of a collection of CloudSequence partitions</p>
 
         </td>
       </tr>

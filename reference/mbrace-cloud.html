@@ -54,10 +54,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '140', 140)" onmouseover="showTip(event, '140', 140)">
+          <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
             AsLocal(workflow)
           </code>
-          <div class="tip" id="140">
+          <div class="tip" id="186">
             <strong>Signature:</strong> workflow:Cloud&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -71,10 +71,10 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '141', 141)" onmouseover="showTip(event, '141', 141)">
+          <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
             AwaitCloudTask(...)
           </code>
-          <div class="tip" id="141">
+          <div class="tip" id="187">
             <strong>Signature:</strong> (task:ICloudTask&lt;&#39;T&gt; * timeoutMilliseconds:int option) -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -86,10 +86,10 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '142', 142)" onmouseover="showTip(event, '142', 142)">
+          <code onmouseout="hideTip(event, '188', 188)" onmouseover="showTip(event, '188', 188)">
             AwaitTask(task, timeoutMilliseconds)
           </code>
-          <div class="tip" id="142">
+          <div class="tip" id="188">
             <strong>Signature:</strong> (task:Task&lt;&#39;T&gt; * timeoutMilliseconds:int option) -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -101,10 +101,10 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '143', 143)" onmouseover="showTip(event, '143', 143)">
+          <code onmouseout="hideTip(event, '189', 189)" onmouseover="showTip(event, '189', 189)">
             CancellationToken
           </code>
-          <div class="tip" id="143">
+          <div class="tip" id="189">
             <strong>Signature:</strong> Local&lt;ICloudCancellationToken&gt;<br />
                       </div>
         </td>
@@ -116,10 +116,10 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '144', 144)" onmouseover="showTip(event, '144', 144)">
+          <code onmouseout="hideTip(event, '190', 190)" onmouseover="showTip(event, '190', 190)">
             Catch(workflow)
           </code>
-          <div class="tip" id="144">
+          <div class="tip" id="190">
             <strong>Signature:</strong> workflow:Cloud&lt;&#39;T&gt; -&gt; Cloud&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -131,12 +131,12 @@ workflow will be re-interpreted using thread parallelism semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '145', 145)" onmouseover="showTip(event, '145', 145)">
+          <code onmouseout="hideTip(event, '191', 191)" onmouseover="showTip(event, '191', 191)">
             Choice(computations)
           </code>
-          <div class="tip" id="145">
-            <strong>Signature:</strong> (computations:seq&lt;&#39;?79982 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T option&gt;<br />
-                          <strong>Type parameters:</strong> '?79982, 'T          </div>
+          <div class="tip" id="191">
+            <strong>Signature:</strong> (computations:seq&lt;&#39;?86639 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T option&gt;<br />
+                          <strong>Type parameters:</strong> '?86639, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Returns a cloud computation that will execute the given computation on the corresponding worker,
@@ -151,12 +151,12 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '146', 146)" onmouseover="showTip(event, '146', 146)">
+          <code onmouseout="hideTip(event, '192', 192)" onmouseover="showTip(event, '192', 192)">
             Choice(computations)
           </code>
-          <div class="tip" id="146">
-            <strong>Signature:</strong> computations:seq&lt;&#39;?79979&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />
-                          <strong>Type parameters:</strong> '?79979, 'T          </div>
+          <div class="tip" id="192">
+            <strong>Signature:</strong> computations:seq&lt;&#39;?86636&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />
+                          <strong>Type parameters:</strong> '?86636, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Returns a cloud computation that will execute given computations
@@ -171,10 +171,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '147', 147)" onmouseover="showTip(event, '147', 147)">
+          <code onmouseout="hideTip(event, '193', 193)" onmouseover="showTip(event, '193', 193)">
             ChoiceEverywhere(computation)
           </code>
-          <div class="tip" id="147">
+          <div class="tip" id="193">
             <strong>Signature:</strong> (computation:Cloud&lt;&#39;T option&gt;) -&gt; Cloud&lt;&#39;T option&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -191,10 +191,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '148', 148)" onmouseover="showTip(event, '148', 148)">
+          <code onmouseout="hideTip(event, '194', 194)" onmouseover="showTip(event, '194', 194)">
             CreateCancellationTokenSource()
           </code>
-          <div class="tip" id="148">
+          <div class="tip" id="194">
             <strong>Signature:</strong> unit -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />
                       </div>
         </td>
@@ -206,10 +206,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '149', 149)" onmouseover="showTip(event, '149', 149)">
+          <code onmouseout="hideTip(event, '195', 195)" onmouseover="showTip(event, '195', 195)">
             CreateLinkedCancellationTokenSource(...)
           </code>
-          <div class="tip" id="149">
+          <div class="tip" id="195">
             <strong>Signature:</strong> tokens:seq&lt;ICloudCancellationToken&gt; -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />
                       </div>
         </td>
@@ -221,10 +221,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '150', 150)" onmouseover="showTip(event, '150', 150)">
+          <code onmouseout="hideTip(event, '196', 196)" onmouseover="showTip(event, '196', 196)">
             CreateLinkedCancellationTokenSource(...)
           </code>
-          <div class="tip" id="150">
+          <div class="tip" id="196">
             <strong>Signature:</strong> (token1:ICloudCancellationToken * token2:ICloudCancellationToken) -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />
                       </div>
         </td>
@@ -236,10 +236,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '151', 151)" onmouseover="showTip(event, '151', 151)">
+          <code onmouseout="hideTip(event, '197', 197)" onmouseover="showTip(event, '197', 197)">
             CreateLinkedCancellationTokenSource(...)
           </code>
-          <div class="tip" id="151">
+          <div class="tip" id="197">
             <strong>Signature:</strong> (parent:ICloudCancellationToken option) -&gt; Local&lt;ICloudCancellationTokenSource&gt;<br />
                       </div>
         </td>
@@ -251,10 +251,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '152', 152)" onmouseover="showTip(event, '152', 152)">
+          <code onmouseout="hideTip(event, '198', 198)" onmouseover="showTip(event, '198', 198)">
             CurrentWorker
           </code>
-          <div class="tip" id="152">
+          <div class="tip" id="198">
             <strong>Signature:</strong> Local&lt;IWorkerRef&gt;<br />
                       </div>
         </td>
@@ -266,10 +266,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '153', 153)" onmouseover="showTip(event, '153', 153)">
+          <code onmouseout="hideTip(event, '199', 199)" onmouseover="showTip(event, '199', 199)">
             Dispose(disposable)
           </code>
-          <div class="tip" id="153">
+          <div class="tip" id="199">
             <strong>Signature:</strong> disposable:&#39;Disposable -&gt; Local&lt;unit&gt;<br />
                           <strong>Type parameters:</strong> 'Disposable          </div>
         </td>
@@ -281,10 +281,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '154', 154)" onmouseover="showTip(event, '154', 154)">
+          <code onmouseout="hideTip(event, '200', 200)" onmouseover="showTip(event, '200', 200)">
             FaultPolicy
           </code>
-          <div class="tip" id="154">
+          <div class="tip" id="200">
             <strong>Signature:</strong> Local&lt;FaultPolicy&gt;<br />
                       </div>
         </td>
@@ -296,10 +296,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '155', 155)" onmouseover="showTip(event, '155', 155)">
+          <code onmouseout="hideTip(event, '201', 201)" onmouseover="showTip(event, '201', 201)">
             GetAvailableWorkers()
           </code>
-          <div class="tip" id="155">
+          <div class="tip" id="201">
             <strong>Signature:</strong> unit -&gt; Local&lt;IWorkerRef []&gt;<br />
                       </div>
         </td>
@@ -311,10 +311,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '156', 156)" onmouseover="showTip(event, '156', 156)">
+          <code onmouseout="hideTip(event, '202', 202)" onmouseover="showTip(event, '202', 202)">
             GetJobId()
           </code>
-          <div class="tip" id="156">
+          <div class="tip" id="202">
             <strong>Signature:</strong> unit -&gt; Local&lt;string&gt;<br />
                       </div>
         </td>
@@ -326,10 +326,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '157', 157)" onmouseover="showTip(event, '157', 157)">
+          <code onmouseout="hideTip(event, '203', 203)" onmouseover="showTip(event, '203', 203)">
             GetProcessId()
           </code>
-          <div class="tip" id="157">
+          <div class="tip" id="203">
             <strong>Signature:</strong> unit -&gt; Local&lt;string&gt;<br />
                       </div>
         </td>
@@ -341,10 +341,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '158', 158)" onmouseover="showTip(event, '158', 158)">
+          <code onmouseout="hideTip(event, '204', 204)" onmouseover="showTip(event, '204', 204)">
             GetWorkerCount()
           </code>
-          <div class="tip" id="158">
+          <div class="tip" id="204">
             <strong>Signature:</strong> unit -&gt; Local&lt;int&gt;<br />
                       </div>
         </td>
@@ -356,12 +356,12 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+          <code onmouseout="hideTip(event, '205', 205)" onmouseover="showTip(event, '205', 205)">
             Ignore(workflow)
           </code>
-          <div class="tip" id="159">
-            <strong>Signature:</strong> workflow:&#39;?79957 -&gt; Cloud&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> '?79957, 'T          </div>
+          <div class="tip" id="205">
+            <strong>Signature:</strong> workflow:&#39;?86614 -&gt; Cloud&lt;unit&gt;<br />
+                          <strong>Type parameters:</strong> '?86614, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Performs a cloud computations, discarding its result</p>
@@ -371,10 +371,10 @@ This operator may create distribution.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
+          <code onmouseout="hideTip(event, '206', 206)" onmouseover="showTip(event, '206', 206)">
             IsTargetedWorkerSupported
           </code>
-          <div class="tip" id="160">
+          <div class="tip" id="206">
             <strong>Signature:</strong> Local&lt;bool&gt;<br />
                       </div>
         </td>
@@ -387,10 +387,10 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '161', 161)" onmouseover="showTip(event, '161', 161)">
+          <code onmouseout="hideTip(event, '207', 207)" onmouseover="showTip(event, '207', 207)">
             Log(logEntry)
           </code>
-          <div class="tip" id="161">
+          <div class="tip" id="207">
             <strong>Signature:</strong> logEntry:string -&gt; Local&lt;unit&gt;<br />
                       </div>
         </td>
@@ -402,12 +402,12 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '162', 162)" onmouseover="showTip(event, '162', 162)">
+          <code onmouseout="hideTip(event, '208', 208)" onmouseover="showTip(event, '208', 208)">
             Logf(fmt)
           </code>
-          <div class="tip" id="162">
-            <strong>Signature:</strong> fmt:StringFormat&lt;&#39;?79965,Local&lt;unit&gt;&gt; -&gt; &#39;?79965<br />
-                          <strong>Type parameters:</strong> '?79965          </div>
+          <div class="tip" id="208">
+            <strong>Signature:</strong> fmt:StringFormat&lt;&#39;?86622,Local&lt;unit&gt;&gt; -&gt; &#39;?86622<br />
+                          <strong>Type parameters:</strong> '?86622          </div>
         </td>
         <td class="xmldoc">
           <p>Writes an entry to a logging provider, if it exists.</p>
@@ -417,10 +417,10 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '163', 163)" onmouseover="showTip(event, '163', 163)">
+          <code onmouseout="hideTip(event, '209', 209)" onmouseover="showTip(event, '209', 209)">
             OfAsync(asyncWorkflow)
           </code>
-          <div class="tip" id="163">
+          <div class="tip" id="209">
             <strong>Signature:</strong> asyncWorkflow:Async&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -432,12 +432,12 @@ Should be used with combinators that support worker targeting like Cloud.Paralle
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '164', 164)" onmouseover="showTip(event, '164', 164)">
+          <code onmouseout="hideTip(event, '210', 210)" onmouseover="showTip(event, '210', 210)">
             Parallel(computations)
           </code>
-          <div class="tip" id="164">
-            <strong>Signature:</strong> (computations:seq&lt;&#39;?79974 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T []&gt;<br />
-                          <strong>Type parameters:</strong> '?79974, 'T          </div>
+          <div class="tip" id="210">
+            <strong>Signature:</strong> (computations:seq&lt;&#39;?86631 * IWorkerRef&gt;) -&gt; Cloud&lt;&#39;T []&gt;<br />
+                          <strong>Type parameters:</strong> '?86631, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Creates a cloud computation that will execute given computations to targeted workers
@@ -450,10 +450,10 @@ Exceptions raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '165', 165)" onmouseover="showTip(event, '165', 165)">
+          <code onmouseout="hideTip(event, '211', 211)" onmouseover="showTip(event, '211', 211)">
             Parallel(left, right)
           </code>
-          <div class="tip" id="165">
+          <div class="tip" id="211">
             <strong>Signature:</strong> (left:Cloud&lt;&#39;L&gt; * right:Cloud&lt;&#39;R&gt;) -&gt; Cloud&lt;&#39;L * &#39;R&gt;<br />
                           <strong>Type parameters:</strong> 'L, 'R          </div>
         </td>
@@ -468,12 +468,12 @@ Exceptions raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '166', 166)" onmouseover="showTip(event, '166', 166)">
+          <code onmouseout="hideTip(event, '212', 212)" onmouseover="showTip(event, '212', 212)">
             Parallel(computations)
           </code>
-          <div class="tip" id="166">
-            <strong>Signature:</strong> computations:seq&lt;&#39;?79968&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />
-                          <strong>Type parameters:</strong> '?79968, 'T          </div>
+          <div class="tip" id="212">
+            <strong>Signature:</strong> computations:seq&lt;&#39;?86625&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />
+                          <strong>Type parameters:</strong> '?86625, 'T          </div>
         </td>
         <td class="xmldoc">
           <p>Creates a cloud computation that will execute the given computations
@@ -486,10 +486,10 @@ Exceptions raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '167', 167)" onmouseover="showTip(event, '167', 167)">
+          <code onmouseout="hideTip(event, '213', 213)" onmouseover="showTip(event, '213', 213)">
             ParallelEverywhere(computation)
           </code>
-          <div class="tip" id="167">
+          <div class="tip" id="213">
             <strong>Signature:</strong> computation:Cloud&lt;&#39;T&gt; -&gt; Cloud&lt;&#39;T []&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -504,10 +504,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '168', 168)" onmouseover="showTip(event, '168', 168)">
+          <code onmouseout="hideTip(event, '214', 214)" onmouseover="showTip(event, '214', 214)">
             Raise(e)
           </code>
-          <div class="tip" id="168">
+          <div class="tip" id="214">
             <strong>Signature:</strong> e:exn -&gt; Local&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -519,10 +519,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '169', 169)" onmouseover="showTip(event, '169', 169)">
+          <code onmouseout="hideTip(event, '215', 215)" onmouseover="showTip(event, '215', 215)">
             Sleep(millisecondsDue)
           </code>
-          <div class="tip" id="169">
+          <div class="tip" id="215">
             <strong>Signature:</strong> millisecondsDue:int -&gt; Local&lt;unit&gt;<br />
                       </div>
         </td>
@@ -534,10 +534,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '170', 170)" onmouseover="showTip(event, '170', 170)">
+          <code onmouseout="hideTip(event, '216', 216)" onmouseover="showTip(event, '216', 216)">
             StartAsCloudTask(...)
           </code>
-          <div class="tip" id="170">
+          <div class="tip" id="216">
             <strong>Signature:</strong> (computation:Cloud&lt;&#39;T&gt; * faultPolicy:FaultPolicy option * target:IWorkerRef option * cancellationToken:ICloudCancellationToken option) -&gt; Cloud&lt;ICloudTask&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -549,10 +549,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '171', 171)" onmouseover="showTip(event, '171', 171)">
+          <code onmouseout="hideTip(event, '217', 217)" onmouseover="showTip(event, '217', 217)">
             StartChild(workflow, target)
           </code>
-          <div class="tip" id="171">
+          <div class="tip" id="217">
             <strong>Signature:</strong> (workflow:Cloud&lt;&#39;T&gt; * target:IWorkerRef option) -&gt; Cloud&lt;Local&lt;&#39;T&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -564,10 +564,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '172', 172)" onmouseover="showTip(event, '172', 172)">
+          <code onmouseout="hideTip(event, '218', 218)" onmouseover="showTip(event, '218', 218)">
             TryFinally(body, finalizer)
           </code>
-          <div class="tip" id="172">
+          <div class="tip" id="218">
             <strong>Signature:</strong> (body:Cloud&lt;&#39;T&gt; * finalizer:Local&lt;unit&gt;) -&gt; Cloud&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
@@ -579,10 +579,10 @@ Any exception raised by children carry cancellation semantics.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '173', 173)" onmouseover="showTip(event, '173', 173)">
+          <code onmouseout="hideTip(event, '219', 219)" onmouseover="showTip(event, '219', 219)">
             WithFaultPolicy(policy workflow)
           </code>
-          <div class="tip" id="173">
+          <div class="tip" id="219">
             <strong>Signature:</strong> policy:FaultPolicy -&gt; workflow:Cloud&lt;&#39;T&gt; -&gt; Cloud&lt;&#39;T&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>

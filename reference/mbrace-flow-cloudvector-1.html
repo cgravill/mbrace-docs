@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CloudPathClient - MBrace</title>
+    <title>CloudVector<'T> - MBrace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -41,10 +41,32 @@
 
 
 
-<h1>CloudPathClient</h1>
+<h1>CloudVector<'T></h1>
 <div class="xmldoc">
-<p>Collection of path-related file store methods.</p>
+<p>Represents an ordered collection of values stored in CloudSequence partitions.</p>
 </div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '659', 659)" onmouseover="showTip(event, '659', 659)">
+            new()
+          </code>
+          <div class="tip" id="659">
+            <strong>Signature:</strong> unit -&gt; CloudVector&lt;&#39;T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
     <thead>
@@ -54,105 +76,161 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
-            Combine(directory, fileNames)
+          <code onmouseout="hideTip(event, '660', 660)" onmouseover="showTip(event, '660', 660)">
+            Count
           </code>
-          <div class="tip" id="562">
-            <strong>Signature:</strong> (directory:string * fileNames:seq&lt;string&gt;) -&gt; string []<br />
+          <div class="tip" id="660">
+            <strong>Signature:</strong> Local&lt;int64&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Combines a collection of file names with provided directory prefix.</p>
+          <p>Gets the total element count for the cloud vector.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
-            Combine(paths)
+          <code onmouseout="hideTip(event, '661', 661)" onmouseover="showTip(event, '661', 661)">
+            Dispose()
           </code>
-          <div class="tip" id="563">
-            <strong>Signature:</strong> (paths:string []) -&gt; string<br />
+          <div class="tip" id="661">
+            <strong>Signature:</strong> unit -&gt; Local&lt;unit&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Combines an array of paths into a path.</p>
+          <p>Disposes cloud vector from store.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '564', 564)" onmouseover="showTip(event, '564', 564)">
-            Combine(path1, path2, path3)
+          <code onmouseout="hideTip(event, '662', 662)" onmouseover="showTip(event, '662', 662)">
+            GetAllPartitions()
           </code>
-          <div class="tip" id="564">
-            <strong>Signature:</strong> (path1:string * path2:string * path3:string) -&gt; string<br />
+          <div class="tip" id="662">
+            <strong>Signature:</strong> unit -&gt; CloudSequence&lt;&#39;T&gt; []<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Combines three strings into one path.</p>
+          <p>Gets all partitions of contained in the vector.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '565', 565)" onmouseover="showTip(event, '565', 565)">
-            Combine(path1, path2)
+          <code onmouseout="hideTip(event, '663', 663)" onmouseover="showTip(event, '663', 663)">
+            GetCacheState()
           </code>
-          <div class="tip" id="565">
-            <strong>Signature:</strong> (path1:string * path2:string) -&gt; string<br />
+          <div class="tip" id="663">
+            <strong>Signature:</strong> unit -&gt; Local&lt;WorkerCacheState []&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Combines two strings into one path.</p>
+          <p>Gets the current cache state of the vector inside the cluster.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '566', 566)" onmouseover="showTip(event, '566', 566)">
-            GetDirectoryName(path)
+          <code onmouseout="hideTip(event, '664', 664)" onmouseover="showTip(event, '664', 664)">
+            GetPartition(index)
           </code>
-          <div class="tip" id="566">
-            <strong>Signature:</strong> path:string -&gt; string<br />
+          <div class="tip" id="664">
+            <strong>Signature:</strong> index:int -&gt; CloudSequence&lt;&#39;T&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the directory name for given path.</p>
+          <p>Gets partition of given index.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '567', 567)" onmouseover="showTip(event, '567', 567)">
-            GetFileName(path)
+          <code onmouseout="hideTip(event, '665', 665)" onmouseover="showTip(event, '665', 665)">
+            IsCachingSupported
           </code>
-          <div class="tip" id="567">
-            <strong>Signature:</strong> path:string -&gt; string<br />
+          <div class="tip" id="665">
+            <strong>Signature:</strong> bool<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the file name for given path.</p>
+          <p>Gets the cache support status for cloud vector instance.</p>
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '568', 568)" onmouseover="showTip(event, '568', 568)">
-            GetRandomDirectoryName()
+          <code onmouseout="hideTip(event, '666', 666)" onmouseover="showTip(event, '666', 666)">
+            [arg1]
           </code>
-          <div class="tip" id="568">
-            <strong>Signature:</strong> unit -&gt; string<br />
+          <div class="tip" id="666">
+            <strong>Signature:</strong> int -&gt; CloudSequence&lt;&#39;T&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-          <p>Generates a random, uniquely specified path to directory</p>
+          <p>Gets partition of given index.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '667', 667)" onmouseover="showTip(event, '667', 667)">
+            PartitionCount
+          </code>
+          <div class="tip" id="667">
+            <strong>Signature:</strong> int<br />
+              <strong>Modifiers:</strong> abstract<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the partition count for cloud vector.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '668', 668)" onmouseover="showTip(event, '668', 668)">
+            ToEnumerable()
+          </code>
+          <div class="tip" id="668">
+            <strong>Signature:</strong> unit -&gt; Local&lt;seq&lt;&#39;T&gt;&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns a local enumerable that iterates through
+all elements of the cloud vector.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '669', 669)" onmouseover="showTip(event, '669', 669)">
+            UpdateCacheState(...)
+          </code>
+          <div class="tip" id="669">
+            <strong>Signature:</strong> (worker:IWorkerRef * appendedIndices:int []) -&gt; Local&lt;unit&gt;<br />
+              <strong>Modifiers:</strong> abstract<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Updates the cache state to include provided indices for given worker ref.</p>
 
         </td>
       </tr>
