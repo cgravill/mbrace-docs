@@ -192,7 +192,7 @@ change the hostnames and ports. Depending on your configuration use either IP ad
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="i">nodes</span> <span class="o">=</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">nodes</span> <span class="o">=</span>
     [
         <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span class="s">&quot;10.0.1.4&quot;</span>, <span class="n">2675</span>)
         <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span class="s">&quot;10.0.1.5&quot;</span>, <span class="n">2675</span>)
@@ -210,7 +210,7 @@ change the hostnames and ports. Depending on your configuration use either IP ad
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="i">nodes</span> <span class="o">=</span> [<span class="n">1..</span><span class="n">3</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="i">i</span> <span class="k">-&gt;</span> <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">sprintf</span> <span class="s">&quot;machine%d&quot;</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">i</span>, <span class="n">2675</span>))
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">nodes</span> <span class="o">=</span> [<span class="n">1..</span><span class="n">3</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">i</span> <span class="k">-&gt;</span> <span class="i">MBraceNode</span><span class="o">.</span><span class="i">Connect</span>(<span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="i">sprintf</span> <span class="s">&quot;machine%d&quot;</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="i">i</span>, <span class="n">2675</span>))
 </pre>
 </td>
 </tr>
@@ -223,7 +223,7 @@ change the hostnames and ports. Depending on your configuration use either IP ad
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="i">nodes</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">n</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="f">printfn</span> <span class="s">&quot;Node </span><span class="pf">%A</span><span class="s"> : </span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">n</span> <span class="o">&lt;|</span> <span class="k">try</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="i">n</span><span class="o">.</span><span class="i">Ping</span>()<span class="o">.</span><span class="i">ToString</span>() <span class="k">with</span> _ <span class="k">-&gt;</span> <span class="s">&quot;failed&quot;</span>)
+<span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="i">nodes</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">n</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="f">printfn</span> <span class="s">&quot;Node </span><span class="pf">%A</span><span class="s"> : </span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">n</span> <span class="o">&lt;|</span> <span class="k">try</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="i">n</span><span class="o">.</span><span class="i">Ping</span>()<span class="o">.</span><span class="i">ToString</span>() <span class="k">with</span> _ <span class="k">-&gt;</span> <span class="s">&quot;failed&quot;</span>)
 </pre>
 </td>
 </tr>
@@ -246,11 +246,11 @@ testing purposes.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="i">Nessos</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs1', 26)" onmouseover="showTip(event, 'fs1', 26)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="i">Store</span>
+<span class="k">open</span> <span class="i">Nessos</span><span class="o">.</span><span class="i">MBrace</span><span class="o">.</span><span class="i">Store</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="i">fileSystemStore</span> <span class="o">=</span> <span class="i">FileSystemStore</span><span class="o">.</span><span class="i">Create</span> <span class="s">@&quot;\\shared\mbrace&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="i">fileSystemStore</span> <span class="o">=</span> <span class="i">FileSystemStore</span><span class="o">.</span><span class="i">Create</span> <span class="s">@&quot;\\shared\mbrace&quot;</span>
 
-<span class="i">MBraceSettings</span><span class="o">.</span><span class="i">DefaultStore</span> <span class="o">&lt;-</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">fileSystemStore</span>
+<span class="i">MBraceSettings</span><span class="o">.</span><span class="i">DefaultStore</span> <span class="o">&lt;-</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="i">fileSystemStore</span>
 </pre>
 </td>
 </tr>
@@ -265,34 +265,27 @@ testing purposes.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="i">runtime</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 31)" onmouseover="showTip(event, 'fs1', 31)" class="i">MBrace</span><span class="o">.</span><span class="i">Boot</span> <span onmouseout="hideTip(event, 'fs8', 32)" onmouseover="showTip(event, 'fs8', 32)" class="i">nodes</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">runtime</span> <span class="o">=</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Boot</span> <span onmouseout="hideTip(event, 'fs4', 21)" onmouseover="showTip(event, 'fs4', 21)" class="i">nodes</span>
 
-<span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="i">runtime</span><span class="o">.</span><span class="i">Run</span> (<span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="i">cloud</span> { <span class="k">return</span> <span class="n">42</span> })
+<span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">runtime</span><span class="o">.</span><span class="i">Run</span> (<span class="i">cloud</span> { <span class="k">return</span> <span class="n">42</span> })
 </pre>
 </td>
 </tr>
 </table>
 
-<div class="tip" id="fs1">namespace MBrace</div>
-<div class="tip" id="fs2">namespace MBrace.Azure</div>
-<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
-<div class="tip" id="fs4">val config : Configuration<br /><br />Full name: Runtime-deployment.config</div>
-<div class="tip" id="fs5">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
-<div class="tip" id="fs6">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
-<div class="tip" id="fs7">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;UserDataTable: string;}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
-<div class="tip" id="fs8">val nodes : obj list<br /><br />Full name: Runtime-deployment.nodes</div>
-<div class="tip" id="fs9">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs10">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
-<div class="tip" id="fs11">val i : int</div>
-<div class="tip" id="fs12">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
-<div class="tip" id="fs13">val iter : action:(&#39;T -&gt; unit) -&gt; list:&#39;T list -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.List.iter</div>
-<div class="tip" id="fs14">val n : obj</div>
-<div class="tip" id="fs15">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs16">namespace Nessos</div>
-<div class="tip" id="fs17">Multiple items<br />namespace MBrace.Azure.Store<br /><br />--------------------<br />namespace MBrace.Store</div>
-<div class="tip" id="fs18">val fileSystemStore : obj<br /><br />Full name: Runtime-deployment.fileSystemStore</div>
-<div class="tip" id="fs19">val runtime : obj<br /><br />Full name: Runtime-deployment.runtime</div>
-<div class="tip" id="fs20">val cloud : CloudBuilder<br /><br />Full name: MBrace.Builders.cloud</div>
+<div class="tip" id="fs1">val config : obj<br /><br />Full name: Runtime-deployment.config</div>
+<div class="tip" id="fs2">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
+<div class="tip" id="fs3">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
+<div class="tip" id="fs4">val nodes : obj list<br /><br />Full name: Runtime-deployment.nodes</div>
+<div class="tip" id="fs5">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs6">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fs7">val i : int</div>
+<div class="tip" id="fs8">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
+<div class="tip" id="fs9">val iter : action:(&#39;T -&gt; unit) -&gt; list:&#39;T list -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.List.iter</div>
+<div class="tip" id="fs10">val n : obj</div>
+<div class="tip" id="fs11">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<div class="tip" id="fs12">val fileSystemStore : obj<br /><br />Full name: Runtime-deployment.fileSystemStore</div>
+<div class="tip" id="fs13">val runtime : obj<br /><br />Full name: Runtime-deployment.runtime</div>
 
         </div>
         <div class="span3">
