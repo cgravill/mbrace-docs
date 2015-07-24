@@ -41,24 +41,26 @@
           
 <h1><a name="Using-MBrace-on-Windows-Azure" class="anchor" href="#Using-MBrace-on-Windows-Azure">Using MBrace on Windows Azure</a></h1>
 
-<p>In this tutorial you will learn how to setup MBrace on Windows Azure.</p>
+<p>In this tutorial you will learn how to setup MBrace on Windows Azure and
+how to use the MBrace Azure Client API.</p>
 
-<h2><a name="Provisioning-Using-Brisk-Engine" class="anchor" href="#Provisioning-Using-Brisk-Engine">Provisioning Using Brisk Engine</a></h2>
+<h2><a name="Provisioning-Your-Cluster-Using-Brisk-Engine" class="anchor" href="#Provisioning-Your-Cluster-Using-Brisk-Engine">Provisioning Your Cluster Using Brisk Engine</a></h2>
 
 <p>The easiest path to provision an MBrace cluster on Azure using
 an Azure Cloud Service is to use <a href="http://briskengine.com">Brisk Engine</a>.
 See <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/brisk-tutorial.md#get-started-with-brisk">Getting Started with MBrace using Brisk Engine</a>.</p>
 
-<h2><a name="Provisioning-an-Azure-Cloud-Service-Explicitly" class="anchor" href="#Provisioning-an-Azure-Cloud-Service-Explicitly">Provisioning an Azure Cloud Service Explicitly</a></h2>
+<h2><a name="Provisioning-Your-Cluster-an-Azure-Cloud-Service-Explicitly" class="anchor" href="#Provisioning-Your-Cluster-an-Azure-Cloud-Service-Explicitly">Provisioning Your Cluster an Azure Cloud Service Explicitly</a></h2>
 
 <p>In some cases you may decide to provision explicitly, if the options provided
 by Brisk Engine do not yet meet your needs.</p>
 
-<p>If so, see <a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">Creating a Custom Azure Cloud Service which includes MBrace runtime instances</a>.</p>
+<p>If so, see <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Creating a Custom Azure Cloud Service which includes MBrace runtime instances</a>.</p>
 
 <p>For example you may want to:</p>
 
 <ul>
+<li><p>use Visual Studio 2012 (F# 3.0, FSharp.Core 4.3.0.0) or Visual Studio 2015 (F# 4.0, FSharp.Core 4.4.0.0) as your client (see below); or</p></li>
 <li><p>adjust the size of VM used for worker instances in your cluster; or</p></li>
 <li><p>add endpoints to your cloud service (so your MBrace cluster can publish 
 TCP and HTTP endpoints, either public or to your virtual network,
@@ -90,7 +92,7 @@ Alternatively you may want to host your MBrace runtime/cluster nodes in one of</
 
 <p>These options are not yet documented but you may be able
 to utilize the relevant components used by the
-<a href="https://github.com/mbraceproject/MBrace.Demos/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>.</p>
+<a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>.</p>
 
 <h3><a name="Where-your-MBrace-client-code-runs" class="anchor" href="#Where-your-MBrace-client-code-runs">Where your MBrace client code runs</a></h3>
 
@@ -105,14 +107,51 @@ to utilize the relevant components used by the
 <p>In all cases, the client will need sufficient network access to be able to write to the
 Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.</p>
 
-<div class="tip" id="fs1">namespace MBrace</div>
-<div class="tip" id="fs2">namespace MBrace.Azure</div>
-<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
-<div class="tip" id="fs4">namespace MBrace.Flow</div>
-<div class="tip" id="fs5">val config : Configuration<br /><br />Full name: Azure-tutorial.config</div>
-<div class="tip" id="fs6">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
-<div class="tip" id="fs7">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
-<div class="tip" id="fs8">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;Version: string;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;...}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithUserDataFolders : userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithVersion : version:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
+<h3><a name="Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012" class="anchor" href="#Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012">Using MBrace.Azure with F# 3.0 (Visual Studio 2012)</a></h3>
+
+<p>MBrace.Azure currently assumes Visual Studio 2013.</p>
+
+<p>If using F# 3.0/Visual Studio 2012, you must use 
+a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
+add a binding redirect for <code>FSharp.Core</code>:</p>
+
+<table class="pre"><tr><td><pre lang="xml"><span class="k">&lt;</span><span class="i">configuration</span><span class="k">&gt;</span>
+  <span class="k">&lt;</span><span class="i">runtime</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">assemblyBinding</span> <span class="o">xmlns</span><span class="k">="urn:schemas-microsoft-com:asm.v1"</span><span class="k">&gt;</span>
+      <span class="k">&lt;</span><span class="i">dependentAssembly</span><span class="k">&gt;</span>
+        <span class="k">&lt;</span><span class="i">assemblyIdentity</span> <span class="o">name</span><span class="k">="FSharp.Core"</span> <span class="o">publicKeyToken</span><span class="k">="b03f5f7f11d50a3a"</span> <span class="o">culture</span><span class="k">="neutral"</span> <span class="k">/&gt;</span>
+        <span class="k">&lt;</span><span class="i">bindingRedirect</span> <span class="o">oldVersion</span><span class="k">="0.0.0.0-4.3.1.0"</span> <span class="o">newVersion</span><span class="k">="4.3.0.0"</span> <span class="k">/&gt;</span>
+      <span class="k">&lt;/</span><span class="i">dependentAssembly</span><span class="k">&gt;</span>
+    <span class="k">&lt;/</span><span class="i">assemblyBinding</span><span class="k">&gt;</span>
+  <span class="k">&lt;/</span><span class="i">runtime</span><span class="k">&gt;</span>
+<span class="k">&lt;/</span><span class="i">configuration</span><span class="k">&gt;</span>
+</pre></td></tr></table>
+
+<h3><a name="Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015" class="anchor" href="#Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015">Using MBrace.Azure with F# 4.0 (Visual Studio 2015)</a></h3>
+
+<p>MBrace.Azure currently assumes Visual Studio 2013.</p>
+
+<p>If using F# 4.0/Visual Studio 2015, you must also use 
+a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
+add a binding redirect for <code>FSharp.Core</code>:</p>
+
+<table class="pre"><tr><td><pre lang="xml"><span class="k">&lt;</span><span class="i">configuration</span><span class="k">&gt;</span>
+  <span class="k">&lt;</span><span class="i">runtime</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">assemblyBinding</span> <span class="o">xmlns</span><span class="k">="urn:schemas-microsoft-com:asm.v1"</span><span class="k">&gt;</span>
+      <span class="k">&lt;</span><span class="i">dependentAssembly</span><span class="k">&gt;</span>
+        <span class="k">&lt;</span><span class="i">assemblyIdentity</span> <span class="o">name</span><span class="k">="FSharp.Core"</span> <span class="o">publicKeyToken</span><span class="k">="b03f5f7f11d50a3a"</span> <span class="o">culture</span><span class="k">="neutral"</span> <span class="k">/&gt;</span>
+        <span class="k">&lt;</span><span class="i">bindingRedirect</span> <span class="o">oldVersion</span><span class="k">="0.0.0.0-4.4.0.0"</span> <span class="o">newVersion</span><span class="k">="4.4.0.0"</span> <span class="k">/&gt;</span>
+      <span class="k">&lt;/</span><span class="i">dependentAssembly</span><span class="k">&gt;</span>
+    <span class="k">&lt;/</span><span class="i">assemblyBinding</span><span class="k">&gt;</span>
+  <span class="k">&lt;/</span><span class="i">runtime</span><span class="k">&gt;</span>
+<span class="k">&lt;/</span><span class="i">configuration</span><span class="k">&gt;</span></pre></td></tr></table>
+
+<div class="tip" id="fs1">val config : MBrace.Azure.Configuration<br /><br />Full name: Azure-tutorial.config</div>
+<div class="tip" id="fs2">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
+<div class="tip" id="fs3">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
+<div class="tip" id="fs4">namespace MBrace</div>
+<div class="tip" id="fs5">namespace MBrace.Azure</div>
+<div class="tip" id="fs6">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;Version: string;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;...}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithUserDataFolders : userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithVersion : version:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
 
         </div>
         <div class="span3">
@@ -136,7 +175,6 @@ Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.
 
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
-            <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
             <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>

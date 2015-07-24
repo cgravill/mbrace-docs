@@ -46,95 +46,9 @@ scalable, fault-tolerant computation and data processing for the .NET/mono frame
 The MBrace programming model uses a distributed continuation-based approach elegantly
 manifested through computation expressions in F#.</p>
 
-<div class="row">
-  <div class="span1"></div>
-  <div class="span6">
-    <div class="well well-small" id="nuget">
-      A prerelease of MBrace.Core can be <a href="https://nuget.org/packages/MBrace.Core">installed from NuGet</a>:
-      <pre>PM> Install-Package MBrace.Core -Pre</pre>
-    </div>
-    <div class="well well-small" id="nuget">
-      A prerelease of MBrace.Azure can be <a href="https://nuget.org/packages/MBrace.Azure">installed from NuGet</a>:
-      <pre>PM> Install-Package MBrace.Azure -Pre</pre>
-    </div>
-  </div>
-  <div class="span1"></div>
-</div>
-
-<h2><a name="Example" class="anchor" href="#Example">Example</a></h2>
-
-<p>When using MBrace.Azure, an MBrace session can be initialized from F# interactive as follows:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 13)" onmouseover="showTip(event, 'fs1', 13)" class="i">MBrace</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 14)" onmouseover="showTip(event, 'fs1', 14)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 15)" onmouseover="showTip(event, 'fs2', 15)" class="i">Azure</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 16)" onmouseover="showTip(event, 'fs1', 16)" class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 17)" onmouseover="showTip(event, 'fs2', 17)" class="i">Azure</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 18)" onmouseover="showTip(event, 'fs3', 18)" class="i">Client</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="f">lineCount</span> () <span class="o">=</span> <span class="i">cloud</span> {
-    <span class="c">// enumerate all files from underlying storage container</span>
-    <span class="k">let!</span> <span class="i">files</span> <span class="o">=</span> <span class="i">CloudFile</span><span class="o">.</span><span class="i">Enumerate</span> <span class="s">&quot;path/to/container&quot;</span>
-
-    <span class="c">// read the contents of a file and return its line count</span>
-    <span class="k">let</span> <span class="i">count</span> (<span class="i">f</span> <span class="o">:</span> <span class="i">CloudFile</span>) <span class="o">=</span> <span class="i">cloud</span> {
-        <span class="k">let!</span> <span class="i">text</span> <span class="o">=</span> <span class="i">CloudFile</span><span class="o">.</span><span class="i">ReadAllText</span> <span class="i">f</span>
-        <span class="k">return</span> <span class="i">text</span><span class="o">.</span><span class="i">Split</span>(<span class="s">&#39;\n&#39;</span>)<span class="o">.</span><span class="i">Length</span>
-    }
-    
-    <span class="c">// perform line count in parallel</span>
-    <span class="k">let!</span> <span class="i">sizes</span> <span class="o">=</span> <span class="i">files</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="i">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="i">map</span> <span class="i">count</span> <span class="o">|&gt;</span> <span class="i">Cloud</span><span class="o">.</span><span class="i">Parallel</span>
-    <span class="k">return</span> <span onmouseout="hideTip(event, 'fs10', 22)" onmouseover="showTip(event, 'fs10', 22)" class="i">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="i">sum</span> <span class="i">sizes</span>
-}
-
-<span class="c">// get handle to Azure MBrace cluster</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="i">cluster</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="t">Runtime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="f">GetHandle</span>(<span onmouseout="hideTip(event, 'fs5', 27)" onmouseover="showTip(event, 'fs5', 27)" class="i">config</span>)
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="i">proc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 29)" onmouseover="showTip(event, 'fs13', 29)" class="i">cluster</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="f">CreateProcess</span> (<span onmouseout="hideTip(event, 'fs9', 31)" onmouseover="showTip(event, 'fs9', 31)" class="f">lineCount</span> ()) <span class="c">// send computation to the runtime</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="i">lines</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="i">proc</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="f">AwaitResult</span> () <span class="c">// await completion</span>
-</pre>
-</td>
-</tr>
-</table>
-
-<p>For a quick dive into MBrace and applications, check out the 
-<a href="https://github.com/mbraceproject/MBrace.Demos"><code>MBrace.Demos</code></a> solution.</p>
-
-<table class="pre"><tr><td><pre lang="bash">git clone https://github.com/mbraceproject/MBrace.Demos
-</pre></td></tr></table>
-
-<h2><a name="Documentation-amp-Tutorials" class="anchor" href="#Documentation-amp-Tutorials">Documentation &amp; Tutorials</a></h2>
-
-<p>A collection of tutorials, technical overviews and API references of the library.</p>
-
 <ul>
-<li><p><a href="programming-model.html">Programming Model</a> An overview of the MBrace programming model.</p></li>
-<li><p><a href="client-api.html">Client API</a> An overview of the MBrace client API.</p></li>
-<li><p><a href="runtime-deployment.html">Cluster Deployment Guide</a> Deploying an MBrace runtime.</p></li>
-<li><p><a href="azure-tutorial.html">Azure Tutorial</a> Getting started with MBrace on Windows Azure.</p></li>
+<li><p><a href="programming-model.html">Programming Model (Core)</a> An overview of the MBrace.Core programming model.</p></li>
+<li><p><a href="azure-tutorial.html">Programming Model and Deployment (Azure)</a> Getting started with MBrace on Windows Azure.</p></li>
 <li><p><a href="reference/index.html">API Reference</a> contains automatically generated documentation for all types, modules
 and functions in the library.</p></li>
 </ul>
@@ -142,9 +56,7 @@ and functions in the library.</p></li>
 <h2><a name="Community" class="anchor" href="#Community">Community</a></h2>
 
 <ul>
-<li><p>Twitter Feed <a href="https://twitter.com/mbracethecloud">@mbracethecloud</a>.</p></li>
-<li><p>User mailing list <a href="https://groups.google.com/group/mbrace-user"><a href="https://groups.google.com/group/mbrace-user">https://groups.google.com/group/mbrace-user</a></a>.</p></li>
-<li><p>Developer/Contributor mailing list <a href="https://groups.google.com/group/mbrace-dev"><a href="https://groups.google.com/group/mbrace-dev">https://groups.google.com/group/mbrace-dev</a></a>.</p></li>
+<li>Twitter Feed <a href="https://twitter.com/mbracethecloud">@mbracethecloud</a>.</li>
 </ul>
 
 <h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
@@ -155,25 +67,12 @@ the project and submit pull requests.</p>
 <p>The library is available under the Apache License. 
 For more information see the <a href="https://github.com/mbraceproject/MBrace/blob/master/LICENSE.md">License file</a> in the GitHub repository.</p>
 
-<div class="tip" id="fs1">namespace MBrace</div>
-<div class="tip" id="fs2">namespace MBrace.Azure</div>
-<div class="tip" id="fs3">namespace MBrace.Azure.Client</div>
-<div class="tip" id="fs4">namespace MBrace.Flow</div>
-<div class="tip" id="fs5">val config : Configuration<br /><br />Full name: Core.config</div>
-<div class="tip" id="fs6">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
-<div class="tip" id="fs7">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
-<div class="tip" id="fs8">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;Version: string;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;...}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithUserDataFolders : userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithVersion : version:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
-<div class="tip" id="fs9">val lineCount : unit -&gt; &#39;a<br /><br />Full name: Core.lineCount</div>
-<div class="tip" id="fs10">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs11">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs12">val sum : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.Array.sum</div>
-<div class="tip" id="fs13">val cluster : Runtime<br /><br />Full name: Core.cluster</div>
-<div class="tip" id="fs14">Multiple items<br />namespace MBrace.Azure.Runtime<br /><br />--------------------<br />namespace MBrace.Runtime<br /><br />--------------------<br />type Runtime =<br />&#160;&#160;private new : clientId:string * config:Configuration -&gt; Runtime<br />&#160;&#160;member AttachClientLogger : logger:ICloudLogger -&gt; unit<br />&#160;&#160;member AttachLocalWorker : ?workerCount:int * ?maxTasks:int -&gt; unit<br />&#160;&#160;member ClearAllProcesses : ?fullClear:bool * ?force:bool -&gt; unit<br />&#160;&#160;member ClearAllProcessesAsync : ?fullClear:bool * ?force:bool -&gt; Async&lt;unit&gt;<br />&#160;&#160;member ClearProcess : pid:string * ?fullClear:bool * ?force:bool -&gt; unit<br />&#160;&#160;member ClearProcessAsync : pid:string * ?fullClear:bool * ?force:bool -&gt; Async&lt;unit&gt;<br />&#160;&#160;member CreateCancellationTokenSource : unit -&gt; ICloudCancellationTokenSource<br />&#160;&#160;member CreateProcess : workflow:Cloud&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:ICloudChannelProvider * ?dictionaryProvider:ICloudDictionaryProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Process&lt;&#39;T&gt;<br />&#160;&#160;member CreateProcessAsTask : workflow:Cloud&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:ICloudChannelProvider * ?dictionaryProvider:ICloudDictionaryProvider * ?cancellationToken:ICloudCancellationToken * ?faultPolicy:FaultPolicy -&gt; Task&lt;Process&lt;&#39;T&gt;&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Azure.Client.Runtime</div>
-<div class="tip" id="fs15">static member Runtime.GetHandle : config:Configuration * ?waitWorkerCount:int -&gt; Runtime</div>
-<div class="tip" id="fs16">val proc : Process&lt;obj&gt;<br /><br />Full name: Core.proc</div>
-<div class="tip" id="fs17">member Runtime.CreateProcess : workflow:Core.Cloud&lt;&#39;T&gt; * ?name:string * ?defaultDirectory:string * ?fileStore:Store.Internals.ICloudFileStore * ?defaultAtomContainer:string * ?atomProvider:Store.Internals.ICloudAtomProvider * ?defaultChannelContainer:string * ?channelProvider:Store.Internals.ICloudChannelProvider * ?dictionaryProvider:Store.Internals.ICloudDictionaryProvider * ?cancellationToken:Core.ICloudCancellationToken * ?faultPolicy:Core.FaultPolicy -&gt; Process&lt;&#39;T&gt;</div>
-<div class="tip" id="fs18">val lines : obj<br /><br />Full name: Core.lines</div>
-<div class="tip" id="fs19">member Process.AwaitResult : unit -&gt; &#39;T</div>
+<div class="tip" id="fs1">val config : MBrace.Azure.Configuration<br /><br />Full name: Core.config</div>
+<div class="tip" id="fs2">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
+<div class="tip" id="fs3">val defaultof&lt;&#39;T&gt; : &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.Unchecked.defaultof</div>
+<div class="tip" id="fs4">namespace MBrace</div>
+<div class="tip" id="fs5">namespace MBrace.Azure</div>
+<div class="tip" id="fs6">type Configuration =<br />&#160;&#160;{Id: uint16;<br />&#160;&#160;&#160;Version: string;<br />&#160;&#160;&#160;StorageConnectionString: string;<br />&#160;&#160;&#160;ServiceBusConnectionString: string;<br />&#160;&#160;&#160;RuntimeQueue: string;<br />&#160;&#160;&#160;RuntimeTopic: string;<br />&#160;&#160;&#160;RuntimeContainer: string;<br />&#160;&#160;&#160;RuntimeTable: string;<br />&#160;&#160;&#160;RuntimeLogsTable: string;<br />&#160;&#160;&#160;UserDataContainer: string;<br />&#160;&#160;&#160;...}<br />&#160;&#160;member WithId : id:uint16 -&gt; Configuration<br />&#160;&#160;member WithRuntimeFolders : runtimeQueue:string * runtimeTopic:string * runtimeContainer:string * runtimeTable:string * runtimeLogsTable:string * userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithServiceBusConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithStorageConnectionString : conn:string -&gt; Configuration<br />&#160;&#160;member WithUserDataFolders : userDataContainer:string * userDataTable:string -&gt; Configuration<br />&#160;&#160;member WithVersion : version:string -&gt; Configuration<br />&#160;&#160;member ConfigurationId : ConfigurationId<br />&#160;&#160;member WithAppendedId : Configuration<br />&#160;&#160;static member Default : Configuration<br /><br />Full name: MBrace.Azure.Configuration</div>
 
         </div>
         <div class="span3">
@@ -197,7 +96,6 @@ For more information see the <a href="https://github.com/mbraceproject/MBrace/bl
 
             <li class="nav-header">Documentation</li>
             <li><a href="http://www.m-brace.net/programming-model.html">Programming model</a></li>
-            <li><a href="http://www.m-brace.net/client-api.html">Client API</a></li>
             <!--<li><a target="_blank" href="http://www.m-brace.net/mbrace-manual.pdf">MBrace Manual</a></li>-->
             <li><a href="http://www.m-brace.net/reference/index.html">API Reference</a></li>
           </ul>
