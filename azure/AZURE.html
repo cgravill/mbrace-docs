@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Exn - MBrace</title>
+    <title>MBrace on Azure
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
+    <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
     
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -38,93 +39,44 @@
       <div class="row">
         <div class="span9" id="main">
           
+<h1><a name="MBrace-on-Azure" class="anchor" href="#MBrace-on-Azure">MBrace on Azure</a></h1>
 
+<h2><a name="Hands-On-Tutorials" class="anchor" href="#Hands-On-Tutorials">Hands On Tutorials</a></h2>
 
+<p>The directory <a href="HandsOnTutorial">HandsOnTutorial</a> contains a set of scripted 
+hands-on tutorials showing how to use an MBrace cluster from F# Interactive.</p>
 
-<h1>Exn</h1>
-<div class="xmldoc">
-</div>
+<ol>
+<li>Provision your cluster, see below.</li>
+<li>Open and build the solution <code>MBrace.Azure.StarterKit.sln</code> before working with the scripts
+to restore the necessary packages.</li>
+</ol>
 
-<!-- Render nested types and modules, if there are any -->
+<h2><a name="Provisioning-Your-Cluster" class="anchor" href="#Provisioning-Your-Cluster">Provisioning Your Cluster</a></h2>
 
-  <h3>Functions and values</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Function or value</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
+<p>An MBrace cluster can be provisioned on Azure using the following methods:</p>
 
-          <code onmouseout="hideTip(event, '131', 131)" onmouseover="showTip(event, '131', 131)">
-            bind f x
-          </code>
-          <div class="tip" id="131">
-            <strong>Signature:</strong> f:(&#39;T -&gt; &#39;S) -&gt; x:Exn&lt;&#39;T&gt; -&gt; Exn&lt;&#39;S&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'S          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+<h3><a name="Use-Brisk-by-Elastacloud" class="anchor" href="#Use-Brisk-by-Elastacloud">Use Brisk by Elastacloud</a></h3>
 
-          <code onmouseout="hideTip(event, '132', 132)" onmouseover="showTip(event, '132', 132)">
-            catch f
-          </code>
-          <div class="tip" id="132">
-            <strong>Signature:</strong> f:(unit -&gt; &#39;T) -&gt; Exn&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+<p>Go to <a href="http://www.briskengine.com/">http://www.briskengine.com/</a> and follow the on-screen instructions.
+A detailed tutorial can be found <a href="https://github.com/mbraceproject/MBrace.StarterKits/blob/master/azure/brisk-tutorial.md">here</a>.</p>
 
-          <code onmouseout="hideTip(event, '133', 133)" onmouseover="showTip(event, '133', 133)">
-            map f x
-          </code>
-          <div class="tip" id="133">
-            <strong>Signature:</strong> f:(&#39;T -&gt; &#39;S) -&gt; x:Exn&lt;&#39;T&gt; -&gt; Exn&lt;&#39;S&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'S          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+<h3><a name="Creating-a-Custom-Azure-Cloud-Service-with-MBrace-Worker-Roles" class="anchor" href="#Creating-a-Custom-Azure-Cloud-Service-with-MBrace-Worker-Roles">Creating a Custom Azure Cloud Service with MBrace Worker Roles</a></h3>
 
-          <code onmouseout="hideTip(event, '134', 134)" onmouseover="showTip(event, '134', 134)">
-            protect f t
-          </code>
-          <div class="tip" id="134">
-            <strong>Signature:</strong> f:(&#39;?286886 -&gt; &#39;?286887) -&gt; t:&#39;?286886 -&gt; Exn&lt;&#39;?286887&gt;<br />
-                          <strong>Type parameters:</strong> '?286886, '?286887          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+<p>The directory <a href="CustomCloudService">CustomCloudService</a> contains a sample showing how to create a custom cloud service
+for Azure where the worker roles include MBrace worker roles.</p>
 
-          <code onmouseout="hideTip(event, '135', 135)" onmouseover="showTip(event, '135', 135)">
-            protect2 f t s
-          </code>
-          <div class="tip" id="135">
-            <strong>Signature:</strong> f:(&#39;?286889 -&gt; &#39;?286890 -&gt; &#39;?286891) -&gt; t:&#39;?286889 -&gt; s:&#39;?286890 -&gt; Exn&lt;&#39;?286891&gt;<br />
-                          <strong>Type parameters:</strong> '?286889, '?286890, '?286891          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<ol>
+<li>Clone this repo.</li>
+<li>You will need the <a href="http://azure.microsoft.com/en-us/downloads/">Azure SDK</a> for the WorkerRole project.</li>
+<li>Insert your Service Bus and Azure Storage connection strings in the <a href="CustomCloudService/MBraceAzureService/ServiceConfiguration.Cloud.cscfg">service configuration</a>.</li>
+<li>Build the three projects.</li>
+<li>Publish the MBraceAzureService project.</li>
+<li>If using the hands-on tutorials, insert the same connection 
+strings in <a href="HandsOnTutorial/credentials.fsx#L29">credentials.fsx</a> and connect
+to your runtime (see <a href="HandsOnTutorial/1-hello-world.fsx">hello-world.fsx</a> as an example).</li>
+</ol>
+
 
         </div>
         <div class="span3">
