@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Simple Cloud Parallelism
+    <title>Simple Cloud Parallelism with MBrace.Azure
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
@@ -38,33 +38,11 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Simple-Cloud-Parallelism" class="anchor" href="#Simple-Cloud-Parallelism">Simple Cloud Parallelism</a></h1>
+<h1><a name="Simple-Cloud-Parallelism-with-MBrace-Azure" class="anchor" href="#Simple-Cloud-Parallelism-with-MBrace-Azure">Simple Cloud Parallelism with MBrace.Azure</a></h1>
 
 <p>You now perform a very simple parallel distributed job on your MBrace cluster.</p>
 
-<p>Before running, edit credentials.fsx to enter your connection strings.
- *</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">IO</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">Core</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span><span class="o">.</span><span class="i">Client</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Flow</span>
-</pre>
-</td>
-</tr>
-</table>
+<p>Before running, edit credentials.fsx to enter your connection strings.</p>
 
 <p>First you connect to the cluster:</p>
 

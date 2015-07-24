@@ -44,8 +44,7 @@
  parallel data flow tasks.  This model is similar to Hadoop, Spark
  and/or Dryad LINQ.</p>
 
-<p>Before running, edit credentials.fsx to enter your connection strings.
-*</p>
+<p>Before running, edit credentials.fsx to enter your connection strings.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -156,8 +155,6 @@ a collection of cloud files, or from a partitioned cloud vector.</p>
 Once again, you compute primes, though you can replace this with
 any CPU-intensive computation, using any DLLs on your disk.</p>
 
-<p>*</p>
-
 <h2><a name="Changing-the-degree-of-parallelism" class="anchor" href="#Changing-the-degree-of-parallelism">Changing the degree of parallelism</a></h2>
 
 <p>The default is to partition the input array between all available workers.</p>
@@ -212,8 +209,6 @@ of partitioning of the stream at any point in the pipeline.</p>
 with a call to CloudFlow.persist/persistaCached. 
 This creates a PersistedCloudFlow instance that can be reused without
 performing recomputations of the original flow.</p>
-
-<p>*</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>

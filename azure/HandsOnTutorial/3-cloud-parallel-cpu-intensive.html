@@ -42,32 +42,15 @@
 
 <p>You now perform a CPU-intensive cloud-parallel workload on your MBrace cluster.</p>
 
-<p>Before running, edit credentials.fsx to enter your connection strings.
-*</p>
+<p>Before running, edit credentials.fsx to enter your connection strings.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">IO</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">Core</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span><span class="o">.</span><span class="i">Client</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Flow</span>
-
-
 <span class="prep">#load</span> <span class="s">&quot;lib/collections.fsx&quot;</span>
 <span class="prep">#load</span> <span class="s">&quot;lib/sieve.fsx&quot;</span>
 <span class="prep">#time</span> <span class="s">&quot;on&quot;</span>
@@ -92,8 +75,6 @@
 <p>Now run this work in different ways on the local machine and cluster</p>
 
 <p>In each case, you calculate a whole bunch of primes.</p>
-
-<p>*</p>
 
 <p>First, run on your local machine, single-threaded.</p>
 
