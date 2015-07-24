@@ -54,18 +54,20 @@ different aspects of the core programming model:</p>
 
 <ul>
 <li><a href="azure/HandsOnTutorial/1-hello-world.html">Hello World with MBrace</a></li>
-<li><a href="azure/HandsOnTutorial/2-cloud-parallel.html">Introduction to cloud parallel combinators</a></li>
+<li><a href="azure/HandsOnTutorial/2-cloud-parallel.html">Introduction to cloud combinators</a></li>
 <li><a href="azure/HandsOnTutorial/3-cloud-parallel-cpu-intensive.html">Introduction to CPU parallelism</a></li>
-<li><a href="azure/HandsOnTutorial/4-cloud-parallel-data-flow.html">Introduction to cloud flows</a></li>
+<li><a href="azure/HandsOnTutorial/4-cloud-parallel-data-flow.html">Introduction to Cloud Flows</a></li>
 <li><a href="azure/HandsOnTutorial/5-using-nuget-packages.html">Using C# DLLs, NuGET packages and native DLLs</a></li>
 <li><a href="azure/HandsOnTutorial/6-using-cloud-data-blobs.html">Using Cloud Data</a></li>
 <li><a href="azure/HandsOnTutorial/7-using-cloud-data-files.html">Using Cloud Files</a></li>
-<li><a href="azure/HandsOnTutorial/200-starting-a-web-server.html">Starting a WebServer to Control Your Cluster</a></li>
+<li><a href="azure/HandsOnTutorial/8-cloud-parallel-web-download.html">Example: Parallel Web Download</a></li>
+<li><a href="azure/HandsOnTutorial/9-norvig's-spelling-corrector.html">Example: Extracting Statistics for a Spelling Corrector</a></li>
+<li><a href="azure/HandsOnTutorial/200-starting-a-web-server.html">Example: Starting a WebServer to Control Your Cluster</a></li>
 </ul>
 
 <h2><a name="Cloud-workflows" class="anchor" href="#Cloud-workflows">Cloud workflows</a></h2>
 
-<p>In MBrace, the unit of computation is a <em>cloud workflow:</em></p>
+<p>In MBrace, the unit of computation is a <em>cloud workflow</em>:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -365,7 +367,7 @@ the distribution/parallelism semantics of execution in cloud workflows.</p>
 </tr>
 </table>
 
-<p>Clearly, one of the child computations will fail on account of
+<p>In this case, one of the child computations will fail on account of
 an invalid url, creating an exception. In general, uncaught exceptions
 bubble up through <code>Cloud.Parallel</code> triggering cancellation of all
 outstanding child computations (just like <code>Async.Parallel</code>).</p>
@@ -437,7 +439,7 @@ between distributed computation and distributed data.</p>
 <h3><a name="Cloud-Values" class="anchor" href="#Cloud-Values">Cloud Values</a></h3>
 
 <p>The mbrace programming model offers access to persistable and distributed data 
-entities known as cloud cells. Cloud cells very much resemble immutable data values found in 
+entities known as cloud values. Cloud values very much resemble immutable data values found in 
 F# but are stored in persisted cloud storage. The following workflow stores the downloaded 
 content of a web page and returns a cloud cell to it:</p>
 
@@ -453,7 +455,7 @@ content of a web page and returns a cloud cell to it:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 171)" onmouseover="showTip(event, 'fs76', 171)" class="f">getTextCell</span> () <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 172)" onmouseover="showTip(event, 'fs12', 172)" class="i">cloud</span> {
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 171)" onmouseover="showTip(event, 'fs76', 171)" class="i">textCell</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 172)" onmouseover="showTip(event, 'fs12', 172)" class="i">cloud</span> {
     <span class="c">// download a piece of data</span>
     <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs77', 173)" onmouseover="showTip(event, 'fs77', 173)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 174)" onmouseover="showTip(event, 'fs51', 174)" class="f">downloadCloud</span> <span class="s">&quot;http://www.m-brace.net/&quot;</span>
     <span class="c">// store data to a new CloudValue</span>
@@ -485,7 +487,7 @@ content of a web page and returns a cloud cell to it:</p>
 </tr>
 </table>
 
-<p>Cloud cells are stored in named locations and can be resurrected (parsed) from
+<p>Cloud values are stored in named locations and can be resurrected (parsed) from
 this locations using <code>CloudValue.Parse</code>, supplying a type.</p>
 
 <h3><a name="Example-Defining-a-MapReduce-workflow" class="anchor" href="#Example-Defining-a-MapReduce-workflow">Example: Defining a MapReduce workflow</a></h3>
@@ -538,93 +540,6 @@ thus achieving the effect of distributed parallelism.</p>
 <p>This is a naive conception of mapReduce, as it does not enable data parallelism nor does it take into account cluster granularity. 
 For a more in-depth exposition of mapReduce, please refer to the MBrace <a href="mbrace-manual.pdf">manual</a>.</p>
 
-<h3><a name="Example-Distributed-Binary-Trees" class="anchor" href="#Example-Distributed-Binary-Trees">Example: Distributed Binary Trees</a></h3>
-
-<p>Cloud values can be used to define distributed data structures. 
-For example, one could define a distributed binary tree like so:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">type</span> <span onmouseout="hideTip(event, 'fs98', 225)" onmouseover="showTip(event, 'fs98', 225)" class="t">CloudTree</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">=</span> 
-    | <span onmouseout="hideTip(event, 'fs99', 226)" onmouseover="showTip(event, 'fs99', 226)" class="p">Empty</span>
-    | <span onmouseout="hideTip(event, 'fs100', 227)" onmouseover="showTip(event, 'fs100', 227)" class="p">Leaf</span> <span class="k">of</span> <span class="o">&#39;</span><span class="i">T</span>
-    | <span onmouseout="hideTip(event, 'fs101', 228)" onmouseover="showTip(event, 'fs101', 228)" class="p">Branch</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs102', 229)" onmouseover="showTip(event, 'fs102', 229)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs102', 230)" onmouseover="showTip(event, 'fs102', 230)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span>
-
-<span class="k">and</span> <span onmouseout="hideTip(event, 'fs102', 231)" onmouseover="showTip(event, 'fs102', 231)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs79', 232)" onmouseover="showTip(event, 'fs79', 232)" class="t">CloudValue</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs98', 233)" onmouseover="showTip(event, 'fs98', 233)" class="t">CloudTree</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span><span class="o">&gt;</span>
-</pre>
-</td>
-</tr>
-</table>
-
-<p>The cloud tree gives rise to a number of naturally distributable combinators. For example</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-<span class="l">8: </span>
-<span class="l">9: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs103', 234)" onmouseover="showTip(event, 'fs103', 234)" class="f">map</span> (<span onmouseout="hideTip(event, 'fs104', 235)" onmouseover="showTip(event, 'fs104', 235)" class="f">f</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">T</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">S</span>) (<span onmouseout="hideTip(event, 'fs105', 236)" onmouseover="showTip(event, 'fs105', 236)" class="i">ttree</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs102', 237)" onmouseover="showTip(event, 'fs102', 237)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 238)" onmouseover="showTip(event, 'fs12', 238)" class="i">cloud</span> { 
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs106', 239)" onmouseover="showTip(event, 'fs106', 239)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs105', 240)" onmouseover="showTip(event, 'fs105', 240)" class="i">ttree</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs107', 241)" onmouseover="showTip(event, 'fs107', 241)" class="i">Value</span>
-    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs106', 242)" onmouseover="showTip(event, 'fs106', 242)" class="i">value</span> <span class="k">with</span>
-    | <span onmouseout="hideTip(event, 'fs99', 243)" onmouseover="showTip(event, 'fs99', 243)" class="p">Empty</span> <span class="k">-&gt;</span> <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 244)" onmouseover="showTip(event, 'fs79', 244)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 245)" onmouseover="showTip(event, 'fs80', 245)" class="f">New</span> <span onmouseout="hideTip(event, 'fs99', 246)" onmouseover="showTip(event, 'fs99', 246)" class="p">Empty</span>
-    | <span onmouseout="hideTip(event, 'fs100', 247)" onmouseover="showTip(event, 'fs100', 247)" class="p">Leaf</span> <span onmouseout="hideTip(event, 'fs72', 248)" onmouseover="showTip(event, 'fs72', 248)" class="i">t</span> <span class="k">-&gt;</span> <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 249)" onmouseover="showTip(event, 'fs79', 249)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 250)" onmouseover="showTip(event, 'fs80', 250)" class="f">New</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs100', 251)" onmouseover="showTip(event, 'fs100', 251)" class="p">Leaf</span> (<span onmouseout="hideTip(event, 'fs104', 252)" onmouseover="showTip(event, 'fs104', 252)" class="f">f</span> <span onmouseout="hideTip(event, 'fs72', 253)" onmouseover="showTip(event, 'fs72', 253)" class="i">t</span>)
-    | <span onmouseout="hideTip(event, 'fs101', 254)" onmouseover="showTip(event, 'fs101', 254)" class="p">Branch</span>(<span onmouseout="hideTip(event, 'fs108', 255)" onmouseover="showTip(event, 'fs108', 255)" class="i">l</span>,<span onmouseout="hideTip(event, 'fs109', 256)" onmouseover="showTip(event, 'fs109', 256)" class="i">r</span>) <span class="k">-&gt;</span>
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs110', 257)" onmouseover="showTip(event, 'fs110', 257)" class="i">l&#39;</span>,<span onmouseout="hideTip(event, 'fs111', 258)" onmouseover="showTip(event, 'fs111', 258)" class="i">r&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs103', 259)" onmouseover="showTip(event, 'fs103', 259)" class="f">map</span> <span onmouseout="hideTip(event, 'fs104', 260)" onmouseover="showTip(event, 'fs104', 260)" class="f">f</span> <span onmouseout="hideTip(event, 'fs108', 261)" onmouseover="showTip(event, 'fs108', 261)" class="i">l</span> <span class="o">&lt;||&gt;</span> <span onmouseout="hideTip(event, 'fs103', 262)" onmouseover="showTip(event, 'fs103', 262)" class="f">map</span> <span onmouseout="hideTip(event, 'fs104', 263)" onmouseover="showTip(event, 'fs104', 263)" class="f">f</span> <span onmouseout="hideTip(event, 'fs109', 264)" onmouseover="showTip(event, 'fs109', 264)" class="i">r</span> 
-        <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 265)" onmouseover="showTip(event, 'fs79', 265)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 266)" onmouseover="showTip(event, 'fs80', 266)" class="f">New</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs101', 267)" onmouseover="showTip(event, 'fs101', 267)" class="p">Branch</span>(<span class="i">l&#39;</span>, <span onmouseout="hideTip(event, 'fs111', 268)" onmouseover="showTip(event, 'fs111', 268)" class="i">r&#39;</span>)
-}
-</pre>
-</td>
-</tr>
-</table>
-
-<p>and</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-<span class="l">8: </span>
-<span class="l">9: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs112', 269)" onmouseover="showTip(event, 'fs112', 269)" class="f">reduce</span> (<span onmouseout="hideTip(event, 'fs113', 270)" onmouseover="showTip(event, 'fs113', 270)" class="i">id</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">R</span>) (<span onmouseout="hideTip(event, 'fs114', 271)" onmouseover="showTip(event, 'fs114', 271)" class="f">reduceF</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">R</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">R</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">R</span>) (<span onmouseout="hideTip(event, 'fs115', 272)" onmouseover="showTip(event, 'fs115', 272)" class="i">rtree</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs102', 273)" onmouseover="showTip(event, 'fs102', 273)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">R</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 274)" onmouseover="showTip(event, 'fs12', 274)" class="i">cloud</span> { 
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs116', 275)" onmouseover="showTip(event, 'fs116', 275)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs115', 276)" onmouseover="showTip(event, 'fs115', 276)" class="i">rtree</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs117', 277)" onmouseover="showTip(event, 'fs117', 277)" class="i">Value</span>
-    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs116', 278)" onmouseover="showTip(event, 'fs116', 278)" class="i">value</span> <span class="k">with</span>
-    | <span onmouseout="hideTip(event, 'fs99', 279)" onmouseover="showTip(event, 'fs99', 279)" class="p">Empty</span> <span class="k">-&gt;</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs113', 280)" onmouseover="showTip(event, 'fs113', 280)" class="i">id</span>
-    | <span onmouseout="hideTip(event, 'fs100', 281)" onmouseover="showTip(event, 'fs100', 281)" class="p">Leaf</span> <span onmouseout="hideTip(event, 'fs118', 282)" onmouseover="showTip(event, 'fs118', 282)" class="i">r</span> <span class="k">-&gt;</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs118', 283)" onmouseover="showTip(event, 'fs118', 283)" class="i">r</span>
-    | <span onmouseout="hideTip(event, 'fs101', 284)" onmouseover="showTip(event, 'fs101', 284)" class="p">Branch</span>(<span onmouseout="hideTip(event, 'fs119', 285)" onmouseover="showTip(event, 'fs119', 285)" class="i">l</span>,<span onmouseout="hideTip(event, 'fs120', 286)" onmouseover="showTip(event, 'fs120', 286)" class="i">r</span>) <span class="k">-&gt;</span>
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs118', 287)" onmouseover="showTip(event, 'fs118', 287)" class="i">r</span>,<span onmouseout="hideTip(event, 'fs121', 288)" onmouseover="showTip(event, 'fs121', 288)" class="i">r&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs112', 289)" onmouseover="showTip(event, 'fs112', 289)" class="f">reduce</span> <span onmouseout="hideTip(event, 'fs113', 290)" onmouseover="showTip(event, 'fs113', 290)" class="i">id</span> <span onmouseout="hideTip(event, 'fs114', 291)" onmouseover="showTip(event, 'fs114', 291)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs119', 292)" onmouseover="showTip(event, 'fs119', 292)" class="i">l</span> <span class="o">&lt;||&gt;</span> <span onmouseout="hideTip(event, 'fs112', 293)" onmouseover="showTip(event, 'fs112', 293)" class="f">reduce</span> <span onmouseout="hideTip(event, 'fs113', 294)" onmouseover="showTip(event, 'fs113', 294)" class="i">id</span> <span onmouseout="hideTip(event, 'fs114', 295)" onmouseover="showTip(event, 'fs114', 295)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs120', 296)" onmouseover="showTip(event, 'fs120', 296)" class="i">r</span> 
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs114', 297)" onmouseover="showTip(event, 'fs114', 297)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs118', 298)" onmouseover="showTip(event, 'fs118', 298)" class="i">r</span> <span onmouseout="hideTip(event, 'fs121', 299)" onmouseover="showTip(event, 'fs121', 299)" class="i">r&#39;</span>
-}
-</pre>
-</td>
-</tr>
-</table>
-
-<p>The above functions enable distributed workflows that are 
-driven by the structural properties of the cloud tree.</p>
-
 <h3><a name="Cloud-Sequences-and-Cloud-Vectors" class="anchor" href="#Cloud-Sequences-and-Cloud-Vectors">Cloud Sequences and Cloud Vectors</a></h3>
 
 <p>While cloud values are useful for storing relatively small chunks of data, 
@@ -655,19 +570,19 @@ just like <code>CloudValue</code>.</p>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="c">/// Download the page and store it as a new cloud sequence of lines</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs122', 300)" onmouseover="showTip(event, 'fs122', 300)" class="f">storePagesInCloudSequence</span> (<span onmouseout="hideTip(event, 'fs37', 301)" onmouseover="showTip(event, 'fs37', 301)" class="i">url</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs38', 302)" onmouseover="showTip(event, 'fs38', 302)" class="t">string</span>) <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs12', 303)" onmouseover="showTip(event, 'fs12', 303)" class="i">cloud</span> {
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs123', 304)" onmouseover="showTip(event, 'fs123', 304)" class="i">lines</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 305)" onmouseover="showTip(event, 'fs51', 305)" class="f">downloadCloud</span> <span onmouseout="hideTip(event, 'fs37', 306)" onmouseover="showTip(event, 'fs37', 306)" class="i">url</span>
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs124', 307)" onmouseover="showTip(event, 'fs124', 307)" class="i">cseq</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs125', 308)" onmouseover="showTip(event, 'fs125', 308)" class="t">CloudSequence</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs126', 309)" onmouseover="showTip(event, 'fs126', 309)" class="f">New</span> <span onmouseout="hideTip(event, 'fs123', 310)" onmouseover="showTip(event, 'fs123', 310)" class="i">lines</span>
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs124', 311)" onmouseover="showTip(event, 'fs124', 311)" class="i">cseq</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs98', 225)" onmouseover="showTip(event, 'fs98', 225)" class="f">storePagesInCloudSequence</span> (<span onmouseout="hideTip(event, 'fs37', 226)" onmouseover="showTip(event, 'fs37', 226)" class="i">url</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs38', 227)" onmouseover="showTip(event, 'fs38', 227)" class="t">string</span>) <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs12', 228)" onmouseover="showTip(event, 'fs12', 228)" class="i">cloud</span> {
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs99', 229)" onmouseover="showTip(event, 'fs99', 229)" class="i">lines</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 230)" onmouseover="showTip(event, 'fs51', 230)" class="f">downloadCloud</span> <span onmouseout="hideTip(event, 'fs37', 231)" onmouseover="showTip(event, 'fs37', 231)" class="i">url</span>
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs100', 232)" onmouseover="showTip(event, 'fs100', 232)" class="i">cseq</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs101', 233)" onmouseover="showTip(event, 'fs101', 233)" class="t">CloudSequence</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs102', 234)" onmouseover="showTip(event, 'fs102', 234)" class="f">New</span> <span onmouseout="hideTip(event, 'fs99', 235)" onmouseover="showTip(event, 'fs99', 235)" class="i">lines</span>
+        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs100', 236)" onmouseover="showTip(event, 'fs100', 236)" class="i">cseq</span>
     }
 
 
 <span class="c">/// Download the pages and store them in cloud sequences.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs127', 312)" onmouseover="showTip(event, 'fs127', 312)" class="f">storePagesInCloudSequences</span> (<span onmouseout="hideTip(event, 'fs128', 313)" onmouseover="showTip(event, 'fs128', 313)" class="i">urls</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs38', 314)" onmouseover="showTip(event, 'fs38', 314)" class="t">string</span> <span onmouseout="hideTip(event, 'fs70', 315)" onmouseover="showTip(event, 'fs70', 315)" class="t">list</span>) <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs128', 316)" onmouseover="showTip(event, 'fs128', 316)" class="i">urls</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs96', 317)" onmouseover="showTip(event, 'fs96', 317)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 318)" onmouseover="showTip(event, 'fs54', 318)" class="f">map</span> <span onmouseout="hideTip(event, 'fs122', 319)" onmouseover="showTip(event, 'fs122', 319)" class="f">storePagesInCloudSequence</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 320)" onmouseover="showTip(event, 'fs31', 320)" class="t">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 321)" onmouseover="showTip(event, 'fs55', 321)" class="f">Parallel</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs103', 237)" onmouseover="showTip(event, 'fs103', 237)" class="f">storePagesInCloudSequences</span> (<span onmouseout="hideTip(event, 'fs104', 238)" onmouseover="showTip(event, 'fs104', 238)" class="i">urls</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs38', 239)" onmouseover="showTip(event, 'fs38', 239)" class="t">string</span> <span onmouseout="hideTip(event, 'fs70', 240)" onmouseover="showTip(event, 'fs70', 240)" class="t">list</span>) <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs104', 241)" onmouseover="showTip(event, 'fs104', 241)" class="i">urls</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs96', 242)" onmouseover="showTip(event, 'fs96', 242)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 243)" onmouseover="showTip(event, 'fs54', 243)" class="f">map</span> <span onmouseout="hideTip(event, 'fs98', 244)" onmouseover="showTip(event, 'fs98', 244)" class="f">storePagesInCloudSequence</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 245)" onmouseover="showTip(event, 'fs31', 245)" class="t">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 246)" onmouseover="showTip(event, 'fs55', 246)" class="f">Parallel</span>
 </pre>
 </td>
 </tr>
@@ -687,13 +602,13 @@ just like <code>CloudValue</code>.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs12', 322)" onmouseover="showTip(event, 'fs12', 322)" class="i">cloud</span> { 
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs129', 323)" onmouseover="showTip(event, 'fs129', 323)" class="i">sequences</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs127', 324)" onmouseover="showTip(event, 'fs127', 324)" class="f">storePagesInCloudSequences</span> [ <span class="s">&quot;http://google.com&quot;</span>; <span class="s">&quot;http://bing.com&quot;</span> ]
+<span onmouseout="hideTip(event, 'fs12', 247)" onmouseover="showTip(event, 'fs12', 247)" class="i">cloud</span> { 
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs105', 248)" onmouseover="showTip(event, 'fs105', 248)" class="i">sequences</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs103', 249)" onmouseover="showTip(event, 'fs103', 249)" class="f">storePagesInCloudSequences</span> [ <span class="s">&quot;http://google.com&quot;</span>; <span class="s">&quot;http://bing.com&quot;</span> ]
 
     <span class="k">return</span> 
-        <span onmouseout="hideTip(event, 'fs129', 325)" onmouseover="showTip(event, 'fs129', 325)" class="i">sequences</span> 
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs130', 326)" onmouseover="showTip(event, 'fs130', 326)" class="t">CloudFlow</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs131', 327)" onmouseover="showTip(event, 'fs131', 327)" class="f">OfCloudSequences</span> 
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs130', 328)" onmouseover="showTip(event, 'fs130', 328)" class="t">CloudFlow</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs132', 329)" onmouseover="showTip(event, 'fs132', 329)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs133', 330)" onmouseover="showTip(event, 'fs133', 330)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs133', 331)" onmouseover="showTip(event, 'fs133', 331)" class="i">x</span>)
+        <span onmouseout="hideTip(event, 'fs105', 250)" onmouseover="showTip(event, 'fs105', 250)" class="i">sequences</span> 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs106', 251)" onmouseover="showTip(event, 'fs106', 251)" class="t">CloudFlow</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs107', 252)" onmouseover="showTip(event, 'fs107', 252)" class="f">OfCloudSequences</span> 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs106', 253)" onmouseover="showTip(event, 'fs106', 253)" class="t">CloudFlow</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs108', 254)" onmouseover="showTip(event, 'fs108', 254)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs109', 255)" onmouseover="showTip(event, 'fs109', 255)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs109', 256)" onmouseover="showTip(event, 'fs109', 256)" class="i">x</span>)
 }
 </pre>
 </td>
@@ -736,30 +651,30 @@ In other words, it is an interface for storing or accessing binary blobs in the 
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs134', 332)" onmouseover="showTip(event, 'fs134', 332)" class="i">Nessos</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs135', 333)" onmouseover="showTip(event, 'fs135', 333)" class="i">FsPickler</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs110', 257)" onmouseover="showTip(event, 'fs110', 257)" class="i">Nessos</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs111', 258)" onmouseover="showTip(event, 'fs111', 258)" class="i">FsPickler</span>
 
-<span onmouseout="hideTip(event, 'fs12', 334)" onmouseover="showTip(event, 'fs12', 334)" class="i">cloud</span> {
+<span onmouseout="hideTip(event, 'fs12', 259)" onmouseover="showTip(event, 'fs12', 259)" class="i">cloud</span> {
     <span class="c">// enumerate all files from underlying storage container</span>
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs136', 335)" onmouseover="showTip(event, 'fs136', 335)" class="i">files</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs137', 336)" onmouseover="showTip(event, 'fs137', 336)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs138', 337)" onmouseover="showTip(event, 'fs138', 337)" class="f">Enumerate</span> <span class="s">&quot;path/to/container&quot;</span>
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs112', 260)" onmouseover="showTip(event, 'fs112', 260)" class="i">files</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs113', 261)" onmouseover="showTip(event, 'fs113', 261)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs114', 262)" onmouseover="showTip(event, 'fs114', 262)" class="f">Enumerate</span> <span class="s">&quot;path/to/container&quot;</span>
 
     <span class="c">// read a cloud file and return its word count</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs139', 338)" onmouseover="showTip(event, 'fs139', 338)" class="f">wordCount</span> (<span onmouseout="hideTip(event, 'fs140', 339)" onmouseover="showTip(event, 'fs140', 339)" class="i">f</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs137', 340)" onmouseover="showTip(event, 'fs137', 340)" class="t">CloudFile</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 341)" onmouseover="showTip(event, 'fs12', 341)" class="i">cloud</span> {
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs141', 342)" onmouseover="showTip(event, 'fs141', 342)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs137', 343)" onmouseover="showTip(event, 'fs137', 343)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs142', 344)" onmouseover="showTip(event, 'fs142', 344)" class="f">ReadAllText</span> <span onmouseout="hideTip(event, 'fs140', 345)" onmouseover="showTip(event, 'fs140', 345)" class="i">f</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs143', 346)" onmouseover="showTip(event, 'fs143', 346)" class="i">Path</span>
-        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs144', 347)" onmouseover="showTip(event, 'fs144', 347)" class="i">count</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs141', 348)" onmouseover="showTip(event, 'fs141', 348)" class="i">text</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 349)" onmouseover="showTip(event, 'fs46', 349)" class="f">Split</span>(<span class="s">&#39; &#39;</span>)
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs145', 350)" onmouseover="showTip(event, 'fs145', 350)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs146', 351)" onmouseover="showTip(event, 'fs146', 351)" class="f">groupBy</span> <span onmouseout="hideTip(event, 'fs147', 352)" onmouseover="showTip(event, 'fs147', 352)" class="f">id</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs145', 353)" onmouseover="showTip(event, 'fs145', 353)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs148', 354)" onmouseover="showTip(event, 'fs148', 354)" class="f">map</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs149', 355)" onmouseover="showTip(event, 'fs149', 355)" class="i">token</span>,<span onmouseout="hideTip(event, 'fs150', 356)" onmouseover="showTip(event, 'fs150', 356)" class="i">instances</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs149', 357)" onmouseover="showTip(event, 'fs149', 357)" class="i">token</span>, <span onmouseout="hideTip(event, 'fs145', 358)" onmouseover="showTip(event, 'fs145', 358)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs151', 359)" onmouseover="showTip(event, 'fs151', 359)" class="f">length</span> <span onmouseout="hideTip(event, 'fs150', 360)" onmouseover="showTip(event, 'fs150', 360)" class="i">instances</span>)
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs145', 361)" onmouseover="showTip(event, 'fs145', 361)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs152', 362)" onmouseover="showTip(event, 'fs152', 362)" class="f">toArray</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs115', 263)" onmouseover="showTip(event, 'fs115', 263)" class="f">wordCount</span> (<span onmouseout="hideTip(event, 'fs116', 264)" onmouseover="showTip(event, 'fs116', 264)" class="i">f</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs113', 265)" onmouseover="showTip(event, 'fs113', 265)" class="t">CloudFile</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 266)" onmouseover="showTip(event, 'fs12', 266)" class="i">cloud</span> {
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs117', 267)" onmouseover="showTip(event, 'fs117', 267)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs113', 268)" onmouseover="showTip(event, 'fs113', 268)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs118', 269)" onmouseover="showTip(event, 'fs118', 269)" class="f">ReadAllText</span> <span onmouseout="hideTip(event, 'fs116', 270)" onmouseover="showTip(event, 'fs116', 270)" class="i">f</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs119', 271)" onmouseover="showTip(event, 'fs119', 271)" class="i">Path</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs120', 272)" onmouseover="showTip(event, 'fs120', 272)" class="i">count</span> <span class="o">=</span>
+            <span onmouseout="hideTip(event, 'fs117', 273)" onmouseover="showTip(event, 'fs117', 273)" class="i">text</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 274)" onmouseover="showTip(event, 'fs46', 274)" class="f">Split</span>(<span class="s">&#39; &#39;</span>)
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs121', 275)" onmouseover="showTip(event, 'fs121', 275)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs122', 276)" onmouseover="showTip(event, 'fs122', 276)" class="f">groupBy</span> <span onmouseout="hideTip(event, 'fs123', 277)" onmouseover="showTip(event, 'fs123', 277)" class="f">id</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs121', 278)" onmouseover="showTip(event, 'fs121', 278)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs124', 279)" onmouseover="showTip(event, 'fs124', 279)" class="f">map</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs125', 280)" onmouseover="showTip(event, 'fs125', 280)" class="i">token</span>,<span onmouseout="hideTip(event, 'fs126', 281)" onmouseover="showTip(event, 'fs126', 281)" class="i">instances</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs125', 282)" onmouseover="showTip(event, 'fs125', 282)" class="i">token</span>, <span onmouseout="hideTip(event, 'fs121', 283)" onmouseover="showTip(event, 'fs121', 283)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs127', 284)" onmouseover="showTip(event, 'fs127', 284)" class="f">length</span> <span onmouseout="hideTip(event, 'fs126', 285)" onmouseover="showTip(event, 'fs126', 285)" class="i">instances</span>)
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs121', 286)" onmouseover="showTip(event, 'fs121', 286)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs128', 287)" onmouseover="showTip(event, 'fs128', 287)" class="f">toArray</span>
 
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs140', 363)" onmouseover="showTip(event, 'fs140', 363)" class="i">f</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs143', 364)" onmouseover="showTip(event, 'fs143', 364)" class="i">Path</span>, <span class="i">count</span>
+        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs116', 288)" onmouseover="showTip(event, 'fs116', 288)" class="i">f</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs119', 289)" onmouseover="showTip(event, 'fs119', 289)" class="i">Path</span>, <span class="i">count</span>
     }
 
     <span class="c">// perform computation in parallel</span>
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs153', 365)" onmouseover="showTip(event, 'fs153', 365)" class="i">results</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs136', 366)" onmouseover="showTip(event, 'fs136', 366)" class="i">files</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 367)" onmouseover="showTip(event, 'fs56', 367)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs154', 368)" onmouseover="showTip(event, 'fs154', 368)" class="f">map</span> <span onmouseout="hideTip(event, 'fs139', 369)" onmouseover="showTip(event, 'fs139', 369)" class="f">wordCount</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 370)" onmouseover="showTip(event, 'fs31', 370)" class="t">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 371)" onmouseover="showTip(event, 'fs55', 371)" class="f">Parallel</span>
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs129', 290)" onmouseover="showTip(event, 'fs129', 290)" class="i">results</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs112', 291)" onmouseover="showTip(event, 'fs112', 291)" class="i">files</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 292)" onmouseover="showTip(event, 'fs56', 292)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs130', 293)" onmouseover="showTip(event, 'fs130', 293)" class="f">map</span> <span onmouseout="hideTip(event, 'fs115', 294)" onmouseover="showTip(event, 'fs115', 294)" class="f">wordCount</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 295)" onmouseover="showTip(event, 'fs31', 295)" class="t">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 296)" onmouseover="showTip(event, 'fs55', 296)" class="f">Parallel</span>
 
     <span class="c">// persist results to a new Cloud file in XML format</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs155', 372)" onmouseover="showTip(event, 'fs155', 372)" class="i">serializer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs156', 373)" onmouseover="showTip(event, 'fs156', 373)" class="t">FsPickler</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs157', 374)" onmouseover="showTip(event, 'fs157', 374)" class="f">CreateXml</span>()
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs158', 375)" onmouseover="showTip(event, 'fs158', 375)" class="i">file</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs137', 376)" onmouseover="showTip(event, 'fs137', 376)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs159', 377)" onmouseover="showTip(event, 'fs159', 377)" class="f">Create</span>(<span class="s">&quot;path/file.xml&quot;</span>,<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs160', 378)" onmouseover="showTip(event, 'fs160', 378)" class="i">fs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 379)" onmouseover="showTip(event, 'fs39', 379)" class="i">async</span> { <span class="k">return</span> <span onmouseout="hideTip(event, 'fs155', 380)" onmouseover="showTip(event, 'fs155', 380)" class="i">serializer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs161', 381)" onmouseover="showTip(event, 'fs161', 381)" class="f">Serialize</span>(<span onmouseout="hideTip(event, 'fs160', 382)" onmouseover="showTip(event, 'fs160', 382)" class="i">fs</span>, <span onmouseout="hideTip(event, 'fs153', 383)" onmouseover="showTip(event, 'fs153', 383)" class="i">results</span>) })
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs131', 297)" onmouseover="showTip(event, 'fs131', 297)" class="i">serializer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs132', 298)" onmouseover="showTip(event, 'fs132', 298)" class="t">FsPickler</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs133', 299)" onmouseover="showTip(event, 'fs133', 299)" class="f">CreateXml</span>()
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs134', 300)" onmouseover="showTip(event, 'fs134', 300)" class="i">file</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs113', 301)" onmouseover="showTip(event, 'fs113', 301)" class="t">CloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs135', 302)" onmouseover="showTip(event, 'fs135', 302)" class="f">Create</span>(<span class="s">&quot;path/file.xml&quot;</span>,<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs136', 303)" onmouseover="showTip(event, 'fs136', 303)" class="i">fs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 304)" onmouseover="showTip(event, 'fs39', 304)" class="i">async</span> { <span class="k">return</span> <span onmouseout="hideTip(event, 'fs131', 305)" onmouseover="showTip(event, 'fs131', 305)" class="i">serializer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs137', 306)" onmouseover="showTip(event, 'fs137', 306)" class="f">Serialize</span>(<span onmouseout="hideTip(event, 'fs136', 307)" onmouseover="showTip(event, 'fs136', 307)" class="i">fs</span>, <span onmouseout="hideTip(event, 'fs129', 308)" onmouseover="showTip(event, 'fs129', 308)" class="i">results</span>) })
     <span class="k">return</span> <span class="i">file</span>
 }
 </pre>
@@ -774,7 +689,7 @@ However,</p>
 
 <ul>
 <li><p>CloudAtoms are mutable. The value of a cloud atom can be updated and, as a result,
-its values are never cached. Mutable cloud cells can be updated transactionally using the
+its values are never cached. Mutable cloud values can be updated transactionally using the
 <code>CloudAtom.Transact</code> methods or forcibly using the <code>CloudAtom.Force</code> method.</p></li>
 <li><p>CloudAtoms can be deallocated manually. This can be done using the <code>CloudAtom.Free</code> method.</p></li>
 </ul>
@@ -797,14 +712,14 @@ mechanisms like locks, semaphores, etc.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs162', 384)" onmouseover="showTip(event, 'fs162', 384)" class="f">race</span> () <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 385)" onmouseover="showTip(event, 'fs12', 385)" class="i">cloud</span> {
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs163', 386)" onmouseover="showTip(event, 'fs163', 386)" class="i">mr</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs164', 387)" onmouseover="showTip(event, 'fs164', 387)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs165', 388)" onmouseover="showTip(event, 'fs165', 388)" class="f">New</span>(<span class="n">0</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs138', 309)" onmouseover="showTip(event, 'fs138', 309)" class="f">race</span> () <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 310)" onmouseover="showTip(event, 'fs12', 310)" class="i">cloud</span> {
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs139', 311)" onmouseover="showTip(event, 'fs139', 311)" class="i">mr</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs140', 312)" onmouseover="showTip(event, 'fs140', 312)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs141', 313)" onmouseover="showTip(event, 'fs141', 313)" class="f">New</span>(<span class="n">0</span>)
     <span class="k">let!</span> _ <span class="o">=</span>
-        <span onmouseout="hideTip(event, 'fs164', 389)" onmouseover="showTip(event, 'fs164', 389)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs166', 390)" onmouseover="showTip(event, 'fs166', 390)" class="f">Force</span>(<span onmouseout="hideTip(event, 'fs163', 391)" onmouseover="showTip(event, 'fs163', 391)" class="i">mr</span>,<span class="n">1</span>)
+        <span onmouseout="hideTip(event, 'fs140', 314)" onmouseover="showTip(event, 'fs140', 314)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs142', 315)" onmouseover="showTip(event, 'fs142', 315)" class="f">Force</span>(<span onmouseout="hideTip(event, 'fs139', 316)" onmouseover="showTip(event, 'fs139', 316)" class="i">mr</span>,<span class="n">1</span>)
             <span class="o">&lt;||&gt;</span>
-        <span onmouseout="hideTip(event, 'fs164', 392)" onmouseover="showTip(event, 'fs164', 392)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs166', 393)" onmouseover="showTip(event, 'fs166', 393)" class="f">Force</span>(<span onmouseout="hideTip(event, 'fs163', 394)" onmouseover="showTip(event, 'fs163', 394)" class="i">mr</span>,<span class="n">2</span>)
+        <span onmouseout="hideTip(event, 'fs140', 317)" onmouseover="showTip(event, 'fs140', 317)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs142', 318)" onmouseover="showTip(event, 'fs142', 318)" class="f">Force</span>(<span onmouseout="hideTip(event, 'fs139', 319)" onmouseover="showTip(event, 'fs139', 319)" class="i">mr</span>,<span class="n">2</span>)
 
-    <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs164', 395)" onmouseover="showTip(event, 'fs164', 395)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs167', 396)" onmouseover="showTip(event, 'fs167', 396)" class="f">Read</span>(<span onmouseout="hideTip(event, 'fs163', 397)" onmouseover="showTip(event, 'fs163', 397)" class="i">mr</span>)
+    <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs140', 320)" onmouseover="showTip(event, 'fs140', 320)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs143', 321)" onmouseover="showTip(event, 'fs143', 321)" class="f">Read</span>(<span onmouseout="hideTip(event, 'fs139', 322)" onmouseover="showTip(event, 'fs139', 322)" class="i">mr</span>)
 }
 </pre>
 </td>
@@ -824,15 +739,102 @@ mechanisms like locks, semaphores, etc.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs168', 398)" onmouseover="showTip(event, 'fs168', 398)" class="f">increment</span> (<span onmouseout="hideTip(event, 'fs169', 399)" onmouseover="showTip(event, 'fs169', 399)" class="i">counter</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs170', 400)" onmouseover="showTip(event, 'fs170', 400)" class="t">ICloudAtom</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs171', 401)" onmouseover="showTip(event, 'fs171', 401)" class="t">int</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 402)" onmouseover="showTip(event, 'fs12', 402)" class="i">cloud</span> {
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs172', 403)" onmouseover="showTip(event, 'fs172', 403)" class="i">v</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs164', 404)" onmouseover="showTip(event, 'fs164', 404)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs167', 405)" onmouseover="showTip(event, 'fs167', 405)" class="f">Read</span> <span onmouseout="hideTip(event, 'fs169', 406)" onmouseover="showTip(event, 'fs169', 406)" class="i">counter</span>
-    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs173', 407)" onmouseover="showTip(event, 'fs173', 407)" class="i">ok</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs164', 408)" onmouseover="showTip(event, 'fs164', 408)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs174', 409)" onmouseover="showTip(event, 'fs174', 409)" class="f">Transact</span>(<span onmouseout="hideTip(event, 'fs169', 410)" onmouseover="showTip(event, 'fs169', 410)" class="i">counter</span>, (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs172', 411)" onmouseover="showTip(event, 'fs172', 411)" class="i">v</span> <span class="k">-&gt;</span> <span class="k">true</span>, <span onmouseout="hideTip(event, 'fs172', 412)" onmouseover="showTip(event, 'fs172', 412)" class="i">v</span> <span class="o">+</span> <span class="n">1</span>))
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs144', 323)" onmouseover="showTip(event, 'fs144', 323)" class="f">increment</span> (<span onmouseout="hideTip(event, 'fs145', 324)" onmouseover="showTip(event, 'fs145', 324)" class="i">counter</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs146', 325)" onmouseover="showTip(event, 'fs146', 325)" class="t">ICloudAtom</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs147', 326)" onmouseover="showTip(event, 'fs147', 326)" class="t">int</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 327)" onmouseover="showTip(event, 'fs12', 327)" class="i">cloud</span> {
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs148', 328)" onmouseover="showTip(event, 'fs148', 328)" class="i">v</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs140', 329)" onmouseover="showTip(event, 'fs140', 329)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs143', 330)" onmouseover="showTip(event, 'fs143', 330)" class="f">Read</span> <span onmouseout="hideTip(event, 'fs145', 331)" onmouseover="showTip(event, 'fs145', 331)" class="i">counter</span>
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs149', 332)" onmouseover="showTip(event, 'fs149', 332)" class="i">ok</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs140', 333)" onmouseover="showTip(event, 'fs140', 333)" class="t">CloudAtom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs150', 334)" onmouseover="showTip(event, 'fs150', 334)" class="f">Transact</span>(<span onmouseout="hideTip(event, 'fs145', 335)" onmouseover="showTip(event, 'fs145', 335)" class="i">counter</span>, (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs148', 336)" onmouseover="showTip(event, 'fs148', 336)" class="i">v</span> <span class="k">-&gt;</span> <span class="k">true</span>, <span onmouseout="hideTip(event, 'fs148', 337)" onmouseover="showTip(event, 'fs148', 337)" class="i">v</span> <span class="o">+</span> <span class="n">1</span>))
     <span class="k">return</span> <span class="i">ok</span>
 }
 </pre>
 </td>
 </tr>
 </table>
+
+<h3><a name="Example-Distributed-Binary-Trees" class="anchor" href="#Example-Distributed-Binary-Trees">Example: Distributed Binary Trees</a></h3>
+
+<p>Cloud values can be used to define distributed data structures. 
+For example, one could define a distributed binary tree like so:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs151', 338)" onmouseover="showTip(event, 'fs151', 338)" class="t">CloudTree</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">=</span> 
+    | <span onmouseout="hideTip(event, 'fs152', 339)" onmouseover="showTip(event, 'fs152', 339)" class="p">Empty</span>
+    | <span onmouseout="hideTip(event, 'fs153', 340)" onmouseover="showTip(event, 'fs153', 340)" class="p">Leaf</span> <span class="k">of</span> <span class="o">&#39;</span><span class="i">T</span>
+    | <span onmouseout="hideTip(event, 'fs154', 341)" onmouseover="showTip(event, 'fs154', 341)" class="p">Branch</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs155', 342)" onmouseover="showTip(event, 'fs155', 342)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs155', 343)" onmouseover="showTip(event, 'fs155', 343)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span>
+
+<span class="k">and</span> <span onmouseout="hideTip(event, 'fs155', 344)" onmouseover="showTip(event, 'fs155', 344)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs79', 345)" onmouseover="showTip(event, 'fs79', 345)" class="t">CloudValue</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs151', 346)" onmouseover="showTip(event, 'fs151', 346)" class="t">CloudTree</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span><span class="o">&gt;</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>The cloud tree gives rise to a number of naturally distributable combinators. For example</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs156', 347)" onmouseover="showTip(event, 'fs156', 347)" class="f">map</span> (<span onmouseout="hideTip(event, 'fs157', 348)" onmouseover="showTip(event, 'fs157', 348)" class="f">f</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">T</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">S</span>) (<span onmouseout="hideTip(event, 'fs158', 349)" onmouseover="showTip(event, 'fs158', 349)" class="i">ttree</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs155', 350)" onmouseover="showTip(event, 'fs155', 350)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">T</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 351)" onmouseover="showTip(event, 'fs12', 351)" class="i">cloud</span> { 
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs159', 352)" onmouseover="showTip(event, 'fs159', 352)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs158', 353)" onmouseover="showTip(event, 'fs158', 353)" class="i">ttree</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs160', 354)" onmouseover="showTip(event, 'fs160', 354)" class="i">Value</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs159', 355)" onmouseover="showTip(event, 'fs159', 355)" class="i">value</span> <span class="k">with</span>
+    | <span onmouseout="hideTip(event, 'fs152', 356)" onmouseover="showTip(event, 'fs152', 356)" class="p">Empty</span> <span class="k">-&gt;</span> <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 357)" onmouseover="showTip(event, 'fs79', 357)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 358)" onmouseover="showTip(event, 'fs80', 358)" class="f">New</span> <span onmouseout="hideTip(event, 'fs152', 359)" onmouseover="showTip(event, 'fs152', 359)" class="p">Empty</span>
+    | <span onmouseout="hideTip(event, 'fs153', 360)" onmouseover="showTip(event, 'fs153', 360)" class="p">Leaf</span> <span onmouseout="hideTip(event, 'fs72', 361)" onmouseover="showTip(event, 'fs72', 361)" class="i">t</span> <span class="k">-&gt;</span> <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 362)" onmouseover="showTip(event, 'fs79', 362)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 363)" onmouseover="showTip(event, 'fs80', 363)" class="f">New</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs153', 364)" onmouseover="showTip(event, 'fs153', 364)" class="p">Leaf</span> (<span onmouseout="hideTip(event, 'fs157', 365)" onmouseover="showTip(event, 'fs157', 365)" class="f">f</span> <span onmouseout="hideTip(event, 'fs72', 366)" onmouseover="showTip(event, 'fs72', 366)" class="i">t</span>)
+    | <span onmouseout="hideTip(event, 'fs154', 367)" onmouseover="showTip(event, 'fs154', 367)" class="p">Branch</span>(<span onmouseout="hideTip(event, 'fs161', 368)" onmouseover="showTip(event, 'fs161', 368)" class="i">l</span>,<span onmouseout="hideTip(event, 'fs162', 369)" onmouseover="showTip(event, 'fs162', 369)" class="i">r</span>) <span class="k">-&gt;</span>
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs163', 370)" onmouseover="showTip(event, 'fs163', 370)" class="i">l&#39;</span>,<span onmouseout="hideTip(event, 'fs164', 371)" onmouseover="showTip(event, 'fs164', 371)" class="i">r&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs156', 372)" onmouseover="showTip(event, 'fs156', 372)" class="f">map</span> <span onmouseout="hideTip(event, 'fs157', 373)" onmouseover="showTip(event, 'fs157', 373)" class="f">f</span> <span onmouseout="hideTip(event, 'fs161', 374)" onmouseover="showTip(event, 'fs161', 374)" class="i">l</span> <span class="o">&lt;||&gt;</span> <span onmouseout="hideTip(event, 'fs156', 375)" onmouseover="showTip(event, 'fs156', 375)" class="f">map</span> <span onmouseout="hideTip(event, 'fs157', 376)" onmouseover="showTip(event, 'fs157', 376)" class="f">f</span> <span onmouseout="hideTip(event, 'fs162', 377)" onmouseover="showTip(event, 'fs162', 377)" class="i">r</span> 
+        <span class="k">return!</span> <span onmouseout="hideTip(event, 'fs79', 378)" onmouseover="showTip(event, 'fs79', 378)" class="t">CloudValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs80', 379)" onmouseover="showTip(event, 'fs80', 379)" class="f">New</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs154', 380)" onmouseover="showTip(event, 'fs154', 380)" class="p">Branch</span>(<span class="i">l&#39;</span>, <span onmouseout="hideTip(event, 'fs164', 381)" onmouseover="showTip(event, 'fs164', 381)" class="i">r&#39;</span>)
+}
+</pre>
+</td>
+</tr>
+</table>
+
+<p>and</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs165', 382)" onmouseover="showTip(event, 'fs165', 382)" class="f">reduce</span> (<span onmouseout="hideTip(event, 'fs166', 383)" onmouseover="showTip(event, 'fs166', 383)" class="i">id</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">R</span>) (<span onmouseout="hideTip(event, 'fs167', 384)" onmouseover="showTip(event, 'fs167', 384)" class="f">reduceF</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">R</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">R</span> <span class="k">-&gt;</span> <span class="o">&#39;</span><span class="i">R</span>) (<span onmouseout="hideTip(event, 'fs168', 385)" onmouseover="showTip(event, 'fs168', 385)" class="i">rtree</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs155', 386)" onmouseover="showTip(event, 'fs155', 386)" class="t">TreeRef</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">R</span><span class="o">&gt;</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 387)" onmouseover="showTip(event, 'fs12', 387)" class="i">cloud</span> { 
+    <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs169', 388)" onmouseover="showTip(event, 'fs169', 388)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs168', 389)" onmouseover="showTip(event, 'fs168', 389)" class="i">rtree</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs170', 390)" onmouseover="showTip(event, 'fs170', 390)" class="i">Value</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs169', 391)" onmouseover="showTip(event, 'fs169', 391)" class="i">value</span> <span class="k">with</span>
+    | <span onmouseout="hideTip(event, 'fs152', 392)" onmouseover="showTip(event, 'fs152', 392)" class="p">Empty</span> <span class="k">-&gt;</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs166', 393)" onmouseover="showTip(event, 'fs166', 393)" class="i">id</span>
+    | <span onmouseout="hideTip(event, 'fs153', 394)" onmouseover="showTip(event, 'fs153', 394)" class="p">Leaf</span> <span onmouseout="hideTip(event, 'fs171', 395)" onmouseover="showTip(event, 'fs171', 395)" class="i">r</span> <span class="k">-&gt;</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs171', 396)" onmouseover="showTip(event, 'fs171', 396)" class="i">r</span>
+    | <span onmouseout="hideTip(event, 'fs154', 397)" onmouseover="showTip(event, 'fs154', 397)" class="p">Branch</span>(<span onmouseout="hideTip(event, 'fs172', 398)" onmouseover="showTip(event, 'fs172', 398)" class="i">l</span>,<span onmouseout="hideTip(event, 'fs173', 399)" onmouseover="showTip(event, 'fs173', 399)" class="i">r</span>) <span class="k">-&gt;</span>
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs171', 400)" onmouseover="showTip(event, 'fs171', 400)" class="i">r</span>,<span onmouseout="hideTip(event, 'fs174', 401)" onmouseover="showTip(event, 'fs174', 401)" class="i">r&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs165', 402)" onmouseover="showTip(event, 'fs165', 402)" class="f">reduce</span> <span onmouseout="hideTip(event, 'fs166', 403)" onmouseover="showTip(event, 'fs166', 403)" class="i">id</span> <span onmouseout="hideTip(event, 'fs167', 404)" onmouseover="showTip(event, 'fs167', 404)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs172', 405)" onmouseover="showTip(event, 'fs172', 405)" class="i">l</span> <span class="o">&lt;||&gt;</span> <span onmouseout="hideTip(event, 'fs165', 406)" onmouseover="showTip(event, 'fs165', 406)" class="f">reduce</span> <span onmouseout="hideTip(event, 'fs166', 407)" onmouseover="showTip(event, 'fs166', 407)" class="i">id</span> <span onmouseout="hideTip(event, 'fs167', 408)" onmouseover="showTip(event, 'fs167', 408)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs173', 409)" onmouseover="showTip(event, 'fs173', 409)" class="i">r</span> 
+        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs167', 410)" onmouseover="showTip(event, 'fs167', 410)" class="f">reduceF</span> <span onmouseout="hideTip(event, 'fs171', 411)" onmouseover="showTip(event, 'fs171', 411)" class="i">r</span> <span onmouseout="hideTip(event, 'fs174', 412)" onmouseover="showTip(event, 'fs174', 412)" class="i">r&#39;</span>
+}
+</pre>
+</td>
+</tr>
+</table>
+
+<p>The above functions enable distributed workflows that are 
+driven by the structural properties of the cloud tree.</p>
 
 <h2><a name="Other-Primitives" class="anchor" href="#Other-Primitives">Other Primitives</a></h2>
 
@@ -922,7 +924,7 @@ mechanisms like locks, semaphores, etc.</p>
 <div class="tip" id="fs73">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
 <div class="tip" id="fs74">union case Option.None: Option&lt;&#39;T&gt;</div>
 <div class="tip" id="fs75">static member Cloud.Choice : computations:seq&lt;#Cloud&lt;&#39;T option&gt; * IWorkerRef&gt; -&gt; Cloud&lt;&#39;T option&gt;<br />static member Cloud.Choice : computations:seq&lt;#Cloud&lt;&#39;T option&gt;&gt; -&gt; Cloud&lt;&#39;T option&gt;</div>
-<div class="tip" id="fs76">val getTextCell : unit -&gt; Cloud&lt;CloudValue&lt;string []&gt;&gt;<br /><br />Full name: Programming-model.getTextCell</div>
+<div class="tip" id="fs76">val textCell : Cloud&lt;CloudValue&lt;string []&gt;&gt;<br /><br />Full name: Programming-model.textCell</div>
 <div class="tip" id="fs77">val text : string []</div>
 <div class="tip" id="fs78">val cref : CloudValue&lt;string []&gt;</div>
 <div class="tip" id="fs79">Multiple items<br />type CloudValue =<br />&#160;&#160;static member New : value:&#39;T * ?path:string * ?serializer:ISerializer * ?enableCache:bool -&gt; Local&lt;CloudValue&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * serializer:ISerializer * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudValue&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * ?deserializer:(Stream -&gt; &#39;T) * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudValue&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * textDeserializer:(StreamReader -&gt; &#39;T) * ?encoding:Encoding * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudValue&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member Read : cloudCell:CloudValue&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member WithCacheBehaviour : cacheByDefault:bool -&gt; cv:CloudValue&lt;&#39;T&gt; -&gt; CloudValue&lt;&#39;T&gt;<br /><br />Full name: MBrace.Store.CloudValue<br /><br />--------------------<br />type CloudValue&lt;&#39;T&gt; =<br />&#160;&#160;interface ICloudStorageEntity<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;interface ICloudCacheable&lt;&#39;T&gt;<br />&#160;&#160;private new : path:string * etag:ETag * deserializer:(Stream -&gt; &#39;T) option * ?enableCache:bool -&gt; CloudValue&lt;&#39;T&gt;<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;val mutable private etag: ETag<br />&#160;&#160;val mutable private deserializer: (Stream -&gt; &#39;T) option<br />&#160;&#160;val mutable private isCacheEnabled: bool<br />&#160;&#160;member ForceCache : unit -&gt; Local&lt;bool&gt;<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudValue&lt;_&gt;</div>
@@ -944,83 +946,83 @@ mechanisms like locks, semaphores, etc.</p>
 <div class="tip" id="fs95">val right : &#39;T list</div>
 <div class="tip" id="fs96">Multiple items<br />module List<br /><br />from Programming-model<br /><br />--------------------<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
 <div class="tip" id="fs97">val results : &#39;R []</div>
-<div class="tip" id="fs98">type CloudTree&lt;&#39;T&gt; =<br />&#160;&#160;| Empty<br />&#160;&#160;| Leaf of &#39;T<br />&#160;&#160;| Branch of TreeRef&lt;&#39;T&gt; * TreeRef&lt;&#39;T&gt;<br /><br />Full name: Programming-model.CloudTree&lt;_&gt;</div>
-<div class="tip" id="fs99">union case CloudTree.Empty: CloudTree&lt;&#39;T&gt;</div>
-<div class="tip" id="fs100">union case CloudTree.Leaf: &#39;T -&gt; CloudTree&lt;&#39;T&gt;</div>
-<div class="tip" id="fs101">union case CloudTree.Branch: TreeRef&lt;&#39;T&gt; * TreeRef&lt;&#39;T&gt; -&gt; CloudTree&lt;&#39;T&gt;</div>
-<div class="tip" id="fs102">type TreeRef&lt;&#39;T&gt; = CloudValue&lt;CloudTree&lt;&#39;T&gt;&gt;<br /><br />Full name: Programming-model.TreeRef&lt;_&gt;</div>
-<div class="tip" id="fs103">val map : f:(&#39;T -&gt; &#39;S) -&gt; ttree:TreeRef&lt;&#39;T&gt; -&gt; Cloud&lt;CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;&gt;<br /><br />Full name: Programming-model.map</div>
-<div class="tip" id="fs104">val f : (&#39;T -&gt; &#39;S)</div>
-<div class="tip" id="fs105">val ttree : TreeRef&lt;&#39;T&gt;</div>
-<div class="tip" id="fs106">val value : CloudTree&lt;&#39;T&gt;</div>
-<div class="tip" id="fs107">property CloudValue.Value: Local&lt;CloudTree&lt;&#39;T&gt;&gt;</div>
-<div class="tip" id="fs108">val l : TreeRef&lt;&#39;T&gt;</div>
-<div class="tip" id="fs109">val r : TreeRef&lt;&#39;T&gt;</div>
-<div class="tip" id="fs110">val l&#39; : CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;</div>
-<div class="tip" id="fs111">val r&#39; : CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;</div>
-<div class="tip" id="fs112">val reduce : id:&#39;R -&gt; reduceF:(&#39;R -&gt; &#39;R -&gt; &#39;R) -&gt; rtree:TreeRef&lt;&#39;R&gt; -&gt; Cloud&lt;&#39;R&gt;<br /><br />Full name: Programming-model.reduce</div>
-<div class="tip" id="fs113">val id : &#39;R</div>
-<div class="tip" id="fs114">val reduceF : (&#39;R -&gt; &#39;R -&gt; &#39;R)</div>
-<div class="tip" id="fs115">val rtree : TreeRef&lt;&#39;R&gt;</div>
-<div class="tip" id="fs116">val value : CloudTree&lt;&#39;R&gt;</div>
-<div class="tip" id="fs117">property CloudValue.Value: Local&lt;CloudTree&lt;&#39;R&gt;&gt;</div>
-<div class="tip" id="fs118">val r : &#39;R</div>
-<div class="tip" id="fs119">val l : TreeRef&lt;&#39;R&gt;</div>
-<div class="tip" id="fs120">val r : TreeRef&lt;&#39;R&gt;</div>
-<div class="tip" id="fs121">val r&#39; : &#39;R</div>
-<div class="tip" id="fs122">val storePagesInCloudSequence : url:string -&gt; Cloud&lt;CloudSequence&lt;string&gt;&gt;<br /><br />Full name: Programming-model.storePagesInCloudSequence<br /><em><br /><br />&#160;Download the page and store it as a new cloud sequence of lines</em></div>
-<div class="tip" id="fs123">val lines : string []</div>
-<div class="tip" id="fs124">val cseq : CloudSequence&lt;string&gt;</div>
-<div class="tip" id="fs125">Multiple items<br />type CloudSequence =<br />&#160;&#160;static member FromLineSeparatedTextFile : path:string * ?encoding:Encoding * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;string&gt;&gt;<br />&#160;&#160;static member New : values:seq&lt;&#39;T&gt; * ?path:string * ?serializer:ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member NewPartitioned : values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * ?directory:string * ?serializer:ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt; []&gt;<br />&#160;&#160;static member OfCloudFile : path:string * serializer:ISerializer * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * textDeserializer:(StreamReader -&gt; seq&lt;&#39;T&gt;) * ?encoding:Encoding * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member WithCacheBehaviour : cacheByDefault:bool -&gt; cseq:CloudSequence&lt;&#39;T&gt; -&gt; CloudSequence&lt;&#39;T&gt;<br /><br />Full name: MBrace.Store.CloudSequence<br /><br />--------------------<br />type CloudSequence&lt;&#39;T&gt; =<br />&#160;&#160;interface ICloudCollection&lt;&#39;T&gt;<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;interface ICloudStorageEntity<br />&#160;&#160;interface ICloudCacheable&lt;&#39;T []&gt;<br />&#160;&#160;private new : path:string * etag:ETag * count:int64 option * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) option * ?enableCache:bool -&gt; CloudSequence&lt;&#39;T&gt;<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;val mutable private etag: ETag<br />&#160;&#160;val mutable private count: int64 option<br />&#160;&#160;val mutable private deserializer: (Stream -&gt; seq&lt;&#39;T&gt;) option<br />&#160;&#160;val mutable private enableCache: bool<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudSequence&lt;_&gt;</div>
-<div class="tip" id="fs126">static member CloudSequence.New : values:seq&lt;&#39;T&gt; * ?path:string * ?serializer:Internals.ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;</div>
-<div class="tip" id="fs127">val storePagesInCloudSequences : urls:string list -&gt; Cloud&lt;CloudSequence&lt;string&gt; []&gt;<br /><br />Full name: Programming-model.storePagesInCloudSequences<br /><em><br /><br />&#160;Download the pages and store them in cloud sequences.</em></div>
-<div class="tip" id="fs128">val urls : string list</div>
-<div class="tip" id="fs129">val sequences : CloudSequence&lt;string&gt; []</div>
-<div class="tip" id="fs130">Multiple items<br />module CloudFlow<br /><br />from MBrace.Flow<br /><br />--------------------<br />type CloudFlow =<br />&#160;&#160;static member OfArray : source:&#39;T [] -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudChannel : channel:IReceivePort&lt;&#39;T&gt; * degreeOfParallelism:int -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudCollection : collection:ICloudCollection&lt;&#39;T&gt; * ?useCache:bool * ?sizeThresholdPerWorker:(unit -&gt; int64) -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * serializer:ISerializer * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * deserializer:(TextReader -&gt; seq&lt;&#39;T&gt;) * ?encoding:Encoding * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectoryByLine : dirPath:string * ?encoding:Encoding * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;string&gt;<br />&#160;&#160;static member OfCloudFileByLine : path:string * ?encoding:Encoding -&gt; CloudFlow&lt;string&gt;<br />&#160;&#160;static member OfCloudFiles : paths:seq&lt;string&gt; * serializer:ISerializer * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudFiles : paths:seq&lt;string&gt; * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Flow.CloudFlow<br /><br />--------------------<br />type CloudFlow&lt;&#39;T&gt; =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;abstract member WithEvaluators : collectorFactory:Local&lt;Collector&lt;&#39;T,&#39;S&gt;&gt; -&gt; projection:(&#39;S -&gt; Local&lt;&#39;R&gt;) -&gt; combiner:(&#39;R [] -&gt; Local&lt;&#39;R&gt;) -&gt; Cloud&lt;&#39;R&gt;<br />&#160;&#160;&#160;&#160;abstract member DegreeOfParallelism : int option<br />&#160;&#160;end<br /><br />Full name: MBrace.Flow.CloudFlow&lt;_&gt;</div>
-<div class="tip" id="fs131">static member CloudFlow.OfCloudSequences : cloudSequences:seq&lt;CloudSequence&lt;&#39;T&gt;&gt; -&gt; CloudFlow&lt;&#39;T&gt;</div>
-<div class="tip" id="fs132">val map : f:(&#39;T -&gt; &#39;R) -&gt; flow:CloudFlow&lt;&#39;T&gt; -&gt; CloudFlow&lt;&#39;R&gt;<br /><br />Full name: MBrace.Flow.CloudFlow.map</div>
-<div class="tip" id="fs133">val x : string</div>
-<div class="tip" id="fs134">namespace Nessos</div>
-<div class="tip" id="fs135">namespace Nessos.FsPickler</div>
-<div class="tip" id="fs136">val files : CloudFile []</div>
-<div class="tip" id="fs137">Multiple items<br />type CloudFile =<br />&#160;&#160;interface ICloudStorageEntity<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;new : path:string -&gt; CloudFile<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Path : string<br />&#160;&#160;member Size : Local&lt;int64&gt;<br />&#160;&#160;member private StructuredFormatDisplay : string<br />&#160;&#160;static member Create : path:string * serializer:(Stream -&gt; Async&lt;unit&gt;) -&gt; Local&lt;CloudFile&gt;<br />&#160;&#160;static member Delete : path:string -&gt; Local&lt;unit&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudFile<br /><br />--------------------<br />new : path:string -&gt; CloudFile</div>
-<div class="tip" id="fs138">static member CloudFile.Enumerate : dirPath:string -&gt; Local&lt;CloudFile []&gt;</div>
-<div class="tip" id="fs139">val wordCount : (CloudFile -&gt; Cloud&lt;string * (string * int) []&gt;)</div>
-<div class="tip" id="fs140">val f : CloudFile</div>
-<div class="tip" id="fs141">val text : string</div>
-<div class="tip" id="fs142">static member CloudFile.ReadAllText : path:string * ?encoding:System.Text.Encoding -&gt; Local&lt;string&gt;</div>
-<div class="tip" id="fs143">property CloudFile.Path: string</div>
-<div class="tip" id="fs144">val count : (string * int) []</div>
-<div class="tip" id="fs145">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs146">val groupBy : projection:(&#39;T -&gt; &#39;Key) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;Key * seq&lt;&#39;T&gt;&gt; (requires equality)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.groupBy</div>
-<div class="tip" id="fs147">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
-<div class="tip" id="fs148">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
-<div class="tip" id="fs149">val token : string</div>
-<div class="tip" id="fs150">val instances : seq&lt;string&gt;</div>
-<div class="tip" id="fs151">val length : source:seq&lt;&#39;T&gt; -&gt; int<br /><br />Full name: Microsoft.FSharp.Collections.Seq.length</div>
-<div class="tip" id="fs152">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
-<div class="tip" id="fs153">val results : (string * (string * int) []) []</div>
-<div class="tip" id="fs154">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs155">val serializer : XmlSerializer</div>
-<div class="tip" id="fs156">type FsPickler =<br />&#160;&#160;private new : unit -&gt; FsPickler<br />&#160;&#160;static member Clone : value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:StreamingContext -&gt; &#39;T<br />&#160;&#160;static member ComputeHash : value:&#39;T * ?hashFactory:IHashStreamFactory -&gt; HashResult<br />&#160;&#160;static member ComputeSize : value:&#39;T -&gt; int64<br />&#160;&#160;static member CreateBinary : ?forceLittleEndian:bool * ?typeConverter:ITypeNameConverter -&gt; BinarySerializer<br />&#160;&#160;static member CreateXml : ?typeConverter:ITypeNameConverter * ?indent:bool -&gt; XmlSerializer<br />&#160;&#160;static member DeclareSerializable : unit -&gt; unit<br />&#160;&#160;static member GatherObjectsInGraph : graph:obj -&gt; obj []<br />&#160;&#160;static member GatherTypesInObjectGraph : graph:obj -&gt; Type []<br />&#160;&#160;static member GeneratePickler : unit -&gt; Pickler&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />Full name: Nessos.FsPickler.FsPickler</div>
-<div class="tip" id="fs157">static member FsPickler.CreateXml : ?typeConverter:ITypeNameConverter * ?indent:bool -&gt; XmlSerializer</div>
-<div class="tip" id="fs158">val file : CloudFile</div>
-<div class="tip" id="fs159">static member CloudFile.Create : path:string * serializer:(System.IO.Stream -&gt; Async&lt;unit&gt;) -&gt; Local&lt;CloudFile&gt;</div>
-<div class="tip" id="fs160">val fs : System.IO.Stream</div>
-<div class="tip" id="fs161">member FsPicklerTextSerializer.Serialize : writer:System.IO.TextWriter * value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:System.Runtime.Serialization.StreamingContext * ?leaveOpen:bool -&gt; unit<br />member FsPicklerSerializer.Serialize : stream:System.IO.Stream * value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:System.Runtime.Serialization.StreamingContext * ?encoding:System.Text.Encoding * ?leaveOpen:bool -&gt; unit</div>
-<div class="tip" id="fs162">val race : unit -&gt; Cloud&lt;int&gt;<br /><br />Full name: Programming-model.race</div>
-<div class="tip" id="fs163">val mr : ICloudAtom&lt;int&gt;</div>
-<div class="tip" id="fs164">type CloudAtom =<br />&#160;&#160;static member CreateContainerName : unit -&gt; Local&lt;string&gt;<br />&#160;&#160;static member Decr : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt; (requires member ( - ) and member get_One)<br />&#160;&#160;static member Delete : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member DeleteContainer : container:string -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member Force : atom:ICloudAtom&lt;&#39;T&gt; * value:&#39;T -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member Incr : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt; (requires member ( + ) and member get_One)<br />&#160;&#160;static member IsSupportedValue : value:&#39;T -&gt; Local&lt;bool&gt;<br />&#160;&#160;static member New : initial:&#39;T * ?container:string -&gt; Local&lt;ICloudAtom&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member Read : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member Transact : atom:ICloudAtom&lt;&#39;T&gt; * transactF:(&#39;T -&gt; &#39;R * &#39;T) * ?maxRetries:int -&gt; Local&lt;&#39;R&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudAtom</div>
-<div class="tip" id="fs165">static member CloudAtom.New : initial:&#39;T * ?container:string -&gt; Local&lt;ICloudAtom&lt;&#39;T&gt;&gt;</div>
-<div class="tip" id="fs166">static member CloudAtom.Force : atom:ICloudAtom&lt;&#39;T&gt; * value:&#39;T -&gt; Local&lt;unit&gt;</div>
-<div class="tip" id="fs167">static member CloudAtom.Read : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;</div>
-<div class="tip" id="fs168">val increment : counter:ICloudAtom&lt;int&gt; -&gt; Cloud&lt;bool&gt;<br /><br />Full name: Programming-model.increment</div>
-<div class="tip" id="fs169">val counter : ICloudAtom&lt;int&gt;</div>
-<div class="tip" id="fs170">type ICloudAtom&lt;&#39;T&gt; =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;inherit ICloudDisposable<br />&#160;&#160;&#160;&#160;abstract member Force : value:&#39;T -&gt; Local&lt;unit&gt;<br />&#160;&#160;&#160;&#160;abstract member Update : updater:(&#39;T -&gt; &#39;T) * ?maxRetries:int -&gt; Local&lt;unit&gt;<br />&#160;&#160;&#160;&#160;abstract member Id : string<br />&#160;&#160;&#160;&#160;abstract member Value : Local&lt;&#39;T&gt;<br />&#160;&#160;end<br /><br />Full name: MBrace.Store.ICloudAtom&lt;_&gt;</div>
-<div class="tip" id="fs171">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
-<div class="tip" id="fs172">val v : int</div>
-<div class="tip" id="fs173">val ok : bool</div>
-<div class="tip" id="fs174">static member CloudAtom.Transact : atom:ICloudAtom&lt;&#39;T&gt; * transactF:(&#39;T -&gt; &#39;R * &#39;T) * ?maxRetries:int -&gt; Local&lt;&#39;R&gt;</div>
+<div class="tip" id="fs98">val storePagesInCloudSequence : url:string -&gt; Cloud&lt;CloudSequence&lt;string&gt;&gt;<br /><br />Full name: Programming-model.storePagesInCloudSequence<br /><em><br /><br />&#160;Download the page and store it as a new cloud sequence of lines</em></div>
+<div class="tip" id="fs99">val lines : string []</div>
+<div class="tip" id="fs100">val cseq : CloudSequence&lt;string&gt;</div>
+<div class="tip" id="fs101">Multiple items<br />type CloudSequence =<br />&#160;&#160;static member FromLineSeparatedTextFile : path:string * ?encoding:Encoding * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;string&gt;&gt;<br />&#160;&#160;static member New : values:seq&lt;&#39;T&gt; * ?path:string * ?serializer:ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member NewPartitioned : values:seq&lt;&#39;T&gt; * maxPartitionSize:int64 * ?directory:string * ?serializer:ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt; []&gt;<br />&#160;&#160;static member OfCloudFile : path:string * serializer:ISerializer * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member OfCloudFile : path:string * textDeserializer:(StreamReader -&gt; seq&lt;&#39;T&gt;) * ?encoding:Encoding * ?force:bool * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member WithCacheBehaviour : cacheByDefault:bool -&gt; cseq:CloudSequence&lt;&#39;T&gt; -&gt; CloudSequence&lt;&#39;T&gt;<br /><br />Full name: MBrace.Store.CloudSequence<br /><br />--------------------<br />type CloudSequence&lt;&#39;T&gt; =<br />&#160;&#160;interface ICloudCollection&lt;&#39;T&gt;<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;interface ICloudStorageEntity<br />&#160;&#160;interface ICloudCacheable&lt;&#39;T []&gt;<br />&#160;&#160;private new : path:string * etag:ETag * count:int64 option * deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) option * ?enableCache:bool -&gt; CloudSequence&lt;&#39;T&gt;<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;val mutable private etag: ETag<br />&#160;&#160;val mutable private count: int64 option<br />&#160;&#160;val mutable private deserializer: (Stream -&gt; seq&lt;&#39;T&gt;) option<br />&#160;&#160;val mutable private enableCache: bool<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudSequence&lt;_&gt;</div>
+<div class="tip" id="fs102">static member CloudSequence.New : values:seq&lt;&#39;T&gt; * ?path:string * ?serializer:Internals.ISerializer * ?enableCache:bool -&gt; Local&lt;CloudSequence&lt;&#39;T&gt;&gt;</div>
+<div class="tip" id="fs103">val storePagesInCloudSequences : urls:string list -&gt; Cloud&lt;CloudSequence&lt;string&gt; []&gt;<br /><br />Full name: Programming-model.storePagesInCloudSequences<br /><em><br /><br />&#160;Download the pages and store them in cloud sequences.</em></div>
+<div class="tip" id="fs104">val urls : string list</div>
+<div class="tip" id="fs105">val sequences : CloudSequence&lt;string&gt; []</div>
+<div class="tip" id="fs106">Multiple items<br />module CloudFlow<br /><br />from MBrace.Flow<br /><br />--------------------<br />type CloudFlow =<br />&#160;&#160;static member OfArray : source:&#39;T [] -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudChannel : channel:IReceivePort&lt;&#39;T&gt; * degreeOfParallelism:int -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudCollection : collection:ICloudCollection&lt;&#39;T&gt; * ?useCache:bool * ?sizeThresholdPerWorker:(unit -&gt; int64) -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * serializer:ISerializer * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectory : dirPath:string * deserializer:(TextReader -&gt; seq&lt;&#39;T&gt;) * ?encoding:Encoding * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudDirectoryByLine : dirPath:string * ?encoding:Encoding * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;string&gt;<br />&#160;&#160;static member OfCloudFileByLine : path:string * ?encoding:Encoding -&gt; CloudFlow&lt;string&gt;<br />&#160;&#160;static member OfCloudFiles : paths:seq&lt;string&gt; * serializer:ISerializer * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;static member OfCloudFiles : paths:seq&lt;string&gt; * ?deserializer:(Stream -&gt; seq&lt;&#39;T&gt;) * ?enableCache:bool * ?sizeThresholdPerCore:int64 -&gt; CloudFlow&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Flow.CloudFlow<br /><br />--------------------<br />type CloudFlow&lt;&#39;T&gt; =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;abstract member WithEvaluators : collectorFactory:Local&lt;Collector&lt;&#39;T,&#39;S&gt;&gt; -&gt; projection:(&#39;S -&gt; Local&lt;&#39;R&gt;) -&gt; combiner:(&#39;R [] -&gt; Local&lt;&#39;R&gt;) -&gt; Cloud&lt;&#39;R&gt;<br />&#160;&#160;&#160;&#160;abstract member DegreeOfParallelism : int option<br />&#160;&#160;end<br /><br />Full name: MBrace.Flow.CloudFlow&lt;_&gt;</div>
+<div class="tip" id="fs107">static member CloudFlow.OfCloudSequences : cloudSequences:seq&lt;CloudSequence&lt;&#39;T&gt;&gt; -&gt; CloudFlow&lt;&#39;T&gt;</div>
+<div class="tip" id="fs108">val map : f:(&#39;T -&gt; &#39;R) -&gt; flow:CloudFlow&lt;&#39;T&gt; -&gt; CloudFlow&lt;&#39;R&gt;<br /><br />Full name: MBrace.Flow.CloudFlow.map</div>
+<div class="tip" id="fs109">val x : string</div>
+<div class="tip" id="fs110">namespace Nessos</div>
+<div class="tip" id="fs111">namespace Nessos.FsPickler</div>
+<div class="tip" id="fs112">val files : CloudFile []</div>
+<div class="tip" id="fs113">Multiple items<br />type CloudFile =<br />&#160;&#160;interface ICloudStorageEntity<br />&#160;&#160;interface ICloudDisposable<br />&#160;&#160;new : path:string -&gt; CloudFile<br />&#160;&#160;val mutable private path: string<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Path : string<br />&#160;&#160;member Size : Local&lt;int64&gt;<br />&#160;&#160;member private StructuredFormatDisplay : string<br />&#160;&#160;static member Create : path:string * serializer:(Stream -&gt; Async&lt;unit&gt;) -&gt; Local&lt;CloudFile&gt;<br />&#160;&#160;static member Delete : path:string -&gt; Local&lt;unit&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudFile<br /><br />--------------------<br />new : path:string -&gt; CloudFile</div>
+<div class="tip" id="fs114">static member CloudFile.Enumerate : dirPath:string -&gt; Local&lt;CloudFile []&gt;</div>
+<div class="tip" id="fs115">val wordCount : (CloudFile -&gt; Cloud&lt;string * (string * int) []&gt;)</div>
+<div class="tip" id="fs116">val f : CloudFile</div>
+<div class="tip" id="fs117">val text : string</div>
+<div class="tip" id="fs118">static member CloudFile.ReadAllText : path:string * ?encoding:System.Text.Encoding -&gt; Local&lt;string&gt;</div>
+<div class="tip" id="fs119">property CloudFile.Path: string</div>
+<div class="tip" id="fs120">val count : (string * int) []</div>
+<div class="tip" id="fs121">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs122">val groupBy : projection:(&#39;T -&gt; &#39;Key) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;Key * seq&lt;&#39;T&gt;&gt; (requires equality)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.groupBy</div>
+<div class="tip" id="fs123">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
+<div class="tip" id="fs124">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
+<div class="tip" id="fs125">val token : string</div>
+<div class="tip" id="fs126">val instances : seq&lt;string&gt;</div>
+<div class="tip" id="fs127">val length : source:seq&lt;&#39;T&gt; -&gt; int<br /><br />Full name: Microsoft.FSharp.Collections.Seq.length</div>
+<div class="tip" id="fs128">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
+<div class="tip" id="fs129">val results : (string * (string * int) []) []</div>
+<div class="tip" id="fs130">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
+<div class="tip" id="fs131">val serializer : XmlSerializer</div>
+<div class="tip" id="fs132">type FsPickler =<br />&#160;&#160;private new : unit -&gt; FsPickler<br />&#160;&#160;static member Clone : value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:StreamingContext -&gt; &#39;T<br />&#160;&#160;static member ComputeHash : value:&#39;T * ?hashFactory:IHashStreamFactory -&gt; HashResult<br />&#160;&#160;static member ComputeSize : value:&#39;T -&gt; int64<br />&#160;&#160;static member CreateBinary : ?forceLittleEndian:bool * ?typeConverter:ITypeNameConverter -&gt; BinarySerializer<br />&#160;&#160;static member CreateXml : ?typeConverter:ITypeNameConverter * ?indent:bool -&gt; XmlSerializer<br />&#160;&#160;static member DeclareSerializable : unit -&gt; unit<br />&#160;&#160;static member GatherObjectsInGraph : graph:obj -&gt; obj []<br />&#160;&#160;static member GatherTypesInObjectGraph : graph:obj -&gt; Type []<br />&#160;&#160;static member GeneratePickler : unit -&gt; Pickler&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />Full name: Nessos.FsPickler.FsPickler</div>
+<div class="tip" id="fs133">static member FsPickler.CreateXml : ?typeConverter:ITypeNameConverter * ?indent:bool -&gt; XmlSerializer</div>
+<div class="tip" id="fs134">val file : CloudFile</div>
+<div class="tip" id="fs135">static member CloudFile.Create : path:string * serializer:(System.IO.Stream -&gt; Async&lt;unit&gt;) -&gt; Local&lt;CloudFile&gt;</div>
+<div class="tip" id="fs136">val fs : System.IO.Stream</div>
+<div class="tip" id="fs137">member FsPicklerTextSerializer.Serialize : writer:System.IO.TextWriter * value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:System.Runtime.Serialization.StreamingContext * ?leaveOpen:bool -&gt; unit<br />member FsPicklerSerializer.Serialize : stream:System.IO.Stream * value:&#39;T * ?pickler:Pickler&lt;&#39;T&gt; * ?streamingContext:System.Runtime.Serialization.StreamingContext * ?encoding:System.Text.Encoding * ?leaveOpen:bool -&gt; unit</div>
+<div class="tip" id="fs138">val race : unit -&gt; Cloud&lt;int&gt;<br /><br />Full name: Programming-model.race</div>
+<div class="tip" id="fs139">val mr : ICloudAtom&lt;int&gt;</div>
+<div class="tip" id="fs140">type CloudAtom =<br />&#160;&#160;static member CreateContainerName : unit -&gt; Local&lt;string&gt;<br />&#160;&#160;static member Decr : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt; (requires member ( - ) and member get_One)<br />&#160;&#160;static member Delete : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member DeleteContainer : container:string -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member Force : atom:ICloudAtom&lt;&#39;T&gt; * value:&#39;T -&gt; Local&lt;unit&gt;<br />&#160;&#160;static member Incr : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;unit&gt; (requires member ( + ) and member get_One)<br />&#160;&#160;static member IsSupportedValue : value:&#39;T -&gt; Local&lt;bool&gt;<br />&#160;&#160;static member New : initial:&#39;T * ?container:string -&gt; Local&lt;ICloudAtom&lt;&#39;T&gt;&gt;<br />&#160;&#160;static member Read : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;<br />&#160;&#160;static member Transact : atom:ICloudAtom&lt;&#39;T&gt; * transactF:(&#39;T -&gt; &#39;R * &#39;T) * ?maxRetries:int -&gt; Local&lt;&#39;R&gt;<br />&#160;&#160;...<br /><br />Full name: MBrace.Store.CloudAtom</div>
+<div class="tip" id="fs141">static member CloudAtom.New : initial:&#39;T * ?container:string -&gt; Local&lt;ICloudAtom&lt;&#39;T&gt;&gt;</div>
+<div class="tip" id="fs142">static member CloudAtom.Force : atom:ICloudAtom&lt;&#39;T&gt; * value:&#39;T -&gt; Local&lt;unit&gt;</div>
+<div class="tip" id="fs143">static member CloudAtom.Read : atom:ICloudAtom&lt;&#39;T&gt; -&gt; Local&lt;&#39;T&gt;</div>
+<div class="tip" id="fs144">val increment : counter:ICloudAtom&lt;int&gt; -&gt; Cloud&lt;bool&gt;<br /><br />Full name: Programming-model.increment</div>
+<div class="tip" id="fs145">val counter : ICloudAtom&lt;int&gt;</div>
+<div class="tip" id="fs146">type ICloudAtom&lt;&#39;T&gt; =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;inherit ICloudDisposable<br />&#160;&#160;&#160;&#160;abstract member Force : value:&#39;T -&gt; Local&lt;unit&gt;<br />&#160;&#160;&#160;&#160;abstract member Update : updater:(&#39;T -&gt; &#39;T) * ?maxRetries:int -&gt; Local&lt;unit&gt;<br />&#160;&#160;&#160;&#160;abstract member Id : string<br />&#160;&#160;&#160;&#160;abstract member Value : Local&lt;&#39;T&gt;<br />&#160;&#160;end<br /><br />Full name: MBrace.Store.ICloudAtom&lt;_&gt;</div>
+<div class="tip" id="fs147">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
+<div class="tip" id="fs148">val v : int</div>
+<div class="tip" id="fs149">val ok : bool</div>
+<div class="tip" id="fs150">static member CloudAtom.Transact : atom:ICloudAtom&lt;&#39;T&gt; * transactF:(&#39;T -&gt; &#39;R * &#39;T) * ?maxRetries:int -&gt; Local&lt;&#39;R&gt;</div>
+<div class="tip" id="fs151">type CloudTree&lt;&#39;T&gt; =<br />&#160;&#160;| Empty<br />&#160;&#160;| Leaf of &#39;T<br />&#160;&#160;| Branch of TreeRef&lt;&#39;T&gt; * TreeRef&lt;&#39;T&gt;<br /><br />Full name: Programming-model.CloudTree&lt;_&gt;</div>
+<div class="tip" id="fs152">union case CloudTree.Empty: CloudTree&lt;&#39;T&gt;</div>
+<div class="tip" id="fs153">union case CloudTree.Leaf: &#39;T -&gt; CloudTree&lt;&#39;T&gt;</div>
+<div class="tip" id="fs154">union case CloudTree.Branch: TreeRef&lt;&#39;T&gt; * TreeRef&lt;&#39;T&gt; -&gt; CloudTree&lt;&#39;T&gt;</div>
+<div class="tip" id="fs155">type TreeRef&lt;&#39;T&gt; = CloudValue&lt;CloudTree&lt;&#39;T&gt;&gt;<br /><br />Full name: Programming-model.TreeRef&lt;_&gt;</div>
+<div class="tip" id="fs156">val map : f:(&#39;T -&gt; &#39;S) -&gt; ttree:TreeRef&lt;&#39;T&gt; -&gt; Cloud&lt;CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;&gt;<br /><br />Full name: Programming-model.map</div>
+<div class="tip" id="fs157">val f : (&#39;T -&gt; &#39;S)</div>
+<div class="tip" id="fs158">val ttree : TreeRef&lt;&#39;T&gt;</div>
+<div class="tip" id="fs159">val value : CloudTree&lt;&#39;T&gt;</div>
+<div class="tip" id="fs160">property CloudValue.Value: Local&lt;CloudTree&lt;&#39;T&gt;&gt;</div>
+<div class="tip" id="fs161">val l : TreeRef&lt;&#39;T&gt;</div>
+<div class="tip" id="fs162">val r : TreeRef&lt;&#39;T&gt;</div>
+<div class="tip" id="fs163">val l&#39; : CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;</div>
+<div class="tip" id="fs164">val r&#39; : CloudValue&lt;CloudTree&lt;&#39;S&gt;&gt;</div>
+<div class="tip" id="fs165">val reduce : id:&#39;R -&gt; reduceF:(&#39;R -&gt; &#39;R -&gt; &#39;R) -&gt; rtree:TreeRef&lt;&#39;R&gt; -&gt; Cloud&lt;&#39;R&gt;<br /><br />Full name: Programming-model.reduce</div>
+<div class="tip" id="fs166">val id : &#39;R</div>
+<div class="tip" id="fs167">val reduceF : (&#39;R -&gt; &#39;R -&gt; &#39;R)</div>
+<div class="tip" id="fs168">val rtree : TreeRef&lt;&#39;R&gt;</div>
+<div class="tip" id="fs169">val value : CloudTree&lt;&#39;R&gt;</div>
+<div class="tip" id="fs170">property CloudValue.Value: Local&lt;CloudTree&lt;&#39;R&gt;&gt;</div>
+<div class="tip" id="fs171">val r : &#39;R</div>
+<div class="tip" id="fs172">val l : TreeRef&lt;&#39;R&gt;</div>
+<div class="tip" id="fs173">val r : TreeRef&lt;&#39;R&gt;</div>
+<div class="tip" id="fs174">val r&#39; : &#39;R</div>
 
         </div>
         <div class="span3">
