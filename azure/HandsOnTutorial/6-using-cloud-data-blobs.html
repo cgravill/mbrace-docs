@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Creating and Using Cloud Values as Blobs
+    <title>Creating and Using Cloud Values and Cloud Sequences
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
@@ -38,32 +38,34 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Creating-and-Using-Cloud-Values-as-Blobs" class="anchor" href="#Creating-and-Using-Cloud-Values-as-Blobs">Creating and Using Cloud Values as Blobs</a></h1>
+<h1><a name="Creating-and-Using-Cloud-Values-and-Cloud-Sequences" class="anchor" href="#Creating-and-Using-Cloud-Values-and-Cloud-Sequences">Creating and Using Cloud Values and Cloud Sequences</a></h1>
+
+<h1><a name="Using-Cloud-Values" class="anchor" href="#Using-Cloud-Values">Using Cloud Values</a></h1>
 
 <p>You now learn how to upload data to Azure Blob Storage using CloudValue and
- then process it using MBrace cloud tasks.</p>
+then process it using MBrace cloud tasks.</p>
 
 <p>When using MBrace, data is implicitly uploaded if it is
- part of the closure of a cloud workflow - for example, if a value is
- referenced in a cloud { ... } block.  That data is a transient part of the 
- process specification.  This is often the most convenient way to get 
- small amounts (KB-MB) of data to the cloud: just use the data as part
- of a cloud workflow and run that work in the cloud.</p>
+part of the closure of a cloud workflow - for example, if a value is
+referenced in a cloud { ... } block.  That data is a transient part of the 
+process specification.  This is often the most convenient way to get 
+small amounts (KB-MB) of data to the cloud: just use the data as part
+of a cloud workflow and run that work in the cloud.</p>
 
 <p>If you wish to <em>persist</em> data in the cloud - for example, if it is too big
- to upload multiple times - then you can use one or more of the
- cloud data constructs that MBrace provides.</p>
+to upload multiple times - then you can use one or more of the
+cloud data constructs that MBrace provides.</p>
 
 <p>Note you can alternatively you use any existing cloud storage 
- APIs or SDKs you already have access to. For example, if you wish you 
- can read/write using the .NET Azure storage SDKs directly rather than 
- using MBrace primitives.</p>
+APIs or SDKs you already have access to. For example, if you wish you 
+can read/write using the .NET Azure storage SDKs directly rather than 
+using MBrace primitives.</p>
 
 <p>You can copy larger data to Azure using the AzCopy.exe command line tool, see
- <a href="https://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/">https://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/</a></p>
+<a href="https://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/">https://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/</a></p>
 
 <p>You can manage storage using the "azure" command line tool, see
- <a href="https://azure.microsoft.com/en-us/documentation/articles/xplat-cli/">https://azure.microsoft.com/en-us/documentation/articles/xplat-cli/</a></p>
+<a href="https://azure.microsoft.com/en-us/documentation/articles/xplat-cli/">https://azure.microsoft.com/en-us/documentation/articles/xplat-cli/</a></p>
 
 <p>Before running, edit credentials.fsx to enter your connection strings.</p>
 
@@ -133,24 +135,24 @@
 </tr>
 </table>
 
+<h1><a name="Using-Cloud-Sequences" class="anchor" href="#Using-Cloud-Sequences">Using Cloud Sequences</a></h1>
+
 <p>Next persist an array of data (each element a tuple) as a CloudSequence.</p>
 
-<p>Here is the data we're going to upload, it's 1000 tuples:</p>
+<p>Here is the data we're going to upload, it's an array of 1000 tuples:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">dataGen</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">seq</span> {
-    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">1000</span> <span class="k">do</span> 
-        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%d</span><span class="s"> quick brown foxes jumped over </span><span class="pf">%d</span><span class="s"> lazy dogs.&quot;</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="i">i</span> (<span class="n">2</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="i">i</span> <span class="o">+</span> <span class="n">1</span>)
-        <span class="k">yield</span> (<span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="i">i</span>, <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="i">text</span>)
-}
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">dataGen</span> <span class="o">=</span> 
+    [| <span class="k">for</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">1000</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%d</span><span class="s"> quick brown foxes jumped over </span><span class="pf">%d</span><span class="s"> lazy dogs.&quot;</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="i">i</span> (<span class="n">2</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="i">i</span> <span class="o">+</span> <span class="n">1</span>)
+        <span class="k">yield</span> (<span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">i</span>, <span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="i">text</span>) |]
 </pre>
 </td>
 </tr>
@@ -168,17 +170,61 @@ on store that can be dereferenced on-demand.</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">cloudSequence</span> <span class="o">=</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="i">cloudSequence</span> <span class="o">=</span> 
     <span class="i">cloud</span> {
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs14', 30)" onmouseover="showTip(event, 'fs14', 30)" class="i">seq</span> <span class="o">=</span> <span class="i">CloudSequence</span><span class="o">.</span><span class="i">New</span> <span onmouseout="hideTip(event, 'fs13', 31)" onmouseover="showTip(event, 'fs13', 31)" class="i">dataGen</span>
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="i">seq</span>
-    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 33)" onmouseover="showTip(event, 'fs4', 33)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">seq</span> <span class="o">=</span> <span class="i">CloudSequence</span><span class="o">.</span><span class="i">New</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="i">dataGen</span>
+        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="i">seq</span>
+    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 32)" onmouseover="showTip(event, 'fs4', 32)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
 </pre>
 </td>
 </tr>
 </table>
 
 <p>For this sample we only read the 10 first elements from store:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="i">first10</span> <span class="o">=</span>
+    <span class="i">cloud</span> {
+        <span class="k">let!</span> <span class="i">e</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="i">cloudSequence</span><span class="o">.</span><span class="i">ToEnumerable</span>()
+        <span class="k">return</span> <span class="i">e</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="i">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="i">take</span> <span class="n">10</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="i">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="i">toArray</span>
+    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 39)" onmouseover="showTip(event, 'fs4', 39)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>The next example runs a cloud job that aggregate all elements to an array
+and returns the results to the server:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="i">allData</span> <span class="o">=</span> 
+    <span class="i">cloud</span> {
+        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="i">array</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 42)" onmouseover="showTip(event, 'fs17', 42)" class="i">cloudSequence</span><span class="o">.</span><span class="i">ToArray</span>()
+        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs24', 43)" onmouseover="showTip(event, 'fs24', 43)" class="i">array</span>
+    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 44)" onmouseover="showTip(event, 'fs4', 44)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>The next sample shows how a collection of cloud sequences can be used
+as input into a CloudFlow data flow:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
@@ -193,25 +239,36 @@ on store that can be dereferenced on-demand.</p>
 <span class="l">10: </span>
 <span class="l">11: </span>
 <span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="i">first10</span> <span class="o">=</span>
-    <span class="i">cloud</span> {
-        <span class="k">let!</span> <span class="i">e</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 35)" onmouseover="showTip(event, 'fs18', 35)" class="i">cloudSequence</span><span class="o">.</span><span class="i">ToEnumerable</span>()
-        <span class="k">return</span> <span class="i">e</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 36)" onmouseover="showTip(event, 'fs20', 36)" class="i">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="i">take</span> <span class="n">10</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 38)" onmouseover="showTip(event, 'fs20', 38)" class="i">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 39)" onmouseover="showTip(event, 'fs22', 39)" class="i">toArray</span>
-    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 40)" onmouseover="showTip(event, 'fs4', 40)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 45)" onmouseover="showTip(event, 'fs25', 45)" class="i">cloudSequences</span> <span class="o">=</span> 
+    [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs14', 46)" onmouseover="showTip(event, 'fs14', 46)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">10</span> <span class="k">-&gt;</span> 
+        <span class="i">cloud</span> {
+            <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs18', 47)" onmouseover="showTip(event, 'fs18', 47)" class="i">seq</span> <span class="o">=</span> <span class="i">CloudSequence</span><span class="o">.</span><span class="i">New</span> <span onmouseout="hideTip(event, 'fs13', 48)" onmouseover="showTip(event, 'fs13', 48)" class="i">dataGen</span>
+            <span class="k">return</span> <span onmouseout="hideTip(event, 'fs18', 49)" onmouseover="showTip(event, 'fs18', 49)" class="i">seq</span>
+        } ]
+    <span class="o">|&gt;</span> <span class="i">Cloud</span><span class="o">.</span><span class="i">Parallel</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 50)" onmouseover="showTip(event, 'fs4', 50)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
 
-<span class="c">(** Aggregate all elements to a local array: *)</span> 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 41)" onmouseover="showTip(event, 'fs23', 41)" class="i">allData</span> <span class="o">=</span> 
-    <span class="i">cloud</span> {
-        <span class="k">let!</span> <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="i">array</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 43)" onmouseover="showTip(event, 'fs18', 43)" class="i">cloudSequence</span><span class="o">.</span><span class="i">ToArray</span>()
-        <span class="k">return</span> <span onmouseout="hideTip(event, 'fs24', 44)" onmouseover="showTip(event, 'fs24', 44)" class="i">array</span>
-    } <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 45)" onmouseover="showTip(event, 'fs4', 45)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="i">results</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs25', 52)" onmouseover="showTip(event, 'fs25', 52)" class="i">cloudSequences</span>
+      <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">OfCloudSequences</span>
+      <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">groupBy</span> (<span class="k">fun</span> (<span class="i">k</span>,<span class="i">v</span>) <span class="k">-&gt;</span> <span class="i">k</span>)
+      <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">toArray</span>
+      <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 53)" onmouseover="showTip(event, 'fs4', 53)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
 </pre>
 </td>
 </tr>
 </table>
+
+<p>In this tutorial, you've learned how to persist data values into
+cloud storage using the <code>CloudValue</code> and <code>CloudSequence</code> types.
+Continue with further samples to learn more about the
+MBrace programming model.</p>
 
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace System.IO</div>
@@ -225,18 +282,20 @@ on store that can be dereferenced on-demand.</p>
 <div class="tip" id="fs10">val persistedCloudData : obj<br /><br />Full name: 6-using-cloud-data-blobs.persistedCloudData</div>
 <div class="tip" id="fs11">val lengthOfData : obj<br /><br />Full name: 6-using-cloud-data-blobs.lengthOfData</div>
 <div class="tip" id="fs12">property String.Length: int</div>
-<div class="tip" id="fs13">val dataGen : seq&lt;int * string&gt;<br /><br />Full name: 6-using-cloud-data-blobs.dataGen</div>
-<div class="tip" id="fs14">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
-<div class="tip" id="fs15">val i : int</div>
-<div class="tip" id="fs16">val text : string</div>
-<div class="tip" id="fs17">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
-<div class="tip" id="fs18">val cloudSequence : obj<br /><br />Full name: 6-using-cloud-data-blobs.cloudSequence</div>
+<div class="tip" id="fs13">val dataGen : (int * string) []<br /><br />Full name: 6-using-cloud-data-blobs.dataGen</div>
+<div class="tip" id="fs14">val i : int</div>
+<div class="tip" id="fs15">val text : string</div>
+<div class="tip" id="fs16">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
+<div class="tip" id="fs17">val cloudSequence : obj<br /><br />Full name: 6-using-cloud-data-blobs.cloudSequence</div>
+<div class="tip" id="fs18">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
 <div class="tip" id="fs19">val first10 : obj<br /><br />Full name: 6-using-cloud-data-blobs.first10</div>
 <div class="tip" id="fs20">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
 <div class="tip" id="fs21">val take : count:int -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.take</div>
 <div class="tip" id="fs22">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
 <div class="tip" id="fs23">val allData : obj<br /><br />Full name: 6-using-cloud-data-blobs.allData</div>
 <div class="tip" id="fs24">type &#39;T array = &#39;T []<br /><br />Full name: Microsoft.FSharp.Core.array&lt;_&gt;</div>
+<div class="tip" id="fs25">val cloudSequences : obj<br /><br />Full name: 6-using-cloud-data-blobs.cloudSequences</div>
+<div class="tip" id="fs26">val results : obj<br /><br />Full name: 6-using-cloud-data-blobs.results</div>
 
         </div>
         <div class="span3">

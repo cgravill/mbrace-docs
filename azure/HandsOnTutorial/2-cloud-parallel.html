@@ -40,9 +40,8 @@
           
 <h1><a name="Simple-Cloud-Parallelism-with-MBrace-Azure" class="anchor" href="#Simple-Cloud-Parallelism-with-MBrace-Azure">Simple Cloud Parallelism with MBrace.Azure</a></h1>
 
-<p>You now perform a very simple parallel distributed job on your MBrace cluster.</p>
-
-<p>Before running, edit credentials.fsx to enter your connection strings.</p>
+<p>You now perform a very simple parallel distributed job on your MBrace cluster.
+Before running, edit credentials.fsx to enter your connection strings.</p>
 
 <p>First you connect to the cluster:</p>
 
@@ -112,32 +111,6 @@
 </tr>
 </table>
 
-<p>Alternatively, you could have started 50 independent jobs.  This can be handy if you want to 
-track each one independently:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="i">jobs</span> <span class="o">=</span>  
-    [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">50</span> <span class="k">-&gt;</span> 
-        <span class="i">cloud</span> { <span class="k">return</span> <span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="i">sprintf</span> <span class="s">&quot;i&#39;m job %d&quot;</span> <span onmouseout="hideTip(event, 'fs8', 24)" onmouseover="showTip(event, 'fs8', 24)" class="i">i</span> } 
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 25)" onmouseover="showTip(event, 'fs4', 25)" class="i">cluster</span><span class="o">.</span><span class="i">CreateProcess</span> ]
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">jobResults</span> <span class="o">=</span> 
-    [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="i">job</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs12', 28)" onmouseover="showTip(event, 'fs12', 28)" class="i">jobs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="i">job</span><span class="o">.</span><span class="i">AwaitResult</span>() ]
-</pre>
-</td>
-</tr>
-</table>
-
 <p>Next you use Cloud.Choice: the first cloud workflow to return "Some" wins.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
@@ -150,12 +123,12 @@ track each one independently:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 30)" onmouseover="showTip(event, 'fs15', 30)" class="i">searchJob</span> <span class="o">=</span>
-    [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 31)" onmouseover="showTip(event, 'fs8', 31)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">50</span> <span class="k">-&gt;</span> <span class="i">cloud</span> { <span class="k">if</span> <span onmouseout="hideTip(event, 'fs8', 32)" onmouseover="showTip(event, 'fs8', 32)" class="i">i</span> <span class="o">%</span> <span class="n">10</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="i">Some</span> <span onmouseout="hideTip(event, 'fs8', 34)" onmouseover="showTip(event, 'fs8', 34)" class="i">i</span> <span class="k">else</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="i">None</span> } ]
-    <span class="o">|&gt;</span> <span class="i">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 36)" onmouseover="showTip(event, 'fs18', 36)" class="i">Choice</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 37)" onmouseover="showTip(event, 'fs4', 37)" class="i">cluster</span><span class="o">.</span><span class="i">CreateProcess</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="i">searchJob</span> <span class="o">=</span>
+    [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">50</span> <span class="k">-&gt;</span> <span class="i">cloud</span> { <span class="k">if</span> <span onmouseout="hideTip(event, 'fs8', 23)" onmouseover="showTip(event, 'fs8', 23)" class="i">i</span> <span class="o">%</span> <span class="n">10</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="i">Some</span> <span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="i">i</span> <span class="k">else</span> <span class="k">return</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">None</span> } ]
+    <span class="o">|&gt;</span> <span class="i">Cloud</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="i">Choice</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 28)" onmouseover="showTip(event, 'fs4', 28)" class="i">cluster</span><span class="o">.</span><span class="i">CreateProcess</span>
 
-<span onmouseout="hideTip(event, 'fs15', 38)" onmouseover="showTip(event, 'fs15', 38)" class="i">searchJob</span><span class="o">.</span><span class="i">ShowInfo</span>()
+<span onmouseout="hideTip(event, 'fs12', 29)" onmouseover="showTip(event, 'fs12', 29)" class="i">searchJob</span><span class="o">.</span><span class="i">ShowInfo</span>()
 </pre>
 </td>
 </tr>
@@ -168,11 +141,15 @@ track each one independently:</p>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 39)" onmouseover="showTip(event, 'fs19', 39)" class="i">searchResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 40)" onmouseover="showTip(event, 'fs15', 40)" class="i">searchJob</span><span class="o">.</span><span class="i">AwaitResult</span>()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">searchResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 31)" onmouseover="showTip(event, 'fs12', 31)" class="i">searchJob</span><span class="o">.</span><span class="i">AwaitResult</span>()
 </pre>
 </td>
 </tr>
 </table>
+
+<p>In this tutorial, you've learned about <code>Cloud.Parallel</code> and <code>Cloud.Choice</code>
+as ways of composing cloud workflows Continue with further samples to learn more about the
+MBrace programming model.</p>
 
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace System.IO</div>
@@ -185,14 +162,11 @@ track each one independently:</p>
 <div class="tip" id="fs9">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
 <div class="tip" id="fs10">val results : obj<br /><br />Full name: 2-cloud-parallel.results</div>
 <div class="tip" id="fs11">val quickResults : obj<br /><br />Full name: 2-cloud-parallel.quickResults</div>
-<div class="tip" id="fs12">val jobs : obj list<br /><br />Full name: 2-cloud-parallel.jobs</div>
-<div class="tip" id="fs13">val jobResults : obj list<br /><br />Full name: 2-cloud-parallel.jobResults</div>
-<div class="tip" id="fs14">val job : obj</div>
-<div class="tip" id="fs15">val searchJob : obj<br /><br />Full name: 2-cloud-parallel.searchJob</div>
-<div class="tip" id="fs16">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
-<div class="tip" id="fs17">union case Option.None: Option&lt;&#39;T&gt;</div>
-<div class="tip" id="fs18">Multiple items<br />type Choice&lt;&#39;T1,&#39;T2&gt; =<br />&#160;&#160;| Choice1Of2 of &#39;T1<br />&#160;&#160;| Choice2Of2 of &#39;T2<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3&gt; =<br />&#160;&#160;| Choice1Of3 of &#39;T1<br />&#160;&#160;| Choice2Of3 of &#39;T2<br />&#160;&#160;| Choice3Of3 of &#39;T3<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4&gt; =<br />&#160;&#160;| Choice1Of4 of &#39;T1<br />&#160;&#160;| Choice2Of4 of &#39;T2<br />&#160;&#160;| Choice3Of4 of &#39;T3<br />&#160;&#160;| Choice4Of4 of &#39;T4<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5&gt; =<br />&#160;&#160;| Choice1Of5 of &#39;T1<br />&#160;&#160;| Choice2Of5 of &#39;T2<br />&#160;&#160;| Choice3Of5 of &#39;T3<br />&#160;&#160;| Choice4Of5 of &#39;T4<br />&#160;&#160;| Choice5Of5 of &#39;T5<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6&gt; =<br />&#160;&#160;| Choice1Of6 of &#39;T1<br />&#160;&#160;| Choice2Of6 of &#39;T2<br />&#160;&#160;| Choice3Of6 of &#39;T3<br />&#160;&#160;| Choice4Of6 of &#39;T4<br />&#160;&#160;| Choice5Of6 of &#39;T5<br />&#160;&#160;| Choice6Of6 of &#39;T6<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6,&#39;T7&gt; =<br />&#160;&#160;| Choice1Of7 of &#39;T1<br />&#160;&#160;| Choice2Of7 of &#39;T2<br />&#160;&#160;| Choice3Of7 of &#39;T3<br />&#160;&#160;| Choice4Of7 of &#39;T4<br />&#160;&#160;| Choice5Of7 of &#39;T5<br />&#160;&#160;| Choice6Of7 of &#39;T6<br />&#160;&#160;| Choice7Of7 of &#39;T7<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_,_&gt;</div>
-<div class="tip" id="fs19">val searchResult : obj<br /><br />Full name: 2-cloud-parallel.searchResult</div>
+<div class="tip" id="fs12">val searchJob : obj<br /><br />Full name: 2-cloud-parallel.searchJob</div>
+<div class="tip" id="fs13">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
+<div class="tip" id="fs14">union case Option.None: Option&lt;&#39;T&gt;</div>
+<div class="tip" id="fs15">Multiple items<br />type Choice&lt;&#39;T1,&#39;T2&gt; =<br />&#160;&#160;| Choice1Of2 of &#39;T1<br />&#160;&#160;| Choice2Of2 of &#39;T2<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3&gt; =<br />&#160;&#160;| Choice1Of3 of &#39;T1<br />&#160;&#160;| Choice2Of3 of &#39;T2<br />&#160;&#160;| Choice3Of3 of &#39;T3<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4&gt; =<br />&#160;&#160;| Choice1Of4 of &#39;T1<br />&#160;&#160;| Choice2Of4 of &#39;T2<br />&#160;&#160;| Choice3Of4 of &#39;T3<br />&#160;&#160;| Choice4Of4 of &#39;T4<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5&gt; =<br />&#160;&#160;| Choice1Of5 of &#39;T1<br />&#160;&#160;| Choice2Of5 of &#39;T2<br />&#160;&#160;| Choice3Of5 of &#39;T3<br />&#160;&#160;| Choice4Of5 of &#39;T4<br />&#160;&#160;| Choice5Of5 of &#39;T5<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6&gt; =<br />&#160;&#160;| Choice1Of6 of &#39;T1<br />&#160;&#160;| Choice2Of6 of &#39;T2<br />&#160;&#160;| Choice3Of6 of &#39;T3<br />&#160;&#160;| Choice4Of6 of &#39;T4<br />&#160;&#160;| Choice5Of6 of &#39;T5<br />&#160;&#160;| Choice6Of6 of &#39;T6<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6,&#39;T7&gt; =<br />&#160;&#160;| Choice1Of7 of &#39;T1<br />&#160;&#160;| Choice2Of7 of &#39;T2<br />&#160;&#160;| Choice3Of7 of &#39;T3<br />&#160;&#160;| Choice4Of7 of &#39;T4<br />&#160;&#160;| Choice5Of7 of &#39;T5<br />&#160;&#160;| Choice6Of7 of &#39;T6<br />&#160;&#160;| Choice7Of7 of &#39;T7<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_,_&gt;</div>
+<div class="tip" id="fs16">val searchResult : obj<br /><br />Full name: 2-cloud-parallel.searchResult</div>
 
         </div>
         <div class="span3">
