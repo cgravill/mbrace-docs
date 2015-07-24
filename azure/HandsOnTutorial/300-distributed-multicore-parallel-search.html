@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>200-distributed-multicore-parallel-search</title>
+    <title>300-distributed-multicore-parallel-search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
     <meta name="author" content="Jan Dzik, Nick Palladinos, Kostas Rontogiannis, Eirik Tsarpalis"/>
@@ -75,6 +75,8 @@
 <p>Before running, edit credentials.fsx to enter your connection strings.
 *</p>
 
+<p>First you connect to the cluster:</p>
+
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -130,11 +132,9 @@
 <span class="l">52: </span>
 <span class="l">53: </span>
 <span class="l">54: </span>
-<span class="l">55: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="c">// First connect to the cluster</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">cluster</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">Runtime</span><span class="o">.</span><span class="i">GetHandle</span>(<span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">config</span>)
 
 <span class="c">/// Distributed tryFind combinator with multicore balancing.</span>
@@ -197,10 +197,10 @@
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace System.IO</div>
 <div class="tip" id="fs3">namespace Microsoft.FSharp.Core</div>
-<div class="tip" id="fs4">val cluster : obj<br /><br />Full name: 200-distributed-multicore-parallel-search.cluster</div>
+<div class="tip" id="fs4">val cluster : obj<br /><br />Full name: 300-distributed-multicore-parallel-search.cluster</div>
 <div class="tip" id="fs5">namespace System.Runtime</div>
 <div class="tip" id="fs6">val config : obj<br /><br />Full name: ConnectionStrings.config</div>
-<div class="tip" id="fs7">val distributedMultiCoreTryFind : predicate:(&#39;T -&gt; bool) -&gt; array:&#39;T [] -&gt; &#39;a<br /><br />Full name: 200-distributed-multicore-parallel-search.distributedMultiCoreTryFind<br /><em><br /><br />&#160;Distributed tryFind combinator with multicore balancing.<br /><br />&#160;Searches the given array non-deterministically using divide-and-conquer,<br />&#160;first dividing according to the number of available workers, and then<br />&#160;according to the number of available cores, and then performing sequential<br />&#160;search on each machine.</em></div>
+<div class="tip" id="fs7">val distributedMultiCoreTryFind : predicate:(&#39;T -&gt; bool) -&gt; array:&#39;T [] -&gt; &#39;a<br /><br />Full name: 300-distributed-multicore-parallel-search.distributedMultiCoreTryFind<br /><em><br /><br />&#160;Distributed tryFind combinator with multicore balancing.<br /><br />&#160;Searches the given array non-deterministically using divide-and-conquer,<br />&#160;first dividing according to the number of available workers, and then<br />&#160;according to the number of available cores, and then performing sequential<br />&#160;search on each machine.</em></div>
 <div class="tip" id="fs8">val predicate : (&#39;T -&gt; bool)</div>
 <div class="tip" id="fs9">type bool = Boolean<br /><br />Full name: Microsoft.FSharp.Core.bool</div>
 <div class="tip" id="fs10">Multiple items<br />val array : &#39;T []<br /><br />--------------------<br />type &#39;T array = &#39;T []<br /><br />Full name: Microsoft.FSharp.Core.array&lt;_&gt;</div>
@@ -213,13 +213,13 @@
 <div class="tip" id="fs17">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
 <div class="tip" id="fs18">val tryFind : predicate:(&#39;T -&gt; bool) -&gt; array:&#39;T [] -&gt; &#39;T option<br /><br />Full name: Microsoft.FSharp.Collections.Array.tryFind</div>
 <div class="tip" id="fs19">Multiple items<br />type Choice&lt;&#39;T1,&#39;T2&gt; =<br />&#160;&#160;| Choice1Of2 of &#39;T1<br />&#160;&#160;| Choice2Of2 of &#39;T2<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3&gt; =<br />&#160;&#160;| Choice1Of3 of &#39;T1<br />&#160;&#160;| Choice2Of3 of &#39;T2<br />&#160;&#160;| Choice3Of3 of &#39;T3<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4&gt; =<br />&#160;&#160;| Choice1Of4 of &#39;T1<br />&#160;&#160;| Choice2Of4 of &#39;T2<br />&#160;&#160;| Choice3Of4 of &#39;T3<br />&#160;&#160;| Choice4Of4 of &#39;T4<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5&gt; =<br />&#160;&#160;| Choice1Of5 of &#39;T1<br />&#160;&#160;| Choice2Of5 of &#39;T2<br />&#160;&#160;| Choice3Of5 of &#39;T3<br />&#160;&#160;| Choice4Of5 of &#39;T4<br />&#160;&#160;| Choice5Of5 of &#39;T5<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6&gt; =<br />&#160;&#160;| Choice1Of6 of &#39;T1<br />&#160;&#160;| Choice2Of6 of &#39;T2<br />&#160;&#160;| Choice3Of6 of &#39;T3<br />&#160;&#160;| Choice4Of6 of &#39;T4<br />&#160;&#160;| Choice5Of6 of &#39;T5<br />&#160;&#160;| Choice6Of6 of &#39;T6<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_&gt;<br /><br />--------------------<br />type Choice&lt;&#39;T1,&#39;T2,&#39;T3,&#39;T4,&#39;T5,&#39;T6,&#39;T7&gt; =<br />&#160;&#160;| Choice1Of7 of &#39;T1<br />&#160;&#160;| Choice2Of7 of &#39;T2<br />&#160;&#160;| Choice3Of7 of &#39;T3<br />&#160;&#160;| Choice4Of7 of &#39;T4<br />&#160;&#160;| Choice5Of7 of &#39;T5<br />&#160;&#160;| Choice6Of7 of &#39;T6<br />&#160;&#160;| Choice7Of7 of &#39;T7<br /><br />Full name: Microsoft.FSharp.Core.Choice&lt;_,_,_,_,_,_,_&gt;</div>
-<div class="tip" id="fs20">val exponentRange : int []<br /><br />Full name: 200-distributed-multicore-parallel-search.exponentRange<br /><em><br /><br />&#160;Known Mersenne exponents : 9,689 and 9,941</em></div>
-<div class="tip" id="fs21">val tryFindMersenneLocal : ts:int [] -&gt; int option<br /><br />Full name: 200-distributed-multicore-parallel-search.tryFindMersenneLocal<br /><em><br /><br />&#160;Sequential Mersenne prime search</em></div>
+<div class="tip" id="fs20">val exponentRange : int []<br /><br />Full name: 300-distributed-multicore-parallel-search.exponentRange<br /><em><br /><br />&#160;Known Mersenne exponents : 9,689 and 9,941</em></div>
+<div class="tip" id="fs21">val tryFindMersenneLocal : ts:int [] -&gt; int option<br /><br />Full name: 300-distributed-multicore-parallel-search.tryFindMersenneLocal<br /><em><br /><br />&#160;Sequential Mersenne prime search</em></div>
 <div class="tip" id="fs22">val ts : int []</div>
 <div class="tip" id="fs23">module Primality</div>
 <div class="tip" id="fs24">val isMersennePrime : exp:int -&gt; bool<br /><br />Full name: Primality.isMersennePrime<br /><em><br /><br />&#160;Lucas - Lehmer Mersenne primality tester<br />&#160;that checks if 2^exp - 1 is prime</em></div>
-<div class="tip" id="fs25">val tryFindMersenneCloud : ts:int [] -&gt; &#39;a<br /><br />Full name: 200-distributed-multicore-parallel-search.tryFindMersenneCloud<br /><em><br /><br />&#160;MBrace distributed, multi-core, nondeterministic Mersenne prime search</em></div>
-<div class="tip" id="fs26">val searchJob : obj<br /><br />Full name: 200-distributed-multicore-parallel-search.searchJob</div>
+<div class="tip" id="fs25">val tryFindMersenneCloud : ts:int [] -&gt; &#39;a<br /><br />Full name: 300-distributed-multicore-parallel-search.tryFindMersenneCloud<br /><em><br /><br />&#160;MBrace distributed, multi-core, nondeterministic Mersenne prime search</em></div>
+<div class="tip" id="fs26">val searchJob : obj<br /><br />Full name: 300-distributed-multicore-parallel-search.searchJob</div>
 
         </div>
         <div class="span3">
