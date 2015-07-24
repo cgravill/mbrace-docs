@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Your First Cloud Work
+    <title>Your First 'Hello World' Computation with MBrace.Azure
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
@@ -33,95 +33,49 @@
           <li><a href="http://nessos.github.io">nessos</a></li>
           <li><a href="http://github.com/mbraceproject/MBrace.Core">github page</a></li>
         </ul>
-        <h3 class="muted"><a href="http://www.m-brace.net/index.html">MBrace</a></h3>
+        <h3 class="muted"><a href="http://www.m-brace.net/index.html">MBrace.Core and MBrace.Azure</a></h3>
       </div>
       <hr />
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Your-First-Cloud-Work" class="anchor" href="#Your-First-Cloud-Work">Your First Cloud Work</a></h1>
+<h1><a name="Your-First-Hello-World-Computation-with-MBrace-Azure" class="anchor" href="#Your-First-Hello-World-Computation-with-MBrace-Azure">Your First 'Hello World' Computation with MBrace.Azure</a></h1>
 
 <p>First you send a simple computation to an mbrace cluster using F# Interactive scripting.
 You can also send computations from a compiled F# project, though using scripting is very 
 common with MBrace.</p>
 
-<p>A guide to creating the cluster is <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/brisk-tutorial.md#get-started-with-brisk">here</a>.</p>
+<p>A guide to creating a cluster is <a href="http://www.m-brace.net/#try">here</a>.</p>
 
 <blockquote>
   <p>NOTE: Before running, build this solution to get the required nuget packages, and edit credentials.fsx to enter your Azure connection strings.</p>
 </blockquote>
 
-<p>*</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">IO</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">Core</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span><span class="o">.</span><span class="i">Client</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Flow</span>
-</pre>
-</td>
-</tr>
-</table>
-
 <p>First connect to the cluster using a configuration to bind to your storage and service bus on Azure.</p>
 
-<p>Before running, edit credentials.fsx to enter your connection strings.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">cluster</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">Runtime</span><span class="o">.</span><span class="i">GetHandle</span>(<span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">config</span>)
-</pre>
-</td>
-</tr>
-</table>
 
-<p>Optionally, attach console logger to client object</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
+<span class="c">// Optionally, attach console logger to client object </span>
 <span onmouseout="hideTip(event, 'fs4', 8)" onmouseover="showTip(event, 'fs4', 8)" class="i">cluster</span><span class="o">.</span><span class="i">AttachClientLogger</span>(<span class="k">new</span> <span class="i">ConsoleLogger</span>())
-</pre>
-</td>
-</tr>
-</table>
 
-<p>You can connect to the cluster and get details of the workers in the pool:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
+<span class="c">// You can connect to the cluster and get details of the workers in the pool:</span>
 <span onmouseout="hideTip(event, 'fs4', 9)" onmouseover="showTip(event, 'fs4', 9)" class="i">cluster</span><span class="o">.</span><span class="i">ShowWorkers</span>()
-</pre>
-</td>
-</tr>
-</table>
 
-<p>You can view the history of processes:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
+<span class="c">// You can view the history of processes:</span>
 <span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="i">cluster</span><span class="o">.</span><span class="i">ShowProcesses</span>()
 </pre>
 </td>
@@ -134,37 +88,23 @@ common with MBrace.</p>
 <span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="i">job</span> <span class="o">=</span> 
     <span class="i">cloud</span> { <span class="k">return</span> <span class="s">&quot;Hello world!&quot;</span> } 
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 12)" onmouseover="showTip(event, 'fs4', 12)" class="i">cluster</span><span class="o">.</span><span class="i">CreateProcess</span>
-</pre>
-</td>
-</tr>
-</table>
 
-<p>You can evaluate helloWorldProcess to get details on it:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
+<span class="c">// You can evaluate helloWorldProcess to get details on it.</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">isJobComplete</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 14)" onmouseover="showTip(event, 'fs7', 14)" class="i">job</span><span class="o">.</span><span class="i">Completed</span>
-</pre>
-</td>
-</tr>
-</table>
 
-<p>Block until the result is computed by the cluster:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
+<span class="c">// Block until the result is computed by the cluster</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="i">text</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 16)" onmouseover="showTip(event, 'fs7', 16)" class="i">job</span><span class="o">.</span><span class="i">AwaitResult</span>()
 </pre>
 </td>
@@ -188,32 +128,25 @@ common with MBrace.</p>
 </tr>
 </table>
 
-<p>You can test a workflow by running locally using async semantics:</p>
+<p>To check that you are running in the cloud, compre
+a workflow by running locally (using async semantics) with one
+using remote execution:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">localResult</span> <span class="o">=</span>
     <span class="i">cloud</span> { <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="i">printfn</span> <span class="s">&quot;hello, world&quot;</span> ; <span class="k">return</span> <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="i">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="i">MachineName</span> }
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 23)" onmouseover="showTip(event, 'fs4', 23)" class="i">cluster</span><span class="o">.</span><span class="i">RunLocally</span>
-</pre>
-</td>
-</tr>
-</table>
 
-<p>Now compare the behaviour against remote execution:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="i">remoteResult</span> <span class="o">=</span>
     <span class="i">cloud</span> { <span onmouseout="hideTip(event, 'fs12', 25)" onmouseover="showTip(event, 'fs12', 25)" class="i">printfn</span> <span class="s">&quot;hello, world&quot;</span> ; <span class="k">return</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="i">MachineName</span> }
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 28)" onmouseover="showTip(event, 'fs4', 28)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
@@ -222,7 +155,10 @@ common with MBrace.</p>
 </tr>
 </table>
 
-<p>This can be used to clear all process records in the cluster:</p>
+<h2><a name="Controlling-the-Cluster" class="anchor" href="#Controlling-the-Cluster">Controlling the Cluster</a></h2>
+
+<p>In case you run into trouble, this can be used to clear all process 
+records in the cluster:</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -299,7 +235,7 @@ management console).</p>
             <img src="http://www.m-brace.net/img/mbrace.png" alt="F# Project" style="width:150px;margin:10px" />
           </a>
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">MBrace</li>
+            <li class="nav-header">MBrace.Core and MBrace.Azure</li>
             <li><a href="http://www.m-brace.net/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://www.nuget.org/packages/MBrace.Core">Get Library via NuGet</a></li>
