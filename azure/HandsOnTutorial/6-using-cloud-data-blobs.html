@@ -224,7 +224,8 @@ and returns the results to the server:</p>
 </table>
 
 <p>The next sample shows how a collection of cloud sequences can be used
-as input into a CloudFlow data flow:</p>
+as input into a CloudFlow data flow. Each cloud sequence can be used as a 
+partition of data flowing into the CloudFlow.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
@@ -257,7 +258,7 @@ as input into a CloudFlow data flow:</p>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="i">results</span> <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs25', 52)" onmouseover="showTip(event, 'fs25', 52)" class="i">cloudSequences</span>
       <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">OfCloudSequences</span>
-      <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">groupBy</span> (<span class="k">fun</span> (<span class="i">k</span>,<span class="i">v</span>) <span class="k">-&gt;</span> <span class="i">k</span>)
+      <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">countBy</span> (<span class="k">fun</span> (<span class="i">k</span>,<span class="i">v</span>) <span class="k">-&gt;</span> <span class="i">k</span>)
       <span class="o">|&gt;</span> <span class="i">CloudFlow</span><span class="o">.</span><span class="i">toArray</span>
       <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 53)" onmouseover="showTip(event, 'fs4', 53)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
 </pre>

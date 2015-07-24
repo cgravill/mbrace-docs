@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Training Machine Learning in the Cloud
+    <title>Example: Training in the Cloud
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source framework for large-scale distributed computation and data processing written in F#."/>
@@ -38,41 +38,16 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Training-Machine-Learning-in-the-Cloud" class="anchor" href="#Training-Machine-Learning-in-the-Cloud">Training Machine Learning in the Cloud</a></h1>
+<h1><a name="Example-Training-in-the-Cloud" class="anchor" href="#Example-Training-in-the-Cloud">Example: Training in the Cloud</a></h1>
 
-<p>This tutorial demonstrates a word count example via Norvig's Spelling Corrector (<a href="http://norvig.com/spell-correct.html).
-">http://norvig.com/spell-correct.html).
-</a> It is a prototypical workflow for training machine learning in the cloud, and extracting the results
- to use locally in your client.</p>
+<p>This example demonstrates Norvig's Spelling Corrector (<a href="http://norvig.com/spell-correct.html).
+It">http://norvig.com/spell-correct.html).
+It</a> is a prototypical workflow for training and learning in the cloud - we use the cloud to extract statistical
+information from a body of text, and the statistical summary is used locally in your client application.</p>
 
 <p>Before running, edit credentials.fsx to enter your connection strings.</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-<span class="l">8: </span>
-<span class="l">9: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">IO</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="i">Net</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">Text</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">RegularExpressions</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="i">Core</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Store</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Azure</span><span class="o">.</span><span class="i">Client</span>
-<span class="k">open</span> <span class="i">MBrace</span><span class="o">.</span><span class="i">Flow</span>
-</pre>
-</td>
-</tr>
-</table>
+<h2><a name="Part-1-Extract-Statistics-in-the-Cloud" class="anchor" href="#Part-1-Extract-Statistics-in-the-Cloud">Part 1 - Extract Statistics in the Cloud</a></h2>
 
 <p>First you connect to the cluster:</p>
 
@@ -215,9 +190,14 @@ frequency count on the stored text.</p>
 </tr>
 </table>
 
+<h2><a name="Part-2-Use-the-Frequency-Counts-in-our-Application" class="anchor" href="#Part-2-Use-the-Frequency-Counts-in-our-Application">Part 2 - Use the Frequency Counts in our Application</a></h2>
+
 <p>In the final step, use the calculated frequency counts to compute suggested spelling corrections in your client.
 At this point, you've finished using the cluster and no longer need it.<br />
-We have the commputed the frequency table, all the rest of this example is run locally.</p>
+We have the computed the frequency table, all the rest of this example is run locally.</p>
+
+<p>The statistics could be saved to disk for use in an application. We will use
+them directly in the client.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
@@ -327,6 +307,11 @@ We have the commputed the frequency table, all the rest of this example is run l
 </td>
 </tr>
 </table>
+
+<p>In this example, you've seen how cloud tasks can be used to 
+extract statistical information returned to the client.
+Continue with further samples to learn more about the
+MBrace programming model.</p>
 
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace System.IO</div>

@@ -88,7 +88,6 @@
 <span class="l">20: </span>
 <span class="l">21: </span>
 <span class="l">22: </span>
-<span class="l">23: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
@@ -108,7 +107,6 @@
      <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 27)" onmouseover="showTip(event, 'fs4', 27)" class="i">cluster</span><span class="o">.</span><span class="i">Run</span>
 
 <span class="c">(** Run a cloud job which reads all the lines of a cloud file: *)</span> 
-
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="i">numberOfLinesInFile</span> <span class="o">=</span> 
     <span class="i">cloud</span> { 
         <span class="k">let!</span> <span class="i">data</span> <span class="o">=</span> <span class="i">CloudFile</span><span class="o">.</span><span class="i">ReadAllLines</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">anonCloudFile</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="i">Path</span>
@@ -287,6 +285,11 @@ parallel data flow. This is a very powerful feature.</p>
 </td>
 </tr>
 </table>
+
+<p>In this tutorial, you've learned how to use cloud files
+including as partitioned inputs into CloudFlow programming.
+Continue with further samples to learn more about the
+MBrace programming model.</p>
 
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace System.IO</div>
