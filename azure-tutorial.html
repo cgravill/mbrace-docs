@@ -51,6 +51,15 @@ See <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azur
 
 <h2><a name="Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service" class="anchor" href="#Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service">Provisioning Your Cluster using an Explicit Azure Cloud Service</a></h2>
 
+<blockquote>
+  <p><em>IMPORTANT NOTE</em>: MBrace.Azure is currently optimized for use from F# 3.1 (Visual Studio 2013).</p>
+
+  <p>If using F# 3.0 (Visual Studio 2012) or F# 4.0 (Visual Studio 2015), 
+you must provision a bespoke Azure cloud service and add a binding redirect 
+for FSharp.Core to <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>
+as described further below.</p>
+</blockquote>
+
 <p>In some cases you may decide to provision explicitly, if the options provided
 by Brisk Engine do not yet meet your needs.</p>
 
@@ -69,7 +78,7 @@ for example, you want your MBrace cluster to publish a web server); or</p></li>
 <li><p>upload certificates as part of your provisioning process; or</p></li>
 <li><p>specify Azure-specific local caching options; or</p></li>
 <li><p>include additional web and worker roles in your cloud service; or</p></li>
-<li>compile and deploy your own version of the MBrace cluster worker instance software.</li>
+<li><p>compile and deploy your own version of the MBrace cluster worker instance software.</p></li>
 </ul>
 
 <p>At the time of writing these options were not yet via the Brisk Engine provisioning
@@ -108,11 +117,11 @@ Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.
 
 <h3><a name="Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012" class="anchor" href="#Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012">Using MBrace.Azure with F# 3.0 (Visual Studio 2012)</a></h3>
 
-<p>MBrace.Azure currently assumes Visual Studio 2013.</p>
+<p>MBrace.Azure currently assumes F# 3.1 (Visual Studio 2013)</p>
 
 <p>If using F# 3.0/Visual Studio 2012, you must use 
 a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
-add a binding redirect for <code>FSharp.Core</code>:</p>
+adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>:</p>
 
 <table class="pre"><tr><td><pre lang="xml"><span class="k">&lt;</span><span class="i">configuration</span><span class="k">&gt;</span>
   <span class="k">&lt;</span><span class="i">runtime</span><span class="k">&gt;</span>
@@ -128,11 +137,11 @@ add a binding redirect for <code>FSharp.Core</code>:</p>
 
 <h3><a name="Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015" class="anchor" href="#Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015">Using MBrace.Azure with F# 4.0 (Visual Studio 2015)</a></h3>
 
-<p>MBrace.Azure currently assumes Visual Studio 2013.</p>
+<p>MBrace.Azure currently assumes F# 3.1 (Visual Studio 2013)</p>
 
 <p>If using F# 4.0/Visual Studio 2015, you must also use 
 a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
-add a binding redirect for <code>FSharp.Core</code>:</p>
+adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>:</p>
 
 <table class="pre"><tr><td><pre lang="xml"><span class="k">&lt;</span><span class="i">configuration</span><span class="k">&gt;</span>
   <span class="k">&lt;</span><span class="i">runtime</span><span class="k">&gt;</span>
