@@ -43,22 +43,24 @@
 <p>In this tutorial you will learn how to setup MBrace on Windows Azure and
 how to use the MBrace Azure Client API.</p>
 
-<h2><a name="Provisioning-Your-Cluster-Using-Brisk-Engine" class="anchor" href="#Provisioning-Your-Cluster-Using-Brisk-Engine">Provisioning Your Cluster Using Brisk Engine</a></h2>
+<h2><a name="Provisioning-Your-Cluster" class="anchor" href="#Provisioning-Your-Cluster">Provisioning Your Cluster</a></h2>
+
+<h3><a name="Provisioning-Your-Cluster-Using-Brisk-Engine" class="anchor" href="#Provisioning-Your-Cluster-Using-Brisk-Engine">Provisioning Your Cluster Using Brisk Engine</a></h3>
 
 <p>The easiest path to provision an MBrace cluster on Azure using
 an Azure Cloud Service is to use <a href="http://briskengine.com">Brisk Engine</a>.
 See <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/brisk-tutorial.md#get-started-with-brisk">Getting Started with MBrace using Brisk Engine</a>.</p>
 
-<h2><a name="Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service" class="anchor" href="#Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service">Provisioning Your Cluster using an Explicit Azure Cloud Service</a></h2>
-
 <blockquote>
-  <p><em>IMPORTANT NOTE</em>: MBrace.Azure is currently optimized for use from F# 3.1 (Visual Studio 2013).</p>
+  <p><em>IMPORTANT NOTE</em>: MBrace.Azure is currently optimized for clients using F# 3.1 (Visual Studio 2013, FSharp.Core 4.3.1.0).</p>
 
   <p>If using F# 3.0 (Visual Studio 2012) or F# 4.0 (Visual Studio 2015), 
 you must provision a bespoke Azure cloud service and add a binding redirect 
 for FSharp.Core to <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>
 as described further below.</p>
 </blockquote>
+
+<h3><a name="Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service" class="anchor" href="#Provisioning-Your-Cluster-using-an-Explicit-Azure-Cloud-Service">Provisioning Your Cluster using an Explicit Azure Cloud Service</a></h3>
 
 <p>In some cases you may decide to provision explicitly, if the options provided
 by Brisk Engine do not yet meet your needs.</p>
@@ -88,38 +90,9 @@ service. In this case, you must create and deploy your own Azure cloud service.<
 to have a Windows Azure account, basic knowledge of the Azure computing and
 optionally Microsoft Visual Studio (or any environment supporting F#).</p>
 
-<h2><a name="Deploying-as-an-Azure-Web-job-or-explicit-VMs" class="anchor" href="#Deploying-as-an-Azure-Web-job-or-explicit-VMs">Deploying as an Azure Web job or explicit VMs</a></h2>
+<h3><a name="Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012-FSharp-Core-4-3-0-0-Clients" class="anchor" href="#Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012-FSharp-Core-4-3-0-0-Clients">Using MBrace.Azure with F# 3.0 (Visual Studio 2012, FSharp.Core 4.3.0.0) Clients</a></h3>
 
-<p>The above deployment techniques use an Azure Cloud Service.
-Alternatively you may want to host your MBrace runtime/cluster nodes in one of</p>
-
-<ul>
-<li><p>explicit VMs; or</p></li>
-<li><p>an Azure web job.</p></li>
-</ul>
-
-<p>These options are not yet documented but you may be able
-to utilize the relevant components used by the
-<a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>.</p>
-
-<h3><a name="Where-your-MBrace-client-code-runs" class="anchor" href="#Where-your-MBrace-client-code-runs">Where your MBrace client code runs</a></h3>
-
-<p>Typically the MBrace client will run in:</p>
-
-<ul>
-<li><p>an F# interactive instance in your Visual Studio session; or</p></li>
-<li><p>as part of another Azure cloud service, website or web job; or</p></li>
-<li><p>as a client desktop process.</p></li>
-</ul>
-
-<p>In all cases, the client will need sufficient network access to be able to write to the
-Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.</p>
-
-<h3><a name="Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012" class="anchor" href="#Using-MBrace-Azure-with-F-3-0-Visual-Studio-2012">Using MBrace.Azure with F# 3.0 (Visual Studio 2012)</a></h3>
-
-<p>MBrace.Azure currently assumes F# 3.1 (Visual Studio 2013)</p>
-
-<p>If using F# 3.0/Visual Studio 2012, you must use 
+<p>If your client is using F# 3.0 (Visual Studio 2012, FSharp.Core 4.3.0.0), you must use 
 a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
 adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>:</p>
 
@@ -135,11 +108,9 @@ adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://git
 <span class="k">&lt;/</span><span class="i">configuration</span><span class="k">&gt;</span>
 </pre></td></tr></table>
 
-<h3><a name="Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015" class="anchor" href="#Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015">Using MBrace.Azure with F# 4.0 (Visual Studio 2015)</a></h3>
+<h3><a name="Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015-FSharp-Core-4-4-0-0-Clients" class="anchor" href="#Using-MBrace-Azure-with-F-4-0-Visual-Studio-2015-FSharp-Core-4-4-0-0-Clients">Using MBrace.Azure with F# 4.0 (Visual Studio 2015, FSharp.Core 4.4.0.0) Clients</a></h3>
 
-<p>MBrace.Azure currently assumes F# 3.1 (Visual Studio 2013)</p>
-
-<p>If using F# 4.0/Visual Studio 2015, you must also use 
+<p>If your client is using F# 4.0 (Visual Studio 2015, FSharp.Core 4.4.0.0), you must also use 
 a <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/AZURE.md">Custom Azure Cloud Service</a>, and 
 adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://github.com/mbraceproject/MBrace.StarterKit/blob/master/azure/CustomCloudService/MBraceAzureRole/app.config">app.config</a>:</p>
 
@@ -152,7 +123,26 @@ adjust the binding redirect for <code>FSharp.Core</code> in <a href="https://git
       <span class="k">&lt;/</span><span class="i">dependentAssembly</span><span class="k">&gt;</span>
     <span class="k">&lt;/</span><span class="i">assemblyBinding</span><span class="k">&gt;</span>
   <span class="k">&lt;/</span><span class="i">runtime</span><span class="k">&gt;</span>
-<span class="k">&lt;/</span><span class="i">configuration</span><span class="k">&gt;</span></pre></td></tr></table>
+<span class="k">&lt;/</span><span class="i">configuration</span><span class="k">&gt;</span>
+</pre></td></tr></table>
+
+<h3><a name="How-your-MBrace-client-code-runs" class="anchor" href="#How-your-MBrace-client-code-runs">How your MBrace client code runs</a></h3>
+
+<p>Typically the MBrace client will run in:</p>
+
+<ul>
+<li><p>an F# interactive instance in your Visual Studio session; or</p></li>
+<li><p>as part of another cloud service, website or web job; or</p></li>
+<li><p>as a client desktop process.</p></li>
+</ul>
+
+<p>In all cases, the client will need sufficient network access to be able to write to the
+Azure storage and Service Bus accounts used by the MBrace runtime/cluster nodes.</p>
+
+<p>Parts of your client code will be transported to the MBrace.Azure service and executed
+there. You should be careful that the version dependencies between base
+architectures, operating systems and .NET versions are compatible and that
+both client and MBrace.Azure service use the same FSharp.Core.</p>
 
 <div class="tip" id="fs1">val config : MBrace.Azure.Configuration<br /><br />Full name: Azure-tutorial.config</div>
 <div class="tip" id="fs2">module Unchecked<br /><br />from Microsoft.FSharp.Core.Operators</div>
